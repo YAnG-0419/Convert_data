@@ -1,0 +1,16 @@
+[
+  {
+    "group": "high_quality",
+    "status": "passed",
+    "unchanged_artifact_files": 20,
+    "converted_bags": 5,
+    "added_bags": 0
+  },
+  {
+    "group": "standard_quality",
+    "status": "passed",
+    "unchanged_artifact_files": 4,
+    "converted_bags": 1,
+    "added_bags": 0
+  }
+]

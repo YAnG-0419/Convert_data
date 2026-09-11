@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "files_unchanged": {
+    "episode_0.hdf5": {
+      "bytes": 1904541396,
+      "mtime_ns": 1789037390810351836,
+      "sha256": "17b33fbfee3531723ebbe29b2e94e4b37072f4c094ddc4283002dd51141f802b"
+    },
+    "episode_1.hdf5": {
+      "bytes": 775374152,
+      "mtime_ns": 1789037390812352017,
+      "sha256": "420e8a1250fa701c8cf1f6e25cf867af9fd243e590feaf6ee9a7f333470ac2e2"
+    },
+    "episode_2.hdf5": {
+      "bytes": 1161526298,
+      "mtime_ns": 1789037427210616376,
+      "sha256": "d4ed675c40250274c47a4554e7c5b10e48583789bafa3c396bd74fbe7b22d184"
+    },
+    "episode_3.hdf5": {
+      "bytes": 840773803,
+      "mtime_ns": 1789037427211616465,
+      "sha256": "9eb0361f95f1cf80435b15c8f62355a30dd38dd1d196e7a6f24704205a0905d1"
+    },
+    "episode_4.hdf5": {
+      "bytes": 459307569,
+      "mtime_ns": 1789037433498174845,
+      "sha256": "38c2d9d4341c08566590ca55f98cf59eec9cbbbd56b51e34eb2aeb5ac15356f2"
+    }
+  },
+  "summary": {
+    "converted_bags": 5,
+    "episodes": 5,
+    "frames": 8442,
+    "repo_id": "act/tomato_test",
+    "added_bags": 0,
+    "selected_bags": 5,
+    "skipped_selected_bags": [],
+    "retained_bags_not_in_current_selection": [],
+    "skipped_by_collection_state": 0,
+    "errors": []
+  }
+}

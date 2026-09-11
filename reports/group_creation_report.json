@@ -1,0 +1,228 @@
+{
+  "tests_passed": 26,
+  "resume_check": [
+    {
+      "group": "high_quality",
+      "status": "passed",
+      "unchanged_artifact_files": 20,
+      "converted_bags": 5,
+      "added_bags": 0
+    },
+    {
+      "group": "standard_quality",
+      "status": "passed",
+      "unchanged_artifact_files": 4,
+      "converted_bags": 1,
+      "added_bags": 0
+    }
+  ],
+  "groups": [
+    {
+      "name": "high_quality",
+      "list": "/home/user/lpy/convert_data/lists/high_quality.txt",
+      "root": "/home/user/lpy/convert_data/outputs/fr3_wuji/tomato_high_quality",
+      "summary": {
+        "converted_bags": 5,
+        "episodes": 5,
+        "frames": 13905,
+        "repo_id": "fr3_wuji/tomato_high_quality",
+        "added_bags": 0,
+        "selected_bags": 5,
+        "skipped_selected_bags": [],
+        "retained_bags_not_in_current_selection": [],
+        "skipped_by_collection_state": 0,
+        "errors": []
+      },
+      "verification": {
+        "status": "passed",
+        "episodes": 5,
+        "frames": 13905,
+        "full_video_decode": true
+      },
+      "pi05_verification": {
+        "status": "passed",
+        "loader": "Pi05 installed LeRobotDataset (v2.1)",
+        "video_backend": "pyav",
+        "repo_id": "fr3_wuji/tomato_high_quality",
+        "transform": "Fr3WujiInputs",
+        "episodes": 5,
+        "frames": 13905,
+        "sampled_indices": [
+          0,
+          2320,
+          4639,
+          4640,
+          5578,
+          6516,
+          6517,
+          7972,
+          9426,
+          9427,
+          10475,
+          11522,
+          11523,
+          12714,
+          13904
+        ],
+        "action_horizon": 50
+      },
+      "source_verification": {
+        "status": "passed",
+        "samples": [
+          {
+            "bag": "/home/user/franka_teleop_data/bags/gello/episode18",
+            "episode_index": 0,
+            "frame_index": 0,
+            "vectors_exact": true,
+            "rgb_mae_255": {
+              "cam0": 2.7715,
+              "cam1": 2.6318,
+              "cam2": 2.7083
+            }
+          },
+          {
+            "bag": "/home/user/franka_teleop_data/bags/gello/episode18",
+            "episode_index": 0,
+            "frame_index": 2320,
+            "vectors_exact": true,
+            "rgb_mae_255": {
+              "cam0": 3.8476,
+              "cam1": 3.045,
+              "cam2": 3.9543
+            }
+          },
+          {
+            "bag": "/home/user/franka_teleop_data/bags/gello/episode18",
+            "episode_index": 0,
+            "frame_index": 4639,
+            "vectors_exact": true,
+            "rgb_mae_255": {
+              "cam0": 3.7404,
+              "cam1": 3.1084,
+              "cam2": 3.6568
+            }
+          },
+          {
+            "bag": "/home/user/franka_teleop_data/bags/gello/episode23",
+            "episode_index": 4,
+            "frame_index": 0,
+            "vectors_exact": true,
+            "rgb_mae_255": {
+              "cam0": 2.8135,
+              "cam1": 2.8432,
+              "cam2": 3.6689
+            }
+          },
+          {
+            "bag": "/home/user/franka_teleop_data/bags/gello/episode23",
+            "episode_index": 4,
+            "frame_index": 1191,
+            "vectors_exact": true,
+            "rgb_mae_255": {
+              "cam0": 2.9477,
+              "cam1": 3.3199,
+              "cam2": 2.4873
+            }
+          },
+          {
+            "bag": "/home/user/franka_teleop_data/bags/gello/episode23",
+            "episode_index": 4,
+            "frame_index": 2381,
+            "vectors_exact": true,
+            "rgb_mae_255": {
+              "cam0": 3.525,
+              "cam1": 3.5225,
+              "cam2": 3.1668
+            }
+          }
+        ],
+        "scope": "sampled states, engaged absolute actions and source-aligned RGB; inactive holds covered by unit tests"
+      }
+    },
+    {
+      "name": "standard_quality",
+      "list": "/home/user/lpy/convert_data/lists/standard_quality.txt",
+      "root": "/home/user/lpy/convert_data/outputs/fr3_wuji/tomato_standard_quality",
+      "summary": {
+        "converted_bags": 1,
+        "episodes": 1,
+        "frames": 1689,
+        "repo_id": "fr3_wuji/tomato_standard_quality",
+        "added_bags": 0,
+        "selected_bags": 1,
+        "skipped_selected_bags": [
+          {
+            "episode": "episode64",
+            "source": "/home/user/franka_teleop_data/bags/gello/episode64",
+            "reason": "collection state: incomplete; failures=['/teleop/arm_command_status: source_max_internal_gap_ms 209.9 ms exceeds 150.0 ms']"
+          }
+        ],
+        "retained_bags_not_in_current_selection": [],
+        "skipped_by_collection_state": 1,
+        "errors": []
+      },
+      "verification": {
+        "status": "passed",
+        "episodes": 1,
+        "frames": 1689,
+        "full_video_decode": true
+      },
+      "pi05_verification": {
+        "status": "passed",
+        "loader": "Pi05 installed LeRobotDataset (v2.1)",
+        "video_backend": "pyav",
+        "repo_id": "fr3_wuji/tomato_standard_quality",
+        "transform": "Fr3WujiInputs",
+        "episodes": 1,
+        "frames": 1689,
+        "sampled_indices": [
+          0,
+          844,
+          1688
+        ],
+        "action_horizon": 50
+      },
+      "source_verification": {
+        "status": "passed",
+        "samples": [
+          {
+            "bag": "/home/user/franka_teleop_data/bags/gello/episode32",
+            "episode_index": 0,
+            "frame_index": 0,
+            "vectors_exact": true,
+            "rgb_mae_255": {
+              "cam0": 2.4941,
+              "cam1": 2.5451,
+              "cam2": 3.8024
+            }
+          },
+          {
+            "bag": "/home/user/franka_teleop_data/bags/gello/episode32",
+            "episode_index": 0,
+            "frame_index": 844,
+            "vectors_exact": true,
+            "rgb_mae_255": {
+              "cam0": 3.89,
+              "cam1": 2.8442,
+              "cam2": 3.5559
+            }
+          },
+          {
+            "bag": "/home/user/franka_teleop_data/bags/gello/episode32",
+            "episode_index": 0,
+            "frame_index": 1688,
+            "vectors_exact": true,
+            "rgb_mae_255": {
+              "cam0": 3.8526,
+              "cam1": 3.4103,
+              "cam2": 4.0391
+            }
+          }
+        ],
+        "scope": "sampled states, engaged absolute actions and source-aligned RGB; inactive holds covered by unit tests"
+      }
+    }
+  ],
+  "real_group_normalization_computed": false,
+  "training_started": false
+}

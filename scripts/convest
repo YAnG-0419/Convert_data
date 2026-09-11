@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+project_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+export PYTHONNOUSERSITE=1
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPATH="$project_root/src"
+export HF_HOME="$project_root/.cache/huggingface"
+export XDG_CACHE_HOME="$project_root/.cache"
+exec "$project_root/.runtime/bin/python" -m convest.cli "$@"

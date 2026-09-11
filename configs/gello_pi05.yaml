@@ -1,0 +1,21 @@
+source_root: /home/user/franka_teleop_data/bags
+output_root: outputs/fr3_wuji/tomato
+repo_id: fr3_wuji/tomato
+source_format: gello_rosbag2
+target_format: lerobot_v21
+contract: schemas/gello_contract.yaml
+schema_dir: schemas
+task: Pick up a tomato truss with the right hand, then pick a cherry tomato with the left hand and place it in the left basket.
+# A marked bag produces one prefix per milestone followed by the full episode.
+segments: all
+segment_tasks:
+  milestone_1: Pick up a tomato truss with the right hand.
+fps: 30
+max_staleness_ms: 150
+# Follow each recording's validated source_effective_start/end_time_ns.
+window: validated
+min_segment_frames: 2
+video_crf: 23
+video_preset: veryfast
+video_threads: 2
+min_free_gb: 10

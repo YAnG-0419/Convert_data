@@ -1,0 +1,23 @@
+source_root: /home/user/franka_teleop_data/bags/gello
+output_root: outputs/act/tomato
+repo_id: act/tomato
+source_format: gello_rosbag2
+target_format: act_hdf5
+contract: schemas/gello_contract.yaml
+schema_dir: schemas
+task: Pick up a tomato truss with the right hand, then pick a cherry tomato with the left hand and place it in the left basket.
+fps: 20
+state_dim: 54  # 14 selects arms only; action_dim follows state_dim.
+window: trimmed_validated
+trim_start_sec: 1.0
+trim_end_sec: 1.0
+image_max_delta_ms: 50
+arm_max_delta_ms: 20
+hand_max_delta_ms: 50
+min_segment_frames: 2
+qvel_policy: prefer_source  # Valid ROS velocities first, finite differences for missing values.
+image_width: 320
+image_height: 240
+compression: lzf  # Lossless HDF5 compression; null and gzip are also supported.
+max_joint_step_rad: 1.0  # Reject qpos/action jumps above this per retained timestep.
+min_free_gb: 10

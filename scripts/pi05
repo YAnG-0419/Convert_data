@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+project_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+pi05_root="${PI05_ROOT:-/home/user/lpy/Pi05}"
+unset PYTHONPATH
+export PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1
+cd "$project_root"
+exec "$pi05_root/.venv/bin/python" "$project_root/scripts/pi05_entry.py" "$@"

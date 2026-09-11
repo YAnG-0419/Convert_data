@@ -1,0 +1,177 @@
+contract_version: 1
+lerobot_version: v2.0
+teleoperator: gello
+units: radian
+
+topics:
+  arm_command_status:
+    topic: /teleop/arm_command_status
+    type: teleop_interfaces/msg/ArmCommandStatus
+  validated_arm_action:
+    topic: /teleop/validated_arm_commands
+    type: sensor_msgs/msg/JointState
+  left_arm_state:
+    topic: /left/franka/joint_states
+    type: sensor_msgs/msg/JointState
+  right_arm_state:
+    topic: /right/franka/joint_states
+    type: sensor_msgs/msg/JointState
+  left_hand_action:
+    topic: /teleop/wuji/left/command
+    type: sensor_msgs/msg/JointState
+  right_hand_action:
+    topic: /teleop/wuji/right/command
+    type: sensor_msgs/msg/JointState
+  left_hand_state:
+    topic: /teleop/wuji/left/joint_states
+    type: sensor_msgs/msg/JointState
+  right_hand_state:
+    topic: /teleop/wuji/right/joint_states
+    type: sensor_msgs/msg/JointState
+  hand_telemetry_status:
+    topic: /teleop/wuji/telemetry_status
+    type: teleop_interfaces/msg/HandTelemetryStatus
+  cam0:
+    topic: /cam0/color/image_raw
+    type: sensor_msgs/msg/Image
+  cam1:
+    topic: /cam1/color/image_raw
+    type: sensor_msgs/msg/Image
+  cam2:
+    topic: /cam2/color/image_raw
+    type: sensor_msgs/msg/Image
+  cam0_depth:
+    topic: /cam0/depth/image_raw
+    type: sensor_msgs/msg/Image
+
+source_joint_names:
+  validated_left_arm:
+    - left_fr3v2_joint1
+    - left_fr3v2_joint2
+    - left_fr3v2_joint3
+    - left_fr3v2_joint4
+    - left_fr3v2_joint5
+    - left_fr3v2_joint6
+    - left_fr3v2_joint7
+  validated_right_arm:
+    - right_fr3v2_joint1
+    - right_fr3v2_joint2
+    - right_fr3v2_joint3
+    - right_fr3v2_joint4
+    - right_fr3v2_joint5
+    - right_fr3v2_joint6
+    - right_fr3v2_joint7
+  measured_left_arm:
+    - left_fr3_joint1
+    - left_fr3_joint2
+    - left_fr3_joint3
+    - left_fr3_joint4
+    - left_fr3_joint5
+    - left_fr3_joint6
+    - left_fr3_joint7
+  measured_right_arm:
+    - right_fr3_joint1
+    - right_fr3_joint2
+    - right_fr3_joint3
+    - right_fr3_joint4
+    - right_fr3_joint5
+    - right_fr3_joint6
+    - right_fr3_joint7
+  left_hand: &left_hand_source
+    - l_thumb_cmc_flex
+    - l_thumb_cmc_abd
+    - l_thumb_mcp
+    - l_thumb_ip
+    - l_index_finger_mcp_flex
+    - l_index_finger_mcp_abd
+    - l_index_finger_pip
+    - l_index_finger_dip
+    - l_middle_finger_mcp_flex
+    - l_middle_finger_mcp_abd
+    - l_middle_finger_pip
+    - l_middle_finger_dip
+    - l_ring_finger_mcp_flex
+    - l_ring_finger_mcp_abd
+    - l_ring_finger_pip
+    - l_ring_finger_dip
+    - l_pinky_mcp_flex
+    - l_pinky_mcp_abd
+    - l_pinky_pip
+    - l_pinky_dip
+  right_hand: &right_hand_source
+    - r_thumb_cmc_flex
+    - r_thumb_cmc_abd
+    - r_thumb_mcp
+    - r_thumb_ip
+    - r_index_finger_mcp_flex
+    - r_index_finger_mcp_abd
+    - r_index_finger_pip
+    - r_index_finger_dip
+    - r_middle_finger_mcp_flex
+    - r_middle_finger_mcp_abd
+    - r_middle_finger_pip
+    - r_middle_finger_dip
+    - r_ring_finger_mcp_flex
+    - r_ring_finger_mcp_abd
+    - r_ring_finger_pip
+    - r_ring_finger_dip
+    - r_pinky_mcp_flex
+    - r_pinky_mcp_abd
+    - r_pinky_pip
+    - r_pinky_dip
+
+contract_joint_names:
+  left_arm: &left_arm_contract
+    - left_fr3_joint1
+    - left_fr3_joint2
+    - left_fr3_joint3
+    - left_fr3_joint4
+    - left_fr3_joint5
+    - left_fr3_joint6
+    - left_fr3_joint7
+  right_arm: &right_arm_contract
+    - right_fr3_joint1
+    - right_fr3_joint2
+    - right_fr3_joint3
+    - right_fr3_joint4
+    - right_fr3_joint5
+    - right_fr3_joint6
+    - right_fr3_joint7
+  left_hand: *left_hand_source
+  right_hand: *right_hand_source
+
+features:
+  action:
+    dimension: 54
+    dtype: float32
+    order:
+      - {name: left_arm.position, count: 7, joints: *left_arm_contract}
+      - {name: right_arm.position, count: 7, joints: *right_arm_contract}
+      - {name: left_hand.command, count: 20, joints: *left_hand_source}
+      - {name: right_hand.command, count: 20, joints: *right_hand_source}
+  observation.state:
+    dimension: 108
+    dtype: float32
+    order:
+      - {name: left_arm.position, count: 7, joints: *left_arm_contract}
+      - {name: left_arm.velocity, count: 7, joints: *left_arm_contract}
+      - {name: right_arm.position, count: 7, joints: *right_arm_contract}
+      - {name: right_arm.velocity, count: 7, joints: *right_arm_contract}
+      - {name: left_hand.position, count: 20, joints: *left_hand_source}
+      - {name: left_hand.velocity, count: 20, joints: *left_hand_source}
+      - {name: right_hand.position, count: 20, joints: *right_hand_source}
+      - {name: right_hand.velocity, count: 20, joints: *right_hand_source}
+  observation.engaged:
+    dimension: 4
+    dtype: float32
+    order:
+      - left_arm
+      - right_arm
+      - left_hand
+      - right_hand
+  images:
+    observation.images.cam0: /cam0/color/image_raw
+    observation.images.cam1: /cam1/color/image_raw
+    observation.images.cam2: /cam2/color/image_raw
+  depths:
+    observation.depths.cam0: /cam0/depth/image_raw

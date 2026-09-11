@@ -1,0 +1,126 @@
+{
+  "status": "passed",
+  "dataset": "/home/user/lpy/convert_data/outputs/act/tomato_test",
+  "bags": [
+    {
+      "source": "/home/user/franka_teleop_data/bags/gello/episode18",
+      "all_vectors_match": true,
+      "source_unchanged": true,
+      "rgb_sample_frames": [
+        {
+          "episode_index": 0,
+          "frame": 0
+        },
+        {
+          "episode_index": 0,
+          "frame": 1546
+        },
+        {
+          "episode_index": 0,
+          "frame": 3092
+        }
+      ]
+    },
+    {
+      "source": "/home/user/franka_teleop_data/bags/gello/episode19",
+      "all_vectors_match": true,
+      "source_unchanged": true,
+      "rgb_sample_frames": [
+        {
+          "episode_index": 1,
+          "frame": 0
+        },
+        {
+          "episode_index": 1,
+          "frame": 626
+        },
+        {
+          "episode_index": 1,
+          "frame": 1251
+        }
+      ]
+    },
+    {
+      "source": "/home/user/franka_teleop_data/bags/gello/episode20",
+      "all_vectors_match": true,
+      "source_unchanged": true,
+      "rgb_sample_frames": [
+        {
+          "episode_index": 2,
+          "frame": 0
+        },
+        {
+          "episode_index": 2,
+          "frame": 970
+        },
+        {
+          "episode_index": 2,
+          "frame": 1939
+        }
+      ]
+    },
+    {
+      "source": "/home/user/franka_teleop_data/bags/gello/episode22",
+      "all_vectors_match": true,
+      "source_unchanged": true,
+      "rgb_sample_frames": [
+        {
+          "episode_index": 3,
+          "frame": 0
+        },
+        {
+          "episode_index": 3,
+          "frame": 699
+        },
+        {
+          "episode_index": 3,
+          "frame": 1397
+        }
+      ]
+    },
+    {
+      "source": "/home/user/franka_teleop_data/bags/gello/episode103",
+      "all_vectors_match": true,
+      "source_unchanged": true,
+      "rgb_sample_frames": [
+        {
+          "episode_index": 4,
+          "frame": 0
+        },
+        {
+          "episode_index": 4,
+          "frame": 379
+        },
+        {
+          "episode_index": 4,
+          "frame": 758
+        }
+      ]
+    }
+  ],
+  "legacy_fingerprints_compatible": [
+    {
+      "dataset": "/home/user/lpy/convert_data/outputs/fr3_wuji/tomato_high_quality",
+      "fingerprint_algorithm_compatible": true,
+      "recorded_contract_path_exists": true,
+      "resolved_contract_for_audit": "/home/user/lpy/convert_data/schemas/gello_contract.yaml"
+    },
+    {
+      "dataset": "/home/user/lpy/convert_data/outputs/fr3_wuji/tomato",
+      "fingerprint_algorithm_compatible": true,
+      "recorded_contract_path_exists": false,
+      "resolved_contract_for_audit": "/home/user/lpy/convert_data/schemas/gello_contract.yaml"
+    },
+    {
+      "dataset": "/home/user/lpy/convert_data/outputs/fr3_wuji/tomato_standard_quality",
+      "fingerprint_algorithm_compatible": true,
+      "recorded_contract_path_exists": true,
+      "resolved_contract_for_audit": "/home/user/lpy/convert_data/schemas/gello_contract.yaml"
+    }
+  ],
+  "preview": "/home/user/lpy/convert_data/reports/act_episode103_preview.mp4",
+  "not_validated": [
+    "ACT training dataloader",
+    "training loss convergence"
+  ]
+}

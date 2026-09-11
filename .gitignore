@@ -1,0 +1,59 @@
+# Local environments and installer caches
+.venv/
+venv/
+.runtime/
+.cache/
+
+# Python bytecode, packaging, and test/lint caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.hypothesis/
+.ipynb_checkpoints/
+
+# Converted datasets, checkpoints, and Pi05 assets (do not upload data)
+outputs/
+
+# Source bags and bulky artifacts if they appear outside outputs/
+*.bag
+*.db3
+*.mcap
+*.hdf5
+*.h5
+*.parquet
+*.ckpt
+*.pt
+*.pth
+*.safetensors
+*.pkl
+*.pickle
+
+# Runtime logs and machine-local inspect dumps.
+# Keep JSON reports and small previews that docs link to.
+*.log
+reports/inventory.json
+reports/*_train_help.txt
+
+# Editors and OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*~
+*.swp
+
+# Secrets
+.env
+.env.*

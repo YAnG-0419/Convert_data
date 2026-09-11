@@ -1,0 +1,5 @@
+# 低质量组。质量等级不替代采集完整性校验。
+32
+64  # 当前采集状态 incomplete，默认拒绝；--skip-ineligible 会明确记录并跳过。
+232
+238  # 当前采集状态 incomplete，默认拒绝；--skip-ineligible 会明确记录并跳过。
