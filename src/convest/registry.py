@@ -21,6 +21,9 @@ TARGETS = {
                           "videos/chunk-*/*/episode_*.mp4"), "0.2.0"),
     "act_hdf5": Target("convest.recipes.act", "convest.formats.act_hdf5",
                        "convest.formats.act_hdf5", ("episode_*.hdf5",), "act-1"),
+    "dp3_uncropped_zarr": Target("convest.recipes.dp3", "convest.formats.dp3_zarr",
+                                  "convest.formats.dp3_zarr", ("dataset_uncropped.zarr",),
+                                  "dp3-uncropped-1"),
 }
 
 

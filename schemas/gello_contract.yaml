@@ -43,6 +43,9 @@ topics:
   cam0_depth:
     topic: /cam0/depth/image_raw
     type: sensor_msgs/msg/Image
+  cam0_depth_info:
+    topic: /cam0/depth/camera_info
+    type: sensor_msgs/msg/CameraInfo
 
 source_joint_names:
   validated_left_arm:

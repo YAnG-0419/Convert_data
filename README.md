@@ -1,8 +1,41 @@
 # 机器人数据转换工作区
 
-目前支持 **Gello / 双 FR3 + Wuji 的 ROS2 sqlite3 bag → Pi05 LeRobot v2.1 / ACT HDF5**。统一入口为 `scripts/convest`，通过 YAML 的 `target_format` 选择输出；不传配置时仍沿用原 Pi05 行为。
+目前支持 **Gello / 双 FR3 + Wuji 的 ROS2 sqlite3 bag → Pi05 LeRobot v2.1 / ACT HDF5 / DP3 未裁剪 Zarr**。Pi05/ACT 使用 `scripts/convest`，DP3 质量分组转换使用 `scripts/dp3`。
 
 所有代码、依赖、缓存、日志、转换结果均放在本目录。源 bag 使用 SQLite 只读连接；不安装 ROS，不修改 Pi05、gello-retarget、系统 Python 或它们的环境，不上传数据。
+
+## DP3 未裁剪 Zarr 转换
+
+实现遵循 `ROSBAG_TO_DP3_CONVERSION.md`：按 header 时间因果对齐到 10 Hz，按关节名称生成 54 维 state/action，用 cam0 深度和对应 CameraInfo 反投影，应用配置中的固定外参，输出变长、未裁剪、未体素化、未 FPS 的点云。后续点云裁剪和固定到 1024 点不属于本脚本。
+
+正式转换前必须编辑 `configs/gello_dp3.yaml`，填写真实的 `point_frame`、`T_point_from_depth_camera` 和 `calibration_version`。默认占位外参会被拒绝，避免把相机坐标系误标成公共工位坐标系。
+
+```bash
+cd /home/descfly/Convert_data
+bash scripts/setup.sh
+
+# 三档分别转换；已有输出必须带 --resume，追加 TXT 后也使用同一命令。
+scripts/dp3 convert --quality high --resume
+scripts/dp3 convert --quality standard --skip-ineligible --resume
+scripts/dp3 convert --quality low --skip-ineligible --resume
+
+# 或一次按配置中的三个 TXT 依次转换。
+scripts/dp3 convert --quality all --skip-ineligible --resume
+
+# 每档独立校验。
+scripts/dp3 verify --quality all
+```
+
+三档对应 `lists/high_quality.txt`、`lists/standard_quality.txt`、`lists/low_quality.txt`，分别写入 `outputs/dp3_uncropped/high`、`standard`、`low`。质量档允许重叠；采集状态不合格默认拒绝，只有显式 `--skip-ineligible` 才跳过并记录。转换中断后，`--resume` 会按提交日志截断未完成数组并继续，不重复已提交 bag。
+
+数据部给出的 `episode51–53` 可用开发配置检查完整链路；该配置故意保留相机坐标系，不能作为正式坐标转换交付：
+
+```bash
+scripts/dp3 convert --config configs/gello_dp3_sample.yaml --quality sample --resume
+scripts/dp3 verify --config configs/gello_dp3_sample.yaml --quality sample
+```
+
+每档输出一个 `dataset_uncropped.zarr`，其中 `point_cloud_xyz [P,3]` 与 `point_cloud_offsets [T+1]` 保存变长点云，`state/action [T,54]` 顺序为左臂、左手、右臂、右手；同时生成 `manifest.json`、`episode_manifest.json`、`conversion_report.json`、`invalid_segments.json` 和 `conversion/` 续跑记录。源文件 SHA-256、源/接收时间、外参和关节名称均随交付保存。
 
 ## ACT HDF5 转换
 
