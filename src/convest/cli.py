@@ -60,6 +60,8 @@ def main():
         inspect(config, args.report)
     else:
         from convest.pipeline import convert
+        if config["target_format"] == "dp3_uncropped_zarr":
+            parser.error("DP3 quality-group conversion uses scripts/dp3 convert --quality <group>")
         if args.output:
             config["output_root"] = str(args.output.expanduser().resolve())
         if args.repo_id:

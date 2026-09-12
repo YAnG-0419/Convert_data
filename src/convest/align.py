@@ -16,6 +16,7 @@ class AlignedEpisode:
     image_indices: dict
     segments: list
     report: dict
+    source_indices: dict | None = None
 
 
 def valid_segments(valid, minimum):
@@ -24,7 +25,7 @@ def valid_segments(valid, minimum):
             if b - a >= minimum]
 
 
-def align(streams, start, end, fps, max_age_ns, min_frames=2):
+def align(streams, start, end, fps, max_age_ns, min_frames=2, camera_keys=CAMERAS):
     count = (end - start) * fps // 1_000_000_000 + 1
     if count < 1:
         raise ValueError("Empty source-time interval")
@@ -32,6 +33,7 @@ def align(streams, start, end, fps, max_age_ns, min_frames=2):
     valid = np.ones(count, dtype=bool)
     unmatched = {}
     ages = {}
+    source_indices = {}
 
     def sample(key):
         series = streams[key]
@@ -41,6 +43,7 @@ def align(streams, start, end, fps, max_age_ns, min_frames=2):
         valid[:] &= good
         unmatched[key] = int((~good).sum())
         ages[key] = float(age[good].max() / 1e6) if good.any() else None
+        source_indices[key] = index
         return index, np.asarray(series.values)[np.maximum(index, 0)]
 
     states, actions, engaged = [], [], []
@@ -70,13 +73,16 @@ def align(streams, start, end, fps, max_age_ns, min_frames=2):
         # If capture began inactive before its first state, seed once from first measured state.
         held = np.where((hold_index >= 0)[:, None], held, seeds)
         action[~active] = held[~active]
+        selected_command_index = command_index.copy()
+        selected_command_index[~active] = hold_index[run][~active]
+        source_indices[f"action.{group}"] = selected_command_index
         good = ~active | active_good
         valid &= good
         unmatched[f"action.{group}"] = int((~good).sum())
         actions.append(action)
         engaged.append(active)
     image_indices = {}
-    for camera in CAMERAS:
+    for camera in camera_keys:
         s = streams[camera]
         index = s.indices(timeline)
         age = timeline - s.times[np.maximum(index, 0)]
@@ -85,6 +91,7 @@ def align(streams, start, end, fps, max_age_ns, min_frames=2):
         unmatched[camera] = int((~good).sum())
         ages[camera] = float(age[good].max() / 1e6) if good.any() else None
         image_indices[camera] = index
+        source_indices[camera] = index
     segments = valid_segments(valid, min_frames)
     retained = sum(b - a for a, b in segments)
     if not segments:
@@ -95,4 +102,4 @@ def align(streams, start, end, fps, max_age_ns, min_frames=2):
                           {"grid_frames": count, "retained_frames": retained,
                            "invalid_frames": int((~valid).sum()), "short_segment_frames": int(valid.sum()) - retained,
                            "segment_count": len(segments), "unmatched": unmatched, "max_age_ms": ages,
-                           "source_start_ns": int(start), "source_end_ns": int(end)})
+                           "source_start_ns": int(start), "source_end_ns": int(end)}, source_indices)

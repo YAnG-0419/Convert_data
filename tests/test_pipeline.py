@@ -69,6 +69,19 @@ def make_bag(path):
             rows[:, :72] = np.tile([frame * 5, 77, 123], (16, 24))
             image = types["sensor_msgs/msg/Image"](header, 16, 24, "bgr8", 0, 76, rows.ravel())
             append(contract["topics"][camera]["topic"], image, time)
+        depth_rows = np.zeros((16, 50), dtype=np.uint8)
+        depth_rows[:, :48] = np.full((16, 24), 1000, dtype="<u2").view(np.uint8).reshape(16, 48)
+        depth = types["sensor_msgs/msg/Image"](header, 16, 24, "16UC1", 0, 50, depth_rows.ravel())
+        append(contract["topics"]["cam0_depth"]["topic"], depth, time)
+        roi = types["sensor_msgs/msg/RegionOfInterest"](0, 0, 0, 0, False)
+        info = types["sensor_msgs/msg/CameraInfo"](
+            header, 16, 24, "plumb_bob", np.zeros(5),
+            np.array([20, 0, 11.5, 0, 20, 7.5, 0, 0, 1], dtype=np.float64),
+            np.eye(3, dtype=np.float64).ravel(),
+            np.array([20, 0, 11.5, 0, 0, 20, 7.5, 0, 0, 0, 1, 0], dtype=np.float64),
+            0, 0, roi,
+        )
+        append(contract["topics"]["cam0_depth_info"]["topic"], info, time)
     db.commit()
     db.close()
     (path / "metadata.yaml").write_text(yaml.safe_dump({"rosbag2_bagfile_information": {

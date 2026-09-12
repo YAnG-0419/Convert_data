@@ -1,0 +1,31 @@
+# Development-only configuration for the three example bags. It intentionally leaves
+# points in cam0_depth_optical_frame and must not be labelled as a formal delivery.
+source_root: /home/descfly/Desktop/51-53.
+output_root: outputs/dp3_sample
+repo_id: fr3_wuji/dp3_sample
+source_format: gello_rosbag2
+target_format: dp3_uncropped_zarr
+contract: schemas/gello_contract.yaml
+schema_dir: schemas
+task: Conversion smoke test.
+quality_groups:
+  sample: lists/dp3_sample.txt
+fps: 10
+max_staleness_ms: 150
+window: validated
+min_segment_frames: 2
+state_dim: 54
+max_joint_step_rad: 1.0
+min_free_gb: 10
+depth_scale_m: 0.001
+min_depth_m: 0.001
+max_depth_m: 10.0
+source_point_frame: cam0_depth_optical_frame
+point_frame: cam0_depth_optical_frame
+T_point_from_depth_camera:
+  - [1.0, 0.0, 0.0, 0.0]
+  - [0.0, 1.0, 0.0, 0.0]
+  - [0.0, 0.0, 1.0, 0.0]
+  - [0.0, 0.0, 0.0, 1.0]
+calibration_version: camera-native-sample-v1
+require_coordinate_transform: false

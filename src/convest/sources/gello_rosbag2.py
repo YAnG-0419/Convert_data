@@ -67,6 +67,7 @@ def header_ns(payload):
 class Series:
     times: np.ndarray
     values: object
+    receive_times: np.ndarray | None = None
 
     @classmethod
     def build(cls, samples):
@@ -74,8 +75,19 @@ class Series:
             raise ValueError("Required stream contains no samples")
         # Stable sort permits bag delivery reordering; equal headers use last arrival.
         samples.sort(key=lambda x: x[0])
-        unique = {time: value for time, value in samples}
-        return cls(np.array(list(unique), dtype=np.int64), list(unique.values()))
+        has_receive_time = len(samples[0]) == 3
+        if any((len(sample) == 3) != has_receive_time for sample in samples):
+            raise ValueError("Series cannot mix samples with and without receive timestamps")
+        unique = {
+            sample[0]: (sample[1], sample[2] if has_receive_time else None)
+            for sample in samples
+        }
+        return cls(
+            np.array(list(unique), dtype=np.int64),
+            [value for value, _ in unique.values()],
+            (np.array([received for _, received in unique.values()], dtype=np.int64)
+             if has_receive_time else None),
+        )
 
     def indices(self, timeline):
         return np.searchsorted(self.times, timeline, side="right") - 1
@@ -117,7 +129,7 @@ class Bag:
     def __exit__(self, *args):
         self.stack.close()
 
-    def records(self, topic, image=False):
+    def records(self, topic, image=False, include_receive=False):
         if topic not in self.topics:
             raise ValueError(f"Missing topic: {topic}")
         for db, ident, kind in self.topics[topic]:
@@ -129,7 +141,8 @@ class Bag:
                 f"SELECT id,timestamp,{field} FROM messages WHERE topic_id=? ORDER BY timestamp,id", (ident,)
             ):
                 time = header_ns(payload)
-                yield time, ((db, row_id) if image else self.store.deserialize_cdr(payload, kind))
+                value = (db, row_id) if image else self.store.deserialize_cdr(payload, kind)
+                yield (time, value, received) if include_receive else (time, value)
 
     def image(self, reference):
         db, row_id = reference
@@ -148,6 +161,21 @@ class Bag:
         else:
             image = image[..., :3]
         return np.ascontiguousarray(image)
+
+    def depth(self, reference):
+        db, row_id = reference
+        payload = db.execute("SELECT data FROM messages WHERE id=?", (row_id,)).fetchone()[0]
+        msg = self.store.deserialize_cdr(payload, "sensor_msgs/msg/Image")
+        encoding = msg.encoding.lower()
+        dtype = {"16uc1": np.dtype("u2"), "32fc1": np.dtype("f4")}.get(encoding)
+        if dtype is None:
+            raise ValueError(f"Unsupported depth encoding {encoding}")
+        dtype = dtype.newbyteorder(">" if msg.is_bigendian else "<")
+        row_bytes = msg.width * dtype.itemsize
+        if msg.step < row_bytes or len(msg.data) != msg.height * msg.step:
+            raise ValueError("Depth Image data/step/shape mismatch")
+        rows = np.asarray(msg.data, dtype=np.uint8).reshape(msg.height, msg.step)
+        return np.frombuffer(rows[:, :row_bytes].copy(), dtype=dtype).reshape(msg.height, msg.width)
 
 
 def joint_values(msg, names, fields, allow_absent=False):
@@ -246,4 +274,63 @@ def read_act_streams(bag, contract, state_dim=54):
             for time, msg in bag.records(topics[f"{group}_action"]["topic"])])
     for camera in ("cam0", "cam1", "cam2"):
         streams[camera] = Series.build(list(bag.records(topics[camera]["topic"], image=True)))
+    return streams
+
+
+def read_dp3_streams(bag, contract):
+    """Read DP3 vectors, health gates, depth and intrinsics with both clocks."""
+    topics, names = contract["topics"], contract["source_joint_names"]
+
+    def series(topic_key, convert, *, image=False):
+        return Series.build([
+            (time, convert(value), received)
+            for time, value, received in bag.records(
+                topics[topic_key]["topic"], image=image, include_receive=True
+            )
+        ])
+
+    streams = {}
+    for part in ("arm", "hand"):
+        for side in ("left", "right"):
+            group = f"{side}_{part}"
+            joints = names[f"measured_{side}_arm" if part == "arm" else f"{side}_hand"]
+            streams[f"state.{group}"] = series(
+                f"{group}_state", lambda msg, joints=joints: joint_values(msg, joints, ["position", "velocity"])
+            )
+
+    actions = {side: [] for side in ("left", "right")}
+    for time, msg, received in bag.records(
+        topics["validated_arm_action"]["topic"], include_receive=True
+    ):
+        for side in actions:
+            value = joint_values(msg, names[f"validated_{side}_arm"], ["position"], allow_absent=True)
+            if value is not None:
+                actions[side].append((time, value, received))
+    for side, samples in actions.items():
+        streams[f"action.{side}_arm"] = Series.build(samples)
+        streams[f"action.{side}_hand"] = series(
+            f"{side}_hand_action",
+            lambda msg, side=side: joint_values(msg, names[f"{side}_hand"], ["position"]),
+        )
+
+    statuses = {group: [] for group in ("left_arm", "right_arm", "left_hand", "right_hand")}
+    for time, msg, received in bag.records(
+        topics["arm_command_status"]["topic"], include_receive=True
+    ):
+        for side in ("left", "right"):
+            statuses[f"{side}_arm"].append(
+                (time, (side in msg.accepted_sides, not bool(msg.faults)), received)
+            )
+    for time, msg, received in bag.records(
+        topics["hand_telemetry_status"]["topic"], include_receive=True
+    ):
+        if msg.side not in ("left", "right"):
+            raise ValueError(f"Unknown hand side {msg.side}")
+        valid = msg.state_valid and (not msg.engaged or msg.command_valid)
+        statuses[f"{msg.side}_hand"].append(
+            (time, (bool(msg.engaged), bool(valid)), received)
+        )
+    streams.update({f"status.{group}": Series.build(samples) for group, samples in statuses.items()})
+    streams["cam0_depth"] = series("cam0_depth", lambda value: value, image=True)
+    streams["cam0_depth_info"] = series("cam0_depth_info", lambda value: value)
     return streams

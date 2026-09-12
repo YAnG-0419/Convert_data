@@ -1,0 +1,38 @@
+# ROS bag -> DP3 intermediate delivery. This stage does not crop or sample points.
+source_root: /home/user/franka_teleop_data/bags/gello
+output_root: outputs/dp3_uncropped
+repo_id: fr3_wuji/dp3_uncropped
+source_format: gello_rosbag2
+target_format: dp3_uncropped_zarr
+contract: schemas/gello_contract.yaml
+schema_dir: schemas
+task: Pick up a tomato truss with the right hand, then pick a cherry tomato with the left hand and place it in the left basket.
+quality_groups:
+  high: lists/high_quality.txt
+  standard: lists/standard_quality.txt
+  low: lists/low_quality.txt
+
+fps: 10
+max_staleness_ms: 150
+window: validated
+min_segment_frames: 2
+state_dim: 54
+max_joint_step_rad: 1.0
+min_free_gb: 10
+
+# 16UC1 sample bags use millimetres. Confirm this against the production camera config.
+depth_scale_m: 0.001
+min_depth_m: 0.001
+max_depth_m: 10.0
+
+# Formal delivery: replace the target frame, matrix and version below with the
+# calibration snapshot from the collection system. The validator rejects this placeholder.
+source_point_frame: cam0_depth_optical_frame
+point_frame: REPLACE_WITH_AGREED_WORKCELL_FRAME
+T_point_from_depth_camera:
+  - [1.0, 0.0, 0.0, 0.0]
+  - [0.0, 1.0, 0.0, 0.0]
+  - [0.0, 0.0, 1.0, 0.0]
+  - [0.0, 0.0, 0.0, 1.0]
+calibration_version: REPLACE_WITH_CALIBRATION_VERSION
+require_coordinate_transform: true
