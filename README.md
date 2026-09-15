@@ -364,3 +364,4 @@ env -u PYTHONPATH PYTHONNOUSERSITE=1 .runtime/bin/python -m pytest -q --basetemp
 - **有限并行和可恢复写出**：使用 `ProcessPoolExecutor` 按 bag 并行，完成后按确定的顺序提交，避免工作进程完成先后影响编号。`--workers 4` 表示最多 4 个进程同时处理不同 bag；每个视频编码器默认 2 个线程。图像只先建立消息头及位置索引，再按需读取和编码，数值时间序列按 bag 放入内存，不将整批原始视频展开到内存或 PNG 目录。
 - **目录与中断保护**：支持自动创建输出目录或使用用户预建的空目录。对已有非空数据集要求本工具的 manifest 和 `--resume`，通过文件锁阻止同一数据集被多个转换任务同时写入。每个 bag 先写入暂存目录，完成后提交产物及来源记录；恢复时仅清理该输出中未提交的产物。源 bag 始终以只读方式访问。
 - **分组数据接入 Pi05**：更新 [check_pi05.py](scripts/check_pi05.py)、[compute_pi05_norm.py](scripts/compute_pi05_norm.py) 和 [pi05_entry.py](scripts/pi05_entry.py)。检查与统计脚本从目标 manifest 读取 `repo_id`，各组归一化统计保存到独立目录；训练入口将用户指定的 `repo_id` 传给 Pi05。针对本机 TorchCodec 动态库问题，入口只在当前进程内选择已可用的 PyAV。
+全量单阶段/记录点前缀转换及服务器上传：见 [操作说明](docs/dp_first_stage_publish.md)。

@@ -32,6 +32,24 @@ def sha256(path):
 def convert_part(item, config, local):
     local = Path(local)
     local.mkdir(parents=True, exist_ok=True)
+    with (local/'job.lock').open('a') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        ready = local/'part.json'
+        if ready.exists():
+            info = json.loads(ready.read_text())
+            archive = local/'replay_buffer.zarr.zip'
+            if (info['record']['source_snapshot'] != snapshot(item['path'])
+                    or sha256(archive) != info['sha256']):
+                raise ValueError('Retained local artifact or source changed')
+            return info
+        # A previous interrupted job can leave a source cache with no commit.
+        stale = local/'dataset/conversion/staging'
+        if stale.exists():
+            shutil.rmtree(stale)
+        return _convert_part(item, config, local)
+
+
+def _convert_part(item, config, local):
     cfg = dict(config, source_root=item['path'], output_root=str(local/'dataset'))
     result = convert(cfg, cache_source=True, resume=True)
     if result['errors'] or result['bags'] != 1:

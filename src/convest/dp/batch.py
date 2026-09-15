@@ -18,7 +18,7 @@ def main():
     selection.add_argument('--episodes', nargs='+', help='Several episodes in one batch, e.g. episode60 episode62 63')
     selection.add_argument('--episode-list', type=Path, help='Optional TXT list of episode numbers/ranges')
     parser.add_argument('--skip-ineligible', action='store_true', help='Explicitly omit bags failing collection validation')
-    parser.add_argument('--segment-mode', choices=['full', 'first_stage'], default='full', help='Keep full validated recordings or only the prefix before the milestone')
+    parser.add_argument('--segment-mode', choices=['full', 'first_stage'], default=None, help='Keep full validated recordings or only the prefix before the milestone')
     parser.add_argument('--cache-source', action='store_true', help='Temporarily cache each source bag locally for remote mounts')
     parser.add_argument('--workers', type=int, default=1, help='Number of episode conversion processes (default: 1)')
     parser.add_argument('--limit', type=int, help='Convert only the first N selected bags, for a trial run')
@@ -31,7 +31,8 @@ def main():
         config = load_config(args.config)
         # This entrypoint always produces the requested 30 Hz action/observation grid.
         config['fps'] = 30
-        config['segment_mode'] = args.segment_mode
+        if args.segment_mode is not None:
+            config['segment_mode'] = args.segment_mode
         for arg, key in ((args.source_root, 'source_root'), (args.output, 'output_root')):
             if arg:
                 config[key] = str(arg.expanduser().resolve())
