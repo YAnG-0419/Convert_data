@@ -127,8 +127,11 @@ def main():
             skipped.append(item);continue
         try:
             start,end,window=selected_window(item,cfg)
+            grid_frames=(end-start)*30//1_000_000_000+1
+            if grid_frames<cfg['min_segment_frames']:
+                raise ValueError(f'Selected window has only {grid_frames} frames; minimum is {cfg["min_segment_frames"]}')
         except ValueError as exc:
-            skipped.append(dict(item,reason=str(exc)));continue
+            skipped.append(dict(item,eligible=False,collection_eligible=item['eligible'],reason=str(exc)));continue
         selected.append(dict(item,window=window,expected_grid_frames=(end-start)*30//1_000_000_000+1,
                              snapshot=snapshot(item['path'])))
     if args.limit:selected=selected[:args.limit]
@@ -158,7 +161,13 @@ def main():
             archive=dest/part['archive']
             if not archive.is_file() or archive.stat().st_size!=part['bytes']:
                 raise ValueError(f'Previously uploaded archive missing/truncated: {archive}')
-        remaining=deque(x for x in selected if Path(x['path']).name not in completed)
+        remaining_items=[x for x in selected if Path(x['path']).name not in completed]
+        # Exercise a real milestone prefix early, before the long single-stage backlog.
+        if not any(p['record']['selection_window']['milestone'] for p in manifest['parts']):
+            first_prefix=next((i for i,x in enumerate(remaining_items) if x['milestones']),None)
+            if first_prefix is not None:
+                remaining_items.insert(0,remaining_items.pop(first_prefix))
+        remaining=deque(remaining_items)
         budget=shutil.disk_usage(local).free-8*10**9
         if budget<=0:raise OSError('Need at least 8 GB free reserve')
         pending=deque();reserved=0;manifest['errors']=[]

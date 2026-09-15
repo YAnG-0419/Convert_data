@@ -34,6 +34,7 @@ def test_local_crop_archive_upload_exact_bytes_and_no_source_writes(tmp_path,mon
     item=discover(bag)[0];item['snapshot']=snapshot(bag)
     local=tmp_path/'job';info=convert_part(item,cfg,local)
     assert info['frames']==24
+    assert convert_part(item,cfg,local)==info  # Reuse a verified archive after interruption.
     with zarr.ZipStore(str(local/'replay_buffer.zarr.zip'),mode='r') as zipstore:
         group=zarr.open_group(zipstore,mode='r')
         stamps=group['provenance/timestamp_ns'][:]

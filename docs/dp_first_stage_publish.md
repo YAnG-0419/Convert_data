@@ -8,7 +8,7 @@
 - 无 `milestones`：保留完整的**采集校验有效窗口**，继续使用原有首尾质量裁剪。
 - 有一个 ROS 时钟记录点：保留有效窗口起点至 `milestone.timestamp_ns - 1`，记录点及之后的数据全部排除。
 - 非 ROS 时钟、无效记录点或多于一个记录点拒绝转换，写入跳过清单。
-- 本批 262 条中 224 条符合要求：131 条单阶段、93 条双阶段前缀。38 条未通过采集校验或缺失状态文件，不转换。
+- 本批 262 条中 223 条符合要求：130 条单阶段、93 条双阶段前缀。38 条未通过采集校验或缺失状态文件；另有 episode146 的有效窗口仅 4 帧（约 0.13 秒），不足 16 帧，列入跳过清单。
 
 30 Hz 因果对齐；三路 RGB + 头部深度 + 54 维关节位置和绝对目标动作。RGB 为 320×240 uint8，
 深度为 320×240×1 float32 米。时间缺口会形成独立片段，训练不会跨越片段或记录点。
@@ -41,7 +41,7 @@ scripts/dp_batch --all --skip-ineligible --segment-mode first_stage \
 ```text
 tomato-dp/
   dataset_manifest.json        # 整批索引、校验和、来源、边界、完成状态
-  inventory.json               # 224 条选择依据 + 38 条跳过原因
+  inventory.json               # 223 条选择依据 + 39 条跳过原因
   episodes/
     episode57/
       replay_buffer.zarr.zip   # 标准 Zarr v2 ZipStore，图像块已用 zstd 压缩
