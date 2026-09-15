@@ -1,0 +1,3208 @@
+{
+  "source_root": "/home/descfly/lcl_work/company-remote/tomato",
+  "total_bags": 262,
+  "eligible_bags": 224,
+  "ineligible_bags": 38,
+  "eligible_grid_frames_30hz": 480252,
+  "sample_bytes_per_frame": 582741.7806253204,
+  "estimated_output_gb": 279.9,
+  "available_gb": 74.2,
+  "bags": [
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode57",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788440877264633088,
+      "source_end_ns": 1788440988606130944,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode57",
+      "milestones": [],
+      "bytes": 9266368512
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode60",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788490270155070528,
+      "source_end_ns": 1788490335159108096,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode60",
+      "milestones": [],
+      "bytes": 5488992256
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode62",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788490437345990058,
+      "source_end_ns": 1788490533526611445,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode62",
+      "milestones": [],
+      "bytes": 8393572352
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode63",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788490586643909053,
+      "source_end_ns": 1788490752704424960,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode63",
+      "milestones": [],
+      "bytes": 13741297664
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode64",
+      "eligible": false,
+      "reason": "collection state: incomplete; failures=['/teleop/arm_command_status: source_max_internal_gap_ms 209.9 ms exceeds 150.0 ms']",
+      "source_start_ns": 1788490817264432934,
+      "source_end_ns": 1788490973794454016,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode64",
+      "milestones": [],
+      "bytes": 12954517504
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode67",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788491572041014061,
+      "source_end_ns": 1788491685612605952,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode67",
+      "milestones": [],
+      "bytes": 9450844160
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode68",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788491744497034500,
+      "source_end_ns": 1788491844562460928,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode68",
+      "milestones": [],
+      "bytes": 8344883200
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode70",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788492200077909761,
+      "source_end_ns": 1788492287183621888,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode70",
+      "milestones": [],
+      "bytes": 7291785216
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode72",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788492460487845495,
+      "source_end_ns": 1788492529525359104,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode72",
+      "milestones": [],
+      "bytes": 5817057280
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode73",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788492579562170043,
+      "source_end_ns": 1788492668926511104,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode73",
+      "milestones": [],
+      "bytes": 7474229248
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode76",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788493130369481511,
+      "source_end_ns": 1788493205627781120,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode76",
+      "milestones": [],
+      "bytes": 6321860608
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode79",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788501902816799679,
+      "source_end_ns": 1788502003115822080,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode79",
+      "milestones": [],
+      "bytes": 8369954816
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode81",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788502236499672985,
+      "source_end_ns": 1788502366064274944,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode81",
+      "milestones": [],
+      "bytes": 10753089536
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode82",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788502413796438069,
+      "source_end_ns": 1788502493916697088,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode82",
+      "milestones": [],
+      "bytes": 6719889408
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode84",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788502705358436488,
+      "source_end_ns": 1788502898672409088,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode84",
+      "milestones": [],
+      "bytes": 15965941760
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode85",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788502960083198003,
+      "source_end_ns": 1788503012810827008,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode85",
+      "milestones": [],
+      "bytes": 4482859008
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode87",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788503138608626946,
+      "source_end_ns": 1788503224683220992,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode87",
+      "milestones": [],
+      "bytes": 7206821888
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode88",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788503250324942635,
+      "source_end_ns": 1788503349126767104,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode88",
+      "milestones": [],
+      "bytes": 8245178368
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode89",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788503390907214080,
+      "source_end_ns": 1788503440210533888,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode89",
+      "milestones": [],
+      "bytes": 4201512960
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode90",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788503491743245765,
+      "source_end_ns": 1788503558553668096,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode90",
+      "milestones": [],
+      "bytes": 5631606784
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode91",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788503600203236655,
+      "source_end_ns": 1788503708411546880,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode91",
+      "milestones": [],
+      "bytes": 9013157888
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode92",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788503957965540736,
+      "source_end_ns": 1788504017413177088,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode92",
+      "milestones": [],
+      "bytes": 5030043648
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode94",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788504239429289935,
+      "source_end_ns": 1788504293169452032,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode94",
+      "milestones": [],
+      "bytes": 4561063936
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode95",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788504334539349015,
+      "source_end_ns": 1788504396259264000,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode95",
+      "milestones": [],
+      "bytes": 5214748672
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode98",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788504774960718826,
+      "source_end_ns": 1788504832874843904,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode98",
+      "milestones": [],
+      "bytes": 4905537536
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode99",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788504907799637855,
+      "source_end_ns": 1788504964730917888,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode99",
+      "milestones": [],
+      "bytes": 4826128384
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode103",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788505901447808507,
+      "source_end_ns": 1788505939370899968,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode103",
+      "milestones": [],
+      "bytes": 3274907648
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode104",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788505977523882957,
+      "source_end_ns": 1788506095783113984,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode104",
+      "milestones": [],
+      "bytes": 9834434560
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode106",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788506142187785819,
+      "source_end_ns": 1788506234939503104,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode106",
+      "milestones": [],
+      "bytes": 7749877760
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode107",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788506277364007435,
+      "source_end_ns": 1788506358638658048,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode107",
+      "milestones": [],
+      "bytes": 6811279360
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode108",
+      "eligible": false,
+      "reason": "collection state: incomplete; failures=['/teleop/arm_command_status: source_max_internal_gap_ms 550.1 ms exceeds 150.0 ms']",
+      "source_start_ns": 1788506408048307248,
+      "source_end_ns": 1788506499144649984,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode108",
+      "milestones": [],
+      "bytes": 7614140416
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode109",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788506563517598144,
+      "source_end_ns": 1788506626445794048,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode109",
+      "milestones": [],
+      "bytes": 5314486272
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode110",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788506703099618674,
+      "source_end_ns": 1788506846384688896,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode110",
+      "milestones": [],
+      "bytes": 11878551552
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode112",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788507137516421782,
+      "source_end_ns": 1788507224396780032,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode112",
+      "milestones": [],
+      "bytes": 7269273600
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode114",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788507521716457089,
+      "source_end_ns": 1788507583342427904,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode114",
+      "milestones": [],
+      "bytes": 5207654400
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode115",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788507616816284739,
+      "source_end_ns": 1788507665476365056,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode115",
+      "milestones": [],
+      "bytes": 4154454016
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode116",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788507726782167479,
+      "source_end_ns": 1788507758414016000,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode116",
+      "milestones": [],
+      "bytes": 2759118848
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode117",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788507792957832960,
+      "source_end_ns": 1788507857003806976,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode117",
+      "milestones": [],
+      "bytes": 5403795456
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode118",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788507901674257653,
+      "source_end_ns": 1788507938736318976,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode118",
+      "milestones": [],
+      "bytes": 3204489216
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode119",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788507974324948992,
+      "source_end_ns": 1788508139090802129,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode119",
+      "milestones": [],
+      "bytes": 13975019520
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode120",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788508191988325427,
+      "source_end_ns": 1788508248110554112,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode120",
+      "milestones": [],
+      "bytes": 4759572480
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode121",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788512727098689792,
+      "source_end_ns": 1788512826567692032,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode121",
+      "milestones": [],
+      "bytes": 8297365504
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode129",
+      "eligible": false,
+      "reason": "collection state: discarded; failures=[]",
+      "source_start_ns": 1788515429225502976,
+      "source_end_ns": 1788515498972965120,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode129",
+      "milestones": [],
+      "bytes": 6109024256
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode131",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788523198492184826,
+      "source_end_ns": 1788523323982605056,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode131",
+      "milestones": [],
+      "bytes": 10426716160
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode132",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788523400094040450,
+      "source_end_ns": 1788523446572887040,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode132",
+      "milestones": [],
+      "bytes": 3976572928
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode133",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788523533397992448,
+      "source_end_ns": 1788523583669914112,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode133",
+      "milestones": [],
+      "bytes": 4279767040
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode135",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788523828933965044,
+      "source_end_ns": 1788523912286084096,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode135",
+      "milestones": [],
+      "bytes": 6981660672
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode136",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788523935426650730,
+      "source_end_ns": 1788524007421187072,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode136",
+      "milestones": [],
+      "bytes": 6055587840
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode138",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788524071876154574,
+      "source_end_ns": 1788524144673179904,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode138",
+      "milestones": [],
+      "bytes": 6120865792
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode139",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788524189756061839,
+      "source_end_ns": 1788524248012920064,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode139",
+      "milestones": [],
+      "bytes": 4934234112
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode143",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788524521458311027,
+      "source_end_ns": 1788524614493489920,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode143",
+      "milestones": [],
+      "bytes": 7776583680
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode144",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788524637647012106,
+      "source_end_ns": 1788524723635772928,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode144",
+      "milestones": [],
+      "bytes": 7195189248
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode146",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788524856707901832,
+      "source_end_ns": 1788524856836998912,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode146",
+      "milestones": [],
+      "bytes": 190873600
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode147",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788524941640633088,
+      "source_end_ns": 1788524961927641088,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode147",
+      "milestones": [],
+      "bytes": 1827651584
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode148",
+      "eligible": false,
+      "reason": "collection state: discarded; failures=[]",
+      "source_start_ns": 1788525048596029761,
+      "source_end_ns": 1788525055763446016,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode148",
+      "milestones": [],
+      "bytes": 759226368
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode151",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788525309317904527,
+      "source_end_ns": 1788525323782654976,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode151",
+      "milestones": [],
+      "bytes": 1358798848
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode152",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788525386916830965,
+      "source_end_ns": 1788525421756003353,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode152",
+      "milestones": [],
+      "bytes": 4756795392
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode163",
+      "eligible": false,
+      "reason": "collection state: incomplete; failures=['/teleop/validated_arm_commands#left: side was never engaged during the episode', '/teleop/validated_arm_commands#right: side was never engaged during the episode', '/teleop/wuji/left/command: side was never engaged during the episode', '/teleop/wuji/right/command: side was never engaged during the episode']",
+      "source_start_ns": 1788756652752205211,
+      "source_end_ns": 1788756655004152064,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode163",
+      "milestones": [],
+      "bytes": 360546304
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode175",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788764797181464448,
+      "source_end_ns": 1788764853165446912,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode175",
+      "milestones": [],
+      "bytes": 4679929856
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode176",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788764892751563218,
+      "source_end_ns": 1788764973564494080,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode176",
+      "milestones": [],
+      "bytes": 6706606080
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode177",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788765012955524030,
+      "source_end_ns": 1788765080007292928,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode177",
+      "milestones": [],
+      "bytes": 5583568896
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode178",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788765108615664896,
+      "source_end_ns": 1788765176146244096,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode178",
+      "milestones": [],
+      "bytes": 5624643584
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode179",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788765221047587571,
+      "source_end_ns": 1788765291193000960,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode179",
+      "milestones": [],
+      "bytes": 5837217792
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode180",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788765393182606718,
+      "source_end_ns": 1788765434700700928,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode180",
+      "milestones": [],
+      "bytes": 3506294784
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode222",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788846453475901907,
+      "source_end_ns": 1788846549137453056,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode222",
+      "milestones": [],
+      "bytes": 7926067200
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode223",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788846608579697927,
+      "source_end_ns": 1788846670584428032,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode223",
+      "milestones": [],
+      "bytes": 5172809728
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode224",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788848184934974936,
+      "source_end_ns": 1788848254270077952,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode224",
+      "milestones": [],
+      "bytes": 5778890752
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode226",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788848491278725120,
+      "source_end_ns": 1788848536946455040,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode226",
+      "milestones": [],
+      "bytes": 3838570496
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode227",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788848565576615272,
+      "source_end_ns": 1788848629386001920,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode227",
+      "milestones": [],
+      "bytes": 5321854976
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode228",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788848691648777984,
+      "source_end_ns": 1788848755738298880,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode228",
+      "milestones": [],
+      "bytes": 5344399360
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode229",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788848791763282944,
+      "source_end_ns": 1788848844370703104,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode229",
+      "milestones": [],
+      "bytes": 4405559296
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode231",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788849621988888093,
+      "source_end_ns": 1788849676971266048,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode231",
+      "milestones": [],
+      "bytes": 4600483840
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode232",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788849755625213283,
+      "source_end_ns": 1788849799417920000,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode232",
+      "milestones": [],
+      "bytes": 3686903808
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode233",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788849838779428001,
+      "source_end_ns": 1788849895105851904,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode233",
+      "milestones": [],
+      "bytes": 4711153664
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode234",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788849994937431257,
+      "source_end_ns": 1788850055520572928,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode234",
+      "milestones": [],
+      "bytes": 5061210112
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode235",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788850089100102154,
+      "source_end_ns": 1788850148508026880,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode235",
+      "milestones": [],
+      "bytes": 4975427584
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode236",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788850173845248037,
+      "source_end_ns": 1788850220586660096,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode236",
+      "milestones": [],
+      "bytes": 3924590592
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode237",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788850293579273984,
+      "source_end_ns": 1788850354190201088,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode237",
+      "milestones": [],
+      "bytes": 5061128192
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode238",
+      "eligible": false,
+      "reason": "collection state: incomplete; failures=['/teleop/arm_command_status: source_max_internal_gap_ms 419.8 ms exceeds 150.0 ms']",
+      "source_start_ns": 1788850383554206976,
+      "source_end_ns": 1788850455931304960,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode238",
+      "milestones": [],
+      "bytes": 6024712192
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode239",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788850760035448499,
+      "source_end_ns": 1788850817129750016,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode239",
+      "milestones": [],
+      "bytes": 4771385344
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode240",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788850918770300085,
+      "source_end_ns": 1788850979096582912,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode240",
+      "milestones": [],
+      "bytes": 5034258432
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode241",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788851006844019526,
+      "source_end_ns": 1788851048925937920,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode241",
+      "milestones": [],
+      "bytes": 3545829376
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode242",
+      "eligible": false,
+      "reason": "collection state: discarded; failures=[]",
+      "source_start_ns": 1788851110821497158,
+      "source_end_ns": 1788851125457249024,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode242",
+      "milestones": [],
+      "bytes": 1309499392
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode243",
+      "eligible": false,
+      "reason": "collection state: incomplete; failures=['/teleop/arm_command_status: source_max_internal_gap_ms 459.8 ms exceeds 150.0 ms']",
+      "source_start_ns": 1788851152987554950,
+      "source_end_ns": 1788851265914958080,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode243",
+      "milestones": [],
+      "bytes": 9331027968
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode244",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788851325955426970,
+      "source_end_ns": 1788851365005435904,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode244",
+      "milestones": [],
+      "bytes": 3299594240
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode245",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788852324298964350,
+      "source_end_ns": 1788852407450842112,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode245",
+      "milestones": [],
+      "bytes": 6899167232
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode251",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788853244502780414,
+      "source_end_ns": 1788853312559599104,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode251",
+      "milestones": [],
+      "bytes": 5667745792
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode252",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788853369307650346,
+      "source_end_ns": 1788853417801908992,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode252",
+      "milestones": [],
+      "bytes": 4071305216
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode261",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788856224745634419,
+      "source_end_ns": 1788856290376504064,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode261",
+      "milestones": [],
+      "bytes": 5472387072
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode262",
+      "eligible": false,
+      "reason": "collection state: incomplete; failures=['/teleop/arm_command_status: source_max_internal_gap_ms 240.4 ms exceeds 150.0 ms']",
+      "source_start_ns": 1788856326155278080,
+      "source_end_ns": 1788856410124474112,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode262",
+      "milestones": [],
+      "bytes": 6971170816
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode264",
+      "eligible": false,
+      "reason": "collection state: incomplete; failures=['/teleop/arm_command_status: source_max_internal_gap_ms 310.0 ms exceeds 150.0 ms']",
+      "source_start_ns": 1788856548839323587,
+      "source_end_ns": 1788856637313775104,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode264",
+      "milestones": [],
+      "bytes": 7333171200
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode266",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788856816716857088,
+      "source_end_ns": 1788856884943866880,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode266",
+      "milestones": [],
+      "bytes": 5677232128
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode267",
+      "eligible": false,
+      "reason": "collection state: incomplete; failures=['/teleop/arm_command_status: source_max_internal_gap_ms 370.0 ms exceeds 150.0 ms']",
+      "source_start_ns": 1788856929090231392,
+      "source_end_ns": 1788856990785306880,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode267",
+      "milestones": [],
+      "bytes": 5151252480
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode268",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788857120103324632,
+      "source_end_ns": 1788857168997554944,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode268",
+      "milestones": [],
+      "bytes": 4106334208
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode269",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788857211423764653,
+      "source_end_ns": 1788857267636550912,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode269",
+      "milestones": [],
+      "bytes": 4704829440
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode271",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788857424002010112,
+      "source_end_ns": 1788857477869878016,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode271",
+      "milestones": [],
+      "bytes": 4510859264
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode272",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788857692973119098,
+      "source_end_ns": 1788857744727897088,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode272",
+      "milestones": [],
+      "bytes": 4335890432
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode274",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788858050856928401,
+      "source_end_ns": 1788858101680694016,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode274",
+      "milestones": [],
+      "bytes": 4264161280
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode275",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788858130796815281,
+      "source_end_ns": 1788858183365612032,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode275",
+      "milestones": [],
+      "bytes": 4402204672
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode276",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788858278610847060,
+      "source_end_ns": 1788858340382661888,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode276",
+      "milestones": [],
+      "bytes": 5158805504
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode277",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788858931746958080,
+      "source_end_ns": 1788858996649093120,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode277",
+      "milestones": [],
+      "bytes": 5409001472
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode278",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788859061677270016,
+      "source_end_ns": 1788859127601523968,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode278",
+      "milestones": [],
+      "bytes": 5495009280
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode281",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788859354292764834,
+      "source_end_ns": 1788859405963164928,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode281",
+      "milestones": [],
+      "bytes": 4332736512
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode282",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788859476093905381,
+      "source_end_ns": 1788859532163449088,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode282",
+      "milestones": [],
+      "bytes": 4688556032
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode284",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788859696156784728,
+      "source_end_ns": 1788859760505921024,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode284",
+      "milestones": [],
+      "bytes": 5361602560
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode285",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788860142174038031,
+      "source_end_ns": 1788860209591619072,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode285",
+      "milestones": [],
+      "bytes": 5614473216
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode286",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788860263850295991,
+      "source_end_ns": 1788860324089324032,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode286",
+      "milestones": [],
+      "bytes": 5030555648
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode287",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788860385732903211,
+      "source_end_ns": 1788860446288816128,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode287",
+      "milestones": [],
+      "bytes": 5058977792
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode288",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788860484684197270,
+      "source_end_ns": 1788860544728911104,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode288",
+      "milestones": [],
+      "bytes": 5014585344
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode289",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788860577863977219,
+      "source_end_ns": 1788860650071736064,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode289",
+      "milestones": [],
+      "bytes": 6012030976
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode290",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788860679894092141,
+      "source_end_ns": 1788860788778498048,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode290",
+      "milestones": [],
+      "bytes": 9008123904
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode292",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788861247834110144,
+      "source_end_ns": 1788861353006112000,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode292",
+      "milestones": [],
+      "bytes": 8700178432
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode295",
+      "eligible": false,
+      "reason": "collection state: incomplete; failures=['/teleop/arm_command_status: source_max_internal_gap_ms 270.0 ms exceeds 150.0 ms']",
+      "source_start_ns": 1788861655827048277,
+      "source_end_ns": 1788861745664892928,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode295",
+      "milestones": [],
+      "bytes": 7454478336
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode296",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788861809711548928,
+      "source_end_ns": 1788861856206213120,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode296",
+      "milestones": [],
+      "bytes": 3907805184
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode303",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788869847455257288,
+      "source_end_ns": 1788869963960267008,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode303",
+      "milestones": [],
+      "bytes": 9626976256
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode307",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788870907080756337,
+      "source_end_ns": 1788870943794446080,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode307",
+      "milestones": [],
+      "bytes": 3117817856
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode308",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788871004140745617,
+      "source_end_ns": 1788871090103684096,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode308",
+      "milestones": [],
+      "bytes": 7132155904
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode309",
+      "eligible": false,
+      "reason": "collection state: incomplete; failures=['/teleop/arm_command_status: source_max_internal_gap_ms 290.1 ms exceeds 150.0 ms']",
+      "source_start_ns": 1788871144280505130,
+      "source_end_ns": 1788871247968584960,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode309",
+      "milestones": [],
+      "bytes": 8579383296
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode311",
+      "eligible": false,
+      "reason": "collection state: incomplete; failures=['/teleop/arm_command_status: source_max_internal_gap_ms 550.2 ms exceeds 150.0 ms']",
+      "source_start_ns": 1788871365588851771,
+      "source_end_ns": 1788871527035657984,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode311",
+      "milestones": [],
+      "bytes": 13294673920
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode312",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788871604610727192,
+      "source_end_ns": 1788871642883887104,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode312",
+      "milestones": [],
+      "bytes": 3235520512
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode313",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788871684054409520,
+      "source_end_ns": 1788871745526487040,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode313",
+      "milestones": [],
+      "bytes": 5131100160
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode318",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788934429298493952,
+      "source_end_ns": 1788934431602127104,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode318",
+      "milestones": [],
+      "bytes": 295968768
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode320",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788934708521174674,
+      "source_end_ns": 1788934754756059904,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode320",
+      "milestones": [],
+      "bytes": 3884961792
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode321",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788934918989475215,
+      "source_end_ns": 1788934978104193024,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode321",
+      "milestones": [],
+      "bytes": 4937203712
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode326",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788939435455461888,
+      "source_end_ns": 1788939475158265088,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode326",
+      "milestones": [],
+      "bytes": 3352834048
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode327",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788939855407710976,
+      "source_end_ns": 1788939937688346880,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode327",
+      "milestones": [],
+      "bytes": 6832148480
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode330",
+      "eligible": false,
+      "reason": "collection state: incomplete; failures=['/teleop/arm_command_status: source_max_internal_gap_ms 300.3 ms exceeds 150.0 ms']",
+      "source_start_ns": 1788940084658354351,
+      "source_end_ns": 1788940129462633984,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode330",
+      "milestones": [],
+      "bytes": 3772252160
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode333",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788940473967900982,
+      "source_end_ns": 1788940503610569984,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode333",
+      "milestones": [],
+      "bytes": 2532282368
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode334",
+      "eligible": false,
+      "reason": "collection state: incomplete; failures=['/teleop/arm_command_status: source_max_internal_gap_ms 569.9 ms exceeds 150.0 ms']",
+      "source_start_ns": 1788940522453665348,
+      "source_end_ns": 1788940635613260032,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode334",
+      "milestones": [],
+      "bytes": 9353965568
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode335",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788940752939967818,
+      "source_end_ns": 1788940807483599104,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode335",
+      "milestones": [],
+      "bytes": 4572536832
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode341",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788941266121921393,
+      "source_end_ns": 1788941324006695936,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode341",
+      "milestones": [],
+      "bytes": 4836130816
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode342",
+      "eligible": false,
+      "reason": "collection state: incomplete; failures=['/teleop/arm_command_status: source_max_internal_gap_ms 310.6 ms exceeds 150.0 ms']",
+      "source_start_ns": 1788941345221319936,
+      "source_end_ns": 1788941412444499968,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode342",
+      "milestones": [],
+      "bytes": 5598502912
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode344",
+      "eligible": false,
+      "reason": "collection state: incomplete; failures=['/teleop/arm_command_status: source_max_internal_gap_ms 270.4 ms exceeds 150.0 ms']",
+      "source_start_ns": 1788941548543099904,
+      "source_end_ns": 1788941642240002048,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode344",
+      "milestones": [],
+      "bytes": 7760101376
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode348",
+      "eligible": false,
+      "reason": "collection state: incomplete; failures=['/teleop/arm_command_status: source_max_internal_gap_ms 609.8 ms exceeds 150.0 ms']",
+      "source_start_ns": 1788943793632089306,
+      "source_end_ns": 1788943983569361920,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode348",
+      "milestones": [],
+      "bytes": 15625043968
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode350",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788944176476408768,
+      "source_end_ns": 1788944285738266880,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode350",
+      "milestones": [],
+      "bytes": 9030533120
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode354",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788944807016103057,
+      "source_end_ns": 1788944896882424064,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode354",
+      "milestones": [],
+      "bytes": 7459938304
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode359",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788945865838229096,
+      "source_end_ns": 1788945932902807040,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode359",
+      "milestones": [],
+      "bytes": 5586100224
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode363",
+      "eligible": false,
+      "reason": "collection state: incomplete; failures=['arm command status reports faults: dual-arm state is missing or stale', '/teleop/arm_command_status: source_max_internal_gap_ms 520.1 ms exceeds 150.0 ms', '/teleop/arm_command_status: bag_trailing_gap_ms 4349.4 ms exceeds boundary allowance 550.0 ms', '/teleop/wuji/telemetry_status: bag_trailing_gap_ms 4351.3 ms exceeds boundary allowance 450.0 ms', '/left/franka/joint_states: bag_trailing_gap_ms 14870.0 ms exceeds boundary allowance 450.0 ms', '/teleop/wuji/left/joint_states: bag_trailing_gap_ms 4351.3 ms exceeds boundary allowance 450.0 ms', '/right/franka/joint_states: bag_trailing_gap_ms 14554.0 ms exceeds boundary allowance 450.0 ms', '/teleop/wuji/right/joint_states: bag_trailing_gap_ms 4351.3 ms exceeds boundary allowance 450.0 ms', '/teleop/wuji/telemetry_status#left: bag_trailing_gap_ms 4351.3 ms exceeds boundary allowance 450.0 ms', '/teleop/wuji/telemetry_status#right: bag_trailing_gap_ms 4351.3 ms exceeds boundary allowance 450.0 ms']",
+      "source_start_ns": 1788946321432241773,
+      "source_end_ns": 1788946484687220639,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode363",
+      "milestones": [],
+      "bytes": 14641074176
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode364",
+      "eligible": false,
+      "reason": "collection state: incomplete; failures=['/teleop/arm_command_status: source_max_internal_gap_ms 180.3 ms exceeds 150.0 ms']",
+      "source_start_ns": 1788947033234623283,
+      "source_end_ns": 1788947080840197120,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode364",
+      "milestones": [],
+      "bytes": 3998658560
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode365",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788947233784309550,
+      "source_end_ns": 1788947366591314944,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode365",
+      "milestones": [],
+      "bytes": 10959364096
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode368",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788955015829455872,
+      "source_end_ns": 1788955069111927040,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode368",
+      "milestones": [],
+      "bytes": 4458287104
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode373",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788955464296913347,
+      "source_end_ns": 1788955564318099968,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode373",
+      "milestones": [],
+      "bytes": 8281026560
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode374",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788955715045073925,
+      "source_end_ns": 1788955791460986112,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode374",
+      "milestones": [],
+      "bytes": 6348541952
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode375",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788955837197434928,
+      "source_end_ns": 1788955907158113024,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode375",
+      "milestones": [],
+      "bytes": 5820579840
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode376",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788955936124115968,
+      "source_end_ns": 1788956006399010048,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode376",
+      "milestones": [],
+      "bytes": 5848887296
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode377",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788956066321400597,
+      "source_end_ns": 1788956137951492096,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode377",
+      "milestones": [],
+      "bytes": 5958074368
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode378",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788956188939013888,
+      "source_end_ns": 1788956229038104064,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode378",
+      "milestones": [],
+      "bytes": 3386986496
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode380",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788956297551070768,
+      "source_end_ns": 1788956305668814080,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode380",
+      "milestones": [],
+      "bytes": 772247552
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode381",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788956313081720450,
+      "source_end_ns": 1788956355489612032,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode381",
+      "milestones": [],
+      "bytes": 3572731904
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode383",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788956556222822544,
+      "source_end_ns": 1788956616294423040,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode383",
+      "milestones": [],
+      "bytes": 5023948800
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode384",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1788956638422971092,
+      "source_end_ns": 1788956723586995968,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode384",
+      "milestones": [],
+      "bytes": 7071272960
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode386",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789008564747160843,
+      "source_end_ns": 1789008608995656960,
+      "source_recording_id": "3756d45b41e04ac485978074075ebbff",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789008594469638013
+        }
+      ],
+      "bytes": 3725889536
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode387",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789008642690924461,
+      "source_end_ns": 1789008694716723968,
+      "source_recording_id": "68021f89117b401f9ca895772bdab821",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789008684586066160
+        }
+      ],
+      "bytes": 4361752576
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode388",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789008729723901997,
+      "source_end_ns": 1789008773302759936,
+      "source_recording_id": "29e0cc53cd7248d79d6133348d59d6b9",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789008761176371198
+        }
+      ],
+      "bytes": 3673808896
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode389",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789008799194198881,
+      "source_end_ns": 1789008848646627072,
+      "source_recording_id": "23fee01f11d64002a54228282c1378cc",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789008835730669396
+        }
+      ],
+      "bytes": 4154863616
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode390",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789008897153826444,
+      "source_end_ns": 1789008971915034112,
+      "source_recording_id": "cb6668d33a95400385f5edcb3cd85270",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789008955087680656
+        }
+      ],
+      "bytes": 6222540800
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode391",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789010178689126002,
+      "source_end_ns": 1789010269144104960,
+      "source_recording_id": "2c3a1ac9af3d4635aa52053da1805875",
+      "milestones": [],
+      "bytes": 7500419072
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode392",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789010349066978061,
+      "source_end_ns": 1789010418703100928,
+      "source_recording_id": "a18d980c7f644d3fa4297ca72f742673",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789010407140430726
+        }
+      ],
+      "bytes": 5795053568
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode393",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789010577381369922,
+      "source_end_ns": 1789010637154202880,
+      "source_recording_id": "74a20eb5ccc74adbb19ca1983452ac9f",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789010624295712323
+        }
+      ],
+      "bytes": 4990722048
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode394",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789010690247331383,
+      "source_end_ns": 1789010761953985024,
+      "source_recording_id": "34063aeccf0f49b6ac4236289aba0bea",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789010745415094654
+        }
+      ],
+      "bytes": 5968601088
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode395",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789010809101926248,
+      "source_end_ns": 1789010869196841984,
+      "source_recording_id": "6059465c536247b895269825f3ce111b",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789010857367518907
+        }
+      ],
+      "bytes": 5016068096
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode396",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789010905748322048,
+      "source_end_ns": 1789010965935347968,
+      "source_recording_id": "85324f8790f44214989663e6c65a63db",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789010948745027197
+        }
+      ],
+      "bytes": 5023723520
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode397",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789011022601123051,
+      "source_end_ns": 1789011098537917952,
+      "source_recording_id": "3b8039574be14fcd823df8f504953dbf",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789011081763447145
+        }
+      ],
+      "bytes": 6310121472
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode398",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789011137495792128,
+      "source_end_ns": 1789011212783951104,
+      "source_recording_id": "21369799bc47421483ef8861a3e11967",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789011198722335762
+        }
+      ],
+      "bytes": 6256631808
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode399",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789011238405731493,
+      "source_end_ns": 1789011309272054016,
+      "source_recording_id": "ed69aabba41745af88954872e442c46f",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789011294665240725
+        }
+      ],
+      "bytes": 5898559488
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode400",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789011339946462976,
+      "source_end_ns": 1789011410012960000,
+      "source_recording_id": "d3841964a8774460b8736c11fa563b20",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789011393408892362
+        }
+      ],
+      "bytes": 5832609792
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode401",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789011432927448744,
+      "source_end_ns": 1789011530609236992,
+      "source_recording_id": "4ab02dcefb47464c9c097475550da2a2",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789011519492186740
+        }
+      ],
+      "bytes": 8087179264
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode402",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789011580455462856,
+      "source_end_ns": 1789011671565095936,
+      "source_recording_id": "a0e8b8bb7e92498b8dd450a4fee0795c",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789011654775996533
+        }
+      ],
+      "bytes": 7550038016
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode403",
+      "eligible": false,
+      "reason": "collection state: discarded; failures=[]",
+      "source_start_ns": 1789017934619175111,
+      "source_end_ns": 1789017947309117952,
+      "source_recording_id": "eadc1fb68aa74bca83e0ae31a9425ad0",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789017941234338752
+        }
+      ],
+      "bytes": 1145401344
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode404",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789018103281527040,
+      "source_end_ns": 1789018182254152960,
+      "source_recording_id": "7b6c35f3fb2245dc8919eb6952e5c3b8",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789018171044513169
+        }
+      ],
+      "bytes": 6559227904
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode405",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789018224902969922,
+      "source_end_ns": 1789018286145478912,
+      "source_recording_id": "5c312e946f3840e1b8c5a31cc4666291",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789018274892964869
+        }
+      ],
+      "bytes": 5109620736
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode406",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789018353539812096,
+      "source_end_ns": 1789018439156834048,
+      "source_recording_id": "33e5d2273e614ab580715b0e714024c2",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789018421903917516
+        }
+      ],
+      "bytes": 7105708032
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode407",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789018513722242048,
+      "source_end_ns": 1789018618378984960,
+      "source_recording_id": "4f45130c0d70450a88c0326ef6d2cdda",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789018604424964110
+        }
+      ],
+      "bytes": 8656838656
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode408",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789018644296486404,
+      "source_end_ns": 1789018742779184896,
+      "source_recording_id": "0209ac2f9bf3442c917e36bc5b2780c7",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789018729492625051
+        }
+      ],
+      "bytes": 8159277056
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode409",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789018795007594473,
+      "source_end_ns": 1789018871780313088,
+      "source_recording_id": "cfa0512c916841c08bb6ee650c372bb8",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789018851918789060
+        }
+      ],
+      "bytes": 6378115072
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode410",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789018938437257098,
+      "source_end_ns": 1789019011686350080,
+      "source_recording_id": "54390959702e4cdb8489fcbd2ba529af",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789018997486183281
+        }
+      ],
+      "bytes": 6092054528
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode411",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789019078077927039,
+      "source_end_ns": 1789019151743447040,
+      "source_recording_id": "14ecf45dbf7d418ba7b687cd5682741d",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789019131585283179
+        }
+      ],
+      "bytes": 6135619584
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode412",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789019201969177162,
+      "source_end_ns": 1789019268238594048,
+      "source_recording_id": "d4fcafc2115e4929a976cd6cba2f1174",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789019252419792144
+        }
+      ],
+      "bytes": 5523251200
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode413",
+      "eligible": false,
+      "reason": "collection state: discarded; failures=[]",
+      "source_start_ns": 1789019351124986111,
+      "source_end_ns": 1789019360675983872,
+      "source_recording_id": "ddaeff0fddf144928dbb1322a4d988cf",
+      "milestones": [],
+      "bytes": 890114048
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode414",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789019390750937118,
+      "source_end_ns": 1789019456464421120,
+      "source_recording_id": "fcb3fcc491954076b6ebe5d1426b03c2",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789019440333264028
+        }
+      ],
+      "bytes": 5480628224
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode415",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789019480829205416,
+      "source_end_ns": 1789019542798787072,
+      "source_recording_id": "f22e1302c9df4d77bbc436d6b9621765",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789019525468243659
+        }
+      ],
+      "bytes": 5177618432
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode416",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789019582543136793,
+      "source_end_ns": 1789019726922734080,
+      "source_recording_id": "8d3fcaf88edb44af855a358456d0ac35",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789019712757673119
+        }
+      ],
+      "bytes": 11900948480
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode417",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789019768002936214,
+      "source_end_ns": 1789019838767165952,
+      "source_recording_id": "50e214b404694a708c14cff1595dc1c6",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789019822131921737
+        }
+      ],
+      "bytes": 5890351104
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode418",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789019866827202048,
+      "source_end_ns": 1789019938957656064,
+      "source_recording_id": "2ae3216ba7b641cba81e5a5c8f7777d3",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789019923770465015
+        }
+      ],
+      "bytes": 5999673344
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode419",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789019967807008869,
+      "source_end_ns": 1789020034096060928,
+      "source_recording_id": "5fed453c8fa84f68b6ab2f23bb683e16",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789020015881100349
+        }
+      ],
+      "bytes": 5522341888
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode420",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789020082793774082,
+      "source_end_ns": 1789020212517918976,
+      "source_recording_id": "e4b016c4f7644f5eb063deeca769775f",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789020185655485841
+        }
+      ],
+      "bytes": 10706198528
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode421",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789020279264993974,
+      "source_end_ns": 1789020359026016000,
+      "source_recording_id": "8163ec8cc1b648849fdb397a235112a7",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789020343302947635
+        }
+      ],
+      "bytes": 6624477184
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode422",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789020397515405321,
+      "source_end_ns": 1789020455364442880,
+      "source_recording_id": "566fab5b8a414b5b95d66b23679b72d1",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789020441215606824
+        }
+      ],
+      "bytes": 4834390016
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode424",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789022206805541668,
+      "source_end_ns": 1789022283768893952,
+      "source_recording_id": "f041ac67f6d04e3e8fce76f56531d7d6",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789022261638127407
+        }
+      ],
+      "bytes": 6398103552
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode425",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789022323745520000,
+      "source_end_ns": 1789022372203657984,
+      "source_recording_id": "04741a14b8a14b36910c41ca65bf5b9c",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789022360247192577
+        }
+      ],
+      "bytes": 4065886208
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode426",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789022399864748938,
+      "source_end_ns": 1789022467292226048,
+      "source_recording_id": "cce334be8740426d8348e2e9576dd55e",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789022451815103358
+        }
+      ],
+      "bytes": 5613445120
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode427",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789022513135064117,
+      "source_end_ns": 1789022571033374976,
+      "source_recording_id": "3bd539672dd848f1a576509d0a035e75",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789022554550241567
+        }
+      ],
+      "bytes": 4835176448
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode428",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789022601769456010,
+      "source_end_ns": 1789022653264467968,
+      "source_recording_id": "3aedb4d5e13b4517801ec1fe3364fcc8",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789022642644662040
+        }
+      ],
+      "bytes": 4313559040
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode433",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789022953720697088,
+      "source_end_ns": 1789023017903397888,
+      "source_recording_id": "c73615685e92471d813dc10f9e598a69",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789023007023059972
+        }
+      ],
+      "bytes": 5350363136
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode434",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789023048739522097,
+      "source_end_ns": 1789023106086893056,
+      "source_recording_id": "d6ceb8a0bd1b46689e910d2cf8a91041",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789023094977638724
+        }
+      ],
+      "bytes": 4794396672
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode435",
+      "eligible": false,
+      "reason": "collection state: discarded; failures=[]",
+      "source_start_ns": 1789023140914761264,
+      "source_end_ns": 1789023200572263936,
+      "source_recording_id": "d25de250a35a4f10bf7a64432697921a",
+      "milestones": [],
+      "bytes": 4979728384
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode436",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789023259165502380,
+      "source_end_ns": 1789023361684208896,
+      "source_recording_id": "3b3715984eba475b9fdb2acfae1ef903",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789023351200871726
+        }
+      ],
+      "bytes": 8484675584
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode437",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789023423117542560,
+      "source_end_ns": 1789023484381037056,
+      "source_recording_id": "71ddcad079ba46cc816529bf6995f6f3",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789023472898009913
+        }
+      ],
+      "bytes": 5113331712
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode438",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789023579637522858,
+      "source_end_ns": 1789023685210714112,
+      "source_recording_id": "6053a6be163349ed8f6685f2ccb410ec",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789023670820299267
+        }
+      ],
+      "bytes": 8733048832
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode439",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789023773731382268,
+      "source_end_ns": 1789023868483852032,
+      "source_recording_id": "28586ab4fe47496bbb1ba37d2ac35bf3",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789023853289506424
+        }
+      ],
+      "bytes": 7845810176
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode440",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789023916669315666,
+      "source_end_ns": 1789023983028611072,
+      "source_recording_id": "269166a594a94c1b8fc46d3fa653d6d4",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789023971904187004
+        }
+      ],
+      "bytes": 5533110272
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode441",
+      "eligible": false,
+      "reason": "collection state: discarded; failures=[]",
+      "source_start_ns": 1789024052204341614,
+      "source_end_ns": 1789024080267642112,
+      "source_recording_id": "9d3d7b9cb16340198a42817735261a1e",
+      "milestones": [],
+      "bytes": 2402172928
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode444",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789024293062184351,
+      "source_end_ns": 1789024357827699968,
+      "source_recording_id": "5e785620c34440a68db152f1487e27f1",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789024346756755914
+        }
+      ],
+      "bytes": 5398855680
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode445",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789024393314764102,
+      "source_end_ns": 1789024466520427008,
+      "source_recording_id": "474a91445f6845dea5feb7bc05cecb38",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789024455561602928
+        }
+      ],
+      "bytes": 6084677632
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode446",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789024500425702534,
+      "source_end_ns": 1789024563058507008,
+      "source_recording_id": "381dd6fd809e44c8944288c66a47fff2",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789024550981411028
+        }
+      ],
+      "bytes": 5223276544
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode447",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789024662776540589,
+      "source_end_ns": 1789024792154915072,
+      "source_recording_id": "9816dda9c9ad455e9364c24aa1247454",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789024783573152447
+        }
+      ],
+      "bytes": 10681044992
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode448",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789024871175272456,
+      "source_end_ns": 1789024960676843008,
+      "source_recording_id": "55b8ab414fa24f259d8f8efdb4dbe063",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789024941639987385
+        }
+      ],
+      "bytes": 7415947264
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode449",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789025086272775744,
+      "source_end_ns": 1789025188127758080,
+      "source_recording_id": "dfb2649fcf2949aeac0d48b917ffecc0",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789025170093081453
+        }
+      ],
+      "bytes": 8431697920
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode455",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789026775409407919,
+      "source_end_ns": 1789026857263048960,
+      "source_recording_id": "653e030729bf4fed9d323d398f78cfca",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789026843480203631
+        }
+      ],
+      "bytes": 6790938624
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode456",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789026951237279337,
+      "source_end_ns": 1789027017078141952,
+      "source_recording_id": "51d1bf08555c4dff9d93f1605fddcd35",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789027003794738308
+        }
+      ],
+      "bytes": 5484716032
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode457",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789027055669805620,
+      "source_end_ns": 1789027096110138112,
+      "source_recording_id": "4560d05d70c64dd1a291d1c6a30132cf",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789027084095185315
+        }
+      ],
+      "bytes": 3409735680
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode458",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789027120341271434,
+      "source_end_ns": 1789027174992205056,
+      "source_recording_id": "212e1736d8434d94a85145bb0b685e3a",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789027159911249907
+        }
+      ],
+      "bytes": 4572082176
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode459",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789027207079290982,
+      "source_end_ns": 1789027262428174080,
+      "source_recording_id": "5ae5db3d8c7e4dddb600b20e4b7d36d1",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789027253759629327
+        }
+      ],
+      "bytes": 4629348352
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode460",
+      "eligible": false,
+      "reason": "collection state: discarded; failures=[]",
+      "source_start_ns": 1789027313911254882,
+      "source_end_ns": 1789027326254247936,
+      "source_recording_id": "6466602740cb4e448598dd6f160bd846",
+      "milestones": [],
+      "bytes": 1121878016
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode461",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789027355774704896,
+      "source_end_ns": 1789027400284317952,
+      "source_recording_id": "8d16b5a5c5924b179fd07c134f6ca3a5",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789027387936240427
+        }
+      ],
+      "bytes": 3744559104
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode462",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789027418162522112,
+      "source_end_ns": 1789027491171193088,
+      "source_recording_id": "cb140fbc5d8045aaa9bccb505ebb0692",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789027480771817846
+        }
+      ],
+      "bytes": 6067884032
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode463",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789027567895469778,
+      "source_end_ns": 1789027644333120000,
+      "source_recording_id": "04efdd82f27c43589392123a279399fa",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789027631503569856
+        }
+      ],
+      "bytes": 6349066240
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode464",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789027710244225024,
+      "source_end_ns": 1789027767032878080,
+      "source_recording_id": "5a4d05e184144fdc8f89a433a3b5e1c3",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789027754665295237
+        }
+      ],
+      "bytes": 4747583488
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode465",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789027804601499893,
+      "source_end_ns": 1789027899186760960,
+      "source_recording_id": "dbdb4a80f9f34165894b097d01ded91a",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789027888546904917
+        }
+      ],
+      "bytes": 7831474176
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode466",
+      "eligible": false,
+      "reason": "collection state: discarded; failures=[]",
+      "source_start_ns": 1789028026913355444,
+      "source_end_ns": 1789028103469687040,
+      "source_recording_id": "10c49f2286a449a0bf8c5c3b93a1f78a",
+      "milestones": [],
+      "bytes": 6360559616
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode467",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789028187264834259,
+      "source_end_ns": 1789028286243486976,
+      "source_recording_id": "7ec5602ea30143a7b629947a0c25610d",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789028273467656798
+        }
+      ],
+      "bytes": 8195784704
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode468",
+      "eligible": false,
+      "reason": "collection state: discarded; failures=[]",
+      "source_start_ns": 1789028355553533670,
+      "source_end_ns": 1789028417497357056,
+      "source_recording_id": "b98a9fc25f3e48c6ba44420616e6b9b5",
+      "milestones": [],
+      "bytes": 5170196480
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode469",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789028491129924779,
+      "source_end_ns": 1789028566307312128,
+      "source_recording_id": "8bedcd43418b4ffc86904744de7a3872",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789028553265870849
+        }
+      ],
+      "bytes": 6246981632
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode470",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789028603145683417,
+      "source_end_ns": 1789028720619934976,
+      "source_recording_id": "b47b4d74dfab4611bdd0f89e158fa6ef",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789028711635806097
+        }
+      ],
+      "bytes": 9701662720
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode471",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789028760011420433,
+      "source_end_ns": 1789028839066945024,
+      "source_recording_id": "3e4b4be478854ee88ead2edf685d47db",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789028828365415250
+        }
+      ],
+      "bytes": 6568570880
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode472",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789028881217451207,
+      "source_end_ns": 1789028929852730880,
+      "source_recording_id": "2ca76ed4085e4961b4d09a2ba31f0776",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789028921473532874
+        }
+      ],
+      "bytes": 4083535872
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode474",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789029039972258616,
+      "source_end_ns": 1789029132632388096,
+      "source_recording_id": "8c2087d2a4c34834b8f2ce2714409060",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789029120440012174
+        }
+      ],
+      "bytes": 7677112320
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode475",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789029164319207363,
+      "source_end_ns": 1789029234071644928,
+      "source_recording_id": "8939b568f2d542a7bd606b0b2a522fc5",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789029222340619550
+        }
+      ],
+      "bytes": 5804969984
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode476",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789029254089523082,
+      "source_end_ns": 1789029361671554048,
+      "source_recording_id": "fda676b291e94986a533df61bf4eab26",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789029344501321477
+        }
+      ],
+      "bytes": 8894246912
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode477",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789029383673307626,
+      "source_end_ns": 1789029461560243968,
+      "source_recording_id": "62b4782b970c421380f46a03564169bc",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789029452950701377
+        }
+      ],
+      "bytes": 6467461120
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode478",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789029529639333127,
+      "source_end_ns": 1789029627726896896,
+      "source_recording_id": "704fa5778ad04f94806634d544640ae1",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789029618047039998
+        }
+      ],
+      "bytes": 8123842560
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode480",
+      "eligible": false,
+      "reason": "collection state: discarded; failures=[]",
+      "source_start_ns": 1789033605292214016,
+      "source_end_ns": 1789033632130498048,
+      "source_recording_id": "026e1ca7bd2b4a2ba0e1446f8f72d5e9",
+      "milestones": [],
+      "bytes": 2301661184
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode481",
+      "eligible": false,
+      "reason": "collection state: discarded; failures=[]",
+      "source_start_ns": 1789033705314273024,
+      "source_end_ns": 1789033802440955904,
+      "source_recording_id": "1b13b72e57264bb98df97e8cbc622102",
+      "milestones": [],
+      "bytes": 8040062976
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode482",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789033851051832832,
+      "source_end_ns": 1789033931787986944,
+      "source_recording_id": "64ab8992c7e947c2961cae3e9b852553",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789033922126055423
+        }
+      ],
+      "bytes": 6699737088
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode483",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789033986045998646,
+      "source_end_ns": 1789034097598850048,
+      "source_recording_id": "af9b7e6bfef54769ab790bfc39f766fa",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789034086883439744
+        }
+      ],
+      "bytes": 9217077248
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode486",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789034325308086882,
+      "source_end_ns": 1789034406912168960,
+      "source_recording_id": "cf2a73511e3f47468314ca8402f87295",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789034397250678839
+        }
+      ],
+      "bytes": 6790107136
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode487",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789112232260601746,
+      "source_end_ns": 1789112299037527040,
+      "source_recording_id": "12ce87a373624f75b4c1b58f8c112b3a",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789112290655538220
+        }
+      ],
+      "bytes": 5561339904
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode488",
+      "eligible": false,
+      "reason": "collection state: discarded; failures=[]",
+      "source_start_ns": 1789112841517053010,
+      "source_end_ns": 1789112893139941888,
+      "source_recording_id": "f92229e8a655440081aea9755f972562",
+      "milestones": [],
+      "bytes": 4326604800
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode489",
+      "eligible": false,
+      "reason": "collection state: discarded; failures=[]",
+      "source_start_ns": 1789112988195190303,
+      "source_end_ns": 1789113052104237056,
+      "source_recording_id": "36599fec383140819df7ecd4a9df9797",
+      "milestones": [],
+      "bytes": 5322670080
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode490",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789113177496467807,
+      "source_end_ns": 1789113248983887872,
+      "source_recording_id": "b692dc035fc64e85b91d2849cd25d9e1",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789113237304756694
+        }
+      ],
+      "bytes": 5945946112
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode491",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789113280079148698,
+      "source_end_ns": 1789113345022117888,
+      "source_recording_id": "26b0639bac7d4281a51f4c64a19d7ee8",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789113319689440534
+        }
+      ],
+      "bytes": 5409136640
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode492",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789113379708253620,
+      "source_end_ns": 1789113457964897024,
+      "source_recording_id": "5e0ebb85b2bf45b6aa6ec94b1b7a60e3",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789113448287174254
+        }
+      ],
+      "bytes": 6500261888
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode493",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789113493414722472,
+      "source_end_ns": 1789113590763687936,
+      "source_recording_id": "55b41c507f0a40b490a84527a452d723",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789113581010716145
+        }
+      ],
+      "bytes": 8057458688
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode494",
+      "eligible": false,
+      "reason": "collection state: discarded; failures=[]",
+      "source_start_ns": 1789113710516880730,
+      "source_end_ns": 1789113747719931904,
+      "source_recording_id": "bbab095b9fb64770a60d2db336d5bd07",
+      "milestones": [],
+      "bytes": 3158618112
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode495",
+      "eligible": false,
+      "reason": "collection state: discarded; failures=[]",
+      "source_start_ns": 1789113772896008960,
+      "source_end_ns": 1789113902274697984,
+      "source_recording_id": "790a914962cc49239c4f3c12ec520d9a",
+      "milestones": [],
+      "bytes": 10675748864
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode496",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789113960927370705,
+      "source_end_ns": 1789114005411597056,
+      "source_recording_id": "b2da9d8e35654f1098a0313c0519fffc",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789113999121350488
+        }
+      ],
+      "bytes": 3742982144
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode497",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789114064333476096,
+      "source_end_ns": 1789114114001090048,
+      "source_recording_id": "3a100a8c9a2f424782a06f8794f71da3",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789114102463339615
+        }
+      ],
+      "bytes": 4168085504
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode498",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789114134615282944,
+      "source_end_ns": 1789114201734443008,
+      "source_recording_id": "c1f02eb65b3b49078734f2a9f0410e8c",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789114192151684356
+        }
+      ],
+      "bytes": 5590056960
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode499",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789114277067126339,
+      "source_end_ns": 1789114333586001920,
+      "source_recording_id": "12f8741396dc4b50b690f6bfaab8bd09",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789114322849743342
+        }
+      ],
+      "bytes": 4726882304
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode500",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789114416129091806,
+      "source_end_ns": 1789114477742044928,
+      "source_recording_id": "e0641bdd0cfa4ee19e43f15721a06df7",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789114470147887793
+        }
+      ],
+      "bytes": 5145206784
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode501",
+      "eligible": false,
+      "reason": "collection state: discarded; failures=[]",
+      "source_start_ns": 1789114517658122184,
+      "source_end_ns": 1789114554673022976,
+      "source_recording_id": "26f038209fc842a3a0efcb60d57ecef6",
+      "milestones": [],
+      "bytes": 3132141568
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode502",
+      "eligible": false,
+      "reason": "collection state: incomplete; failures=['/teleop/wuji/telemetry_status: source_max_internal_gap_ms 156.5 ms exceeds 150.0 ms', '/teleop/wuji/left/joint_states: source_max_internal_gap_ms 152.3 ms exceeds 150.0 ms', '/teleop/wuji/right/joint_states: source_max_internal_gap_ms 152.3 ms exceeds 150.0 ms', '/teleop/wuji/telemetry_status#left: source_max_internal_gap_ms 160.5 ms exceeds 150.0 ms', '/teleop/wuji/telemetry_status#right: source_max_internal_gap_ms 157.3 ms exceeds 150.0 ms']",
+      "source_start_ns": 1789114656547383412,
+      "source_end_ns": 1789114724989839104,
+      "source_recording_id": "3a8acbf58e984721b949528e6af8390d",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789114711359513068
+        }
+      ],
+      "bytes": 5699833856
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode503",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789114783800045611,
+      "source_end_ns": 1789114863194034944,
+      "source_recording_id": "9954c032fb3842e688cc400cdf5d7e62",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789114851884554459
+        }
+      ],
+      "bytes": 6588342272
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode504",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789114887649473560,
+      "source_end_ns": 1789114998097312000,
+      "source_recording_id": "4c1ebc2c724047aa9e95a366f4de3999",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789114988469593363
+        }
+      ],
+      "bytes": 9128603648
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode505",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789115033911824896,
+      "source_end_ns": 1789115082831174912,
+      "source_recording_id": "d383769cc40849909e6750d9105a281a",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789115072294696456
+        }
+      ],
+      "bytes": 4107767808
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode506",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789115100663372462,
+      "source_end_ns": 1789115196325879040,
+      "source_recording_id": "3e9407f8b8d0414fa4cc387da513c0ca",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789115187482158704
+        }
+      ],
+      "bytes": 7925563392
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode507",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789115229916465250,
+      "source_end_ns": 1789115272104900096,
+      "source_recording_id": "a58353f79d3847e8a447617501c64cd0",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789115265369192728
+        }
+      ],
+      "bytes": 3558973440
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode508",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789115289968963320,
+      "source_end_ns": 1789115369693766912,
+      "source_recording_id": "2b41923d173843b19fd0419d49d86109",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789115361057450307
+        }
+      ],
+      "bytes": 6620647424
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode509",
+      "eligible": false,
+      "reason": "collection state: incomplete; failures=['/teleop/wuji/left/joint_states: source_max_internal_gap_ms 729.8 ms exceeds 150.0 ms', '/teleop/wuji/right/joint_states: source_max_internal_gap_ms 729.8 ms exceeds 150.0 ms']",
+      "source_start_ns": 1789115431795368013,
+      "source_end_ns": 1789115491993049088,
+      "source_recording_id": "a859a8a7ce914bbf9126afffa44e9514",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789115485152088070
+        }
+      ],
+      "bytes": 5027155968
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode510",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789115528160581185,
+      "source_end_ns": 1789115599487038976,
+      "source_recording_id": "bc28dc8aa6ac44a08d6a2a02e1f2a1f8",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789115588805170348
+        }
+      ],
+      "bytes": 5931397120
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode511",
+      "eligible": true,
+      "reason": null,
+      "source_start_ns": 1789115732159054994,
+      "source_end_ns": 1789115798718797056,
+      "source_recording_id": "f2ebad38847c49de844fb712359a2470",
+      "milestones": [
+        {
+          "clock": "ros",
+          "id": "milestone_1",
+          "timestamp_ns": 1789115788091122578
+        }
+      ],
+      "bytes": 5546749952
+    },
+    {
+      "path": "/home/descfly/lcl_work/company-remote/tomato/episode512",
+      "eligible": false,
+      "reason": "[Errno 2] No such file or directory: '/home/descfly/lcl_work/company-remote/tomato/episode512/collection_state.json'",
+      "source_start_ns": null,
+      "source_end_ns": null,
+      "source_recording_id": "/home/descfly/lcl_work/company-remote/tomato/episode512",
+      "milestones": [],
+      "bytes": 0
+    }
+  ]
+}

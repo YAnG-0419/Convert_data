@@ -1,0 +1,47 @@
+name: franka_dual_hand_rgbd
+dataset_path: ${oc.env:DP_DATASET}
+shape_meta:
+  action:
+    shape:
+    - 54
+  obs:
+    joint_pos:
+      shape:
+      - 54
+      type: low_dim
+    head_rgb:
+      shape:
+      - 3
+      - 240
+      - 320
+      type: rgb
+    left_wrist_rgb:
+      shape:
+      - 3
+      - 240
+      - 320
+      type: rgb
+    right_wrist_rgb:
+      shape:
+      - 3
+      - 240
+      - 320
+      type: rgb
+    head_depth:
+      shape:
+      - 1
+      - 240
+      - 320
+      type: depth
+dataset:
+  _target_: convest.dp.dataset.FrankaImageDataset
+  dataset_path: ${task.dataset_path}
+  shape_meta: ${task.shape_meta}
+  horizon: ${horizon}
+  pad_before: ${eval:'${n_obs_steps}-1'}
+  pad_after: ${eval:'${n_action_steps}-1'}
+  n_obs_steps: ${n_obs_steps}
+  seed: 42
+  val_ratio: 0.1
+env_runner:
+  _target_: convest.dp.runner.OfflineImageRunner

@@ -5,11 +5,12 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "convest-data"
 version = "0.1.0"
-description = "Offline ROS bag conversion to LeRobot v2.1, ACT HDF5 and uncropped DP3 Zarr"
+description = "Offline ROS bag conversion to LeRobot v2.1, ACT HDF5, DP RGB-D and uncropped DP3 Zarr"
 requires-python = ">=3.11"
 dependencies = ["numpy==2.2.6", "pyarrow==19.0.1", "av==14.2.0", "rosbags==0.10.11", "PyYAML==6.0.2"]
 
 [project.optional-dependencies]
+dp = ["zarr==2.18.7", "numcodecs==0.15.1"]
 act = ["h5py==3.14.0"]
 dp3 = ["zarr==2.18.7", "numcodecs==0.15.1"]
 test = ["pytest==8.3.5"]

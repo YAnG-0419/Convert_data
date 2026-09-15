@@ -1,8 +1,25 @@
 # 机器人数据转换工作区
 
-目前支持 **Gello / 双 FR3 + Wuji 的 ROS2 sqlite3 bag → Pi05 LeRobot v2.1 / ACT HDF5 / DP3 未裁剪 Zarr**。Pi05/ACT 使用 `scripts/convest`，DP3 质量分组转换使用 `scripts/dp3`。
+目前支持 **Gello / 双 FR3 + Wuji 的 ROS2 sqlite3 bag → Pi05 LeRobot v2.1 / ACT HDF5 / Diffusion Policy RGB-D Zarr / DP3 未裁剪 Zarr**。Pi05/ACT 使用 `scripts/convest`，DP3 质量分组转换使用 `scripts/dp3`。
 
-所有代码、依赖、缓存、日志、转换结果均放在本目录。源 bag 使用 SQLite 只读连接；不安装 ROS，不修改 Pi05、gello-retarget、系统 Python 或它们的环境，不上传数据。
+
+## Diffusion Policy：双 Franka + 双 Wuji RGB-D
+
+新增 `scripts/dp` 和一键批量入口 `scripts/dp_batch`：将 ROS2 episode 转为官方 DP ReplayBuffer 兼容的 Zarr v2，默认 30 Hz、54 维实测位置/绝对目标动作、三路 RGB 和头部米单位深度。训练适配层、配置和入口全部位于本目录，无需修改同级 `diffusion_policy` 仓库。
+
+```bash
+cd /home/descfly/Convert_data
+bash scripts/setup.sh
+scripts/dp_batch --all --workers 4  # 4 个进程并行转换 episode，30 Hz，自动续跑并校验
+# 一次指定多个 episode：
+# scripts/dp_batch --episodes episode60 episode62 episode63 --workers 3 --output outputs/dp/selected_30hz
+# 按质量清单：
+# scripts/dp_batch --episode-list lists/high_quality.txt --output outputs/dp/tomato_high_30hz
+```
+
+完整批量转换、数据结构、时间对齐、断点续跑及官方 DP 训练命令见 [Diffusion Policy 使用说明](docs/diffusion_policy.md)。本机已完成 episode60 的完整转换和训练接口验证。
+
+实际三批优秀数据筛选、官方 DP 训练、过程页面与离线预测演示见 [试验说明](docs/dp_pilot_experiment.md)。
 
 ## DP3 未裁剪 Zarr 转换
 
@@ -347,9 +364,3 @@ env -u PYTHONPATH PYTHONNOUSERSITE=1 .runtime/bin/python -m pytest -q --basetemp
 - **有限并行和可恢复写出**：使用 `ProcessPoolExecutor` 按 bag 并行，完成后按确定的顺序提交，避免工作进程完成先后影响编号。`--workers 4` 表示最多 4 个进程同时处理不同 bag；每个视频编码器默认 2 个线程。图像只先建立消息头及位置索引，再按需读取和编码，数值时间序列按 bag 放入内存，不将整批原始视频展开到内存或 PNG 目录。
 - **目录与中断保护**：支持自动创建输出目录或使用用户预建的空目录。对已有非空数据集要求本工具的 manifest 和 `--resume`，通过文件锁阻止同一数据集被多个转换任务同时写入。每个 bag 先写入暂存目录，完成后提交产物及来源记录；恢复时仅清理该输出中未提交的产物。源 bag 始终以只读方式访问。
 - **分组数据接入 Pi05**：更新 [check_pi05.py](scripts/check_pi05.py)、[compute_pi05_norm.py](scripts/compute_pi05_norm.py) 和 [pi05_entry.py](scripts/pi05_entry.py)。检查与统计脚本从目标 manifest 读取 `repo_id`，各组归一化统计保存到独立目录；训练入口将用户指定的 `repo_id` 传给 Pi05。针对本机 TorchCodec 动态库问题，入口只在当前进程内选择已可用的 PyAV。
-
-### 已完成的验证
-
-清单与追加功能实现时，共 **26 项测试通过**，覆盖关节映射、时间对齐、动作保持、断档分段、视频写出、TXT 解析、异常输入、追加和重复续跑等行为。优秀组 5 个 episode、标准组实际导出的 1 个 episode，均通过了完整视频解码与索引校验、Pi05 读取及输入变换检查，并对原始 bag 做了抽样比对。重复执行 `--resume` 后，已有 Parquet 和 MP4 的 SHA-256 与修改时间保持一致。
-
-这些是该次生成结果的验证记录；以后追加数据仍需重新校验和计算对应组的训练归一化统计。报告见 [group_creation_report.json](reports/group_creation_report.json) 和 [group_resume_verification.json](reports/group_resume_verification.json)。

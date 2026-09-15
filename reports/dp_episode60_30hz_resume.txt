@@ -1,0 +1,50 @@
+Batch conversion: 30 Hz, source=/home/descfly/lcl_work/company-remote/tomato/episode60, output=/home/descfly/lcl_work/Convert_data/outputs/dp/episode60_30hz
+Already committed: /home/descfly/lcl_work/company-remote/tomato/episode60
+{
+  "bags": 1,
+  "episodes": 1,
+  "frames": 1951,
+  "errors": []
+}
+{
+  "ok": true,
+  "bags": 1,
+  "episodes": 1,
+  "frames": 1951,
+  "action_dim": 54,
+  "full_image_read": true,
+  "arrays": {
+    "action": [
+      1951,
+      54
+    ],
+    "head_depth": [
+      1951,
+      240,
+      320,
+      1
+    ],
+    "head_rgb": [
+      1951,
+      240,
+      320,
+      3
+    ],
+    "joint_pos": [
+      1951,
+      54
+    ],
+    "left_wrist_rgb": [
+      1951,
+      240,
+      320,
+      3
+    ],
+    "right_wrist_rgb": [
+      1951,
+      240,
+      320,
+      3
+    ]
+  }
+}

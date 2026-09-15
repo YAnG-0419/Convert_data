@@ -1,0 +1,20 @@
+# All relative paths are resolved from Convert_data, independently of shell cwd.
+source_root: ../company-remote/tomato
+output_root: outputs/dp/tomato_30hz
+contract: schemas/gello_contract.yaml
+schema_dir: schemas
+fps: 30
+image_width: 320
+image_height: 240
+include_depth: true
+# sensor_msgs/Image 16UC1 values -> metres. Confirm for a different camera driver.
+depth_scale: 0.001
+# Only the training loader clips/scales depth; stored float32 depth remains in metres.
+depth_max_m: 2.0
+state_max_age_ms: 75
+command_max_age_ms: 150
+status_max_age_ms: 150
+image_max_age_ms: 100
+min_segment_frames: 16
+max_joint_step_rad: 1.0
+min_free_gb: 5

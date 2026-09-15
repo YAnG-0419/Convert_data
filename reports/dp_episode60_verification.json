@@ -1,0 +1,42 @@
+{
+  "ok": true,
+  "bags": 1,
+  "episodes": 1,
+  "frames": 1301,
+  "action_dim": 54,
+  "full_image_read": true,
+  "arrays": {
+    "action": [
+      1301,
+      54
+    ],
+    "head_depth": [
+      1301,
+      240,
+      320,
+      1
+    ],
+    "head_rgb": [
+      1301,
+      240,
+      320,
+      3
+    ],
+    "joint_pos": [
+      1301,
+      54
+    ],
+    "left_wrist_rgb": [
+      1301,
+      240,
+      320,
+      3
+    ],
+    "right_wrist_rgb": [
+      1301,
+      240,
+      320,
+      3
+    ]
+  }
+}

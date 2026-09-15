@@ -1,0 +1,212 @@
+{
+  "arm_command_status": {
+    "topic": "/teleop/arm_command_status",
+    "source_timestamp_ns": 1788490269034791749
+  },
+  "validated_arm_action": {
+    "topic": "/teleop/validated_arm_commands",
+    "source_timestamp_ns": 1788490269034861865,
+    "joint_names": [
+      "left_fr3v2_joint1",
+      "left_fr3v2_joint2",
+      "left_fr3v2_joint3",
+      "left_fr3v2_joint4",
+      "left_fr3v2_joint5",
+      "left_fr3v2_joint6",
+      "left_fr3v2_joint7",
+      "right_fr3v2_joint1",
+      "right_fr3v2_joint2",
+      "right_fr3v2_joint3",
+      "right_fr3v2_joint4",
+      "right_fr3v2_joint5",
+      "right_fr3v2_joint6",
+      "right_fr3v2_joint7"
+    ],
+    "position_dim": 14
+  },
+  "left_arm_state": {
+    "topic": "/left/franka/joint_states",
+    "source_timestamp_ns": 1788490269135922135,
+    "joint_names": [
+      "left_fr3_joint1",
+      "left_fr3_joint3",
+      "left_fr3_joint5",
+      "left_fr3_joint2",
+      "left_fr3_joint6",
+      "left_fr3_joint7",
+      "left_fr3_joint4"
+    ],
+    "position_dim": 7
+  },
+  "right_arm_state": {
+    "topic": "/right/franka/joint_states",
+    "source_timestamp_ns": 1788490269031857645,
+    "joint_names": [
+      "right_fr3_joint3",
+      "right_fr3_joint4",
+      "right_fr3_joint5",
+      "right_fr3_joint7",
+      "right_fr3_joint2",
+      "right_fr3_joint1",
+      "right_fr3_joint6"
+    ],
+    "position_dim": 7
+  },
+  "left_hand_action": {
+    "topic": "/teleop/wuji/left/command",
+    "source_timestamp_ns": 1788490269153769634,
+    "joint_names": [
+      "l_thumb_cmc_flex",
+      "l_thumb_cmc_abd",
+      "l_thumb_mcp",
+      "l_thumb_ip",
+      "l_index_finger_mcp_flex",
+      "l_index_finger_mcp_abd",
+      "l_index_finger_pip",
+      "l_index_finger_dip",
+      "l_middle_finger_mcp_flex",
+      "l_middle_finger_mcp_abd",
+      "l_middle_finger_pip",
+      "l_middle_finger_dip",
+      "l_ring_finger_mcp_flex",
+      "l_ring_finger_mcp_abd",
+      "l_ring_finger_pip",
+      "l_ring_finger_dip",
+      "l_pinky_mcp_flex",
+      "l_pinky_mcp_abd",
+      "l_pinky_pip",
+      "l_pinky_dip"
+    ],
+    "position_dim": 20
+  },
+  "right_hand_action": {
+    "topic": "/teleop/wuji/right/command",
+    "source_timestamp_ns": 1788490269153769634,
+    "joint_names": [
+      "r_thumb_cmc_flex",
+      "r_thumb_cmc_abd",
+      "r_thumb_mcp",
+      "r_thumb_ip",
+      "r_index_finger_mcp_flex",
+      "r_index_finger_mcp_abd",
+      "r_index_finger_pip",
+      "r_index_finger_dip",
+      "r_middle_finger_mcp_flex",
+      "r_middle_finger_mcp_abd",
+      "r_middle_finger_pip",
+      "r_middle_finger_dip",
+      "r_ring_finger_mcp_flex",
+      "r_ring_finger_mcp_abd",
+      "r_ring_finger_pip",
+      "r_ring_finger_dip",
+      "r_pinky_mcp_flex",
+      "r_pinky_mcp_abd",
+      "r_pinky_pip",
+      "r_pinky_dip"
+    ],
+    "position_dim": 20
+  },
+  "left_hand_state": {
+    "topic": "/teleop/wuji/left/joint_states",
+    "source_timestamp_ns": 1788490269153769634,
+    "joint_names": [
+      "l_thumb_cmc_flex",
+      "l_thumb_cmc_abd",
+      "l_thumb_mcp",
+      "l_thumb_ip",
+      "l_index_finger_mcp_flex",
+      "l_index_finger_mcp_abd",
+      "l_index_finger_pip",
+      "l_index_finger_dip",
+      "l_middle_finger_mcp_flex",
+      "l_middle_finger_mcp_abd",
+      "l_middle_finger_pip",
+      "l_middle_finger_dip",
+      "l_ring_finger_mcp_flex",
+      "l_ring_finger_mcp_abd",
+      "l_ring_finger_pip",
+      "l_ring_finger_dip",
+      "l_pinky_mcp_flex",
+      "l_pinky_mcp_abd",
+      "l_pinky_pip",
+      "l_pinky_dip"
+    ],
+    "position_dim": 20
+  },
+  "right_hand_state": {
+    "topic": "/teleop/wuji/right/joint_states",
+    "source_timestamp_ns": 1788490269153769634,
+    "joint_names": [
+      "r_thumb_cmc_flex",
+      "r_thumb_cmc_abd",
+      "r_thumb_mcp",
+      "r_thumb_ip",
+      "r_index_finger_mcp_flex",
+      "r_index_finger_mcp_abd",
+      "r_index_finger_pip",
+      "r_index_finger_dip",
+      "r_middle_finger_mcp_flex",
+      "r_middle_finger_mcp_abd",
+      "r_middle_finger_pip",
+      "r_middle_finger_dip",
+      "r_ring_finger_mcp_flex",
+      "r_ring_finger_mcp_abd",
+      "r_ring_finger_pip",
+      "r_ring_finger_dip",
+      "r_pinky_mcp_flex",
+      "r_pinky_mcp_abd",
+      "r_pinky_pip",
+      "r_pinky_dip"
+    ],
+    "position_dim": 20
+  },
+  "hand_telemetry_status": {
+    "topic": "/teleop/wuji/telemetry_status",
+    "source_timestamp_ns": 1788490269155070528
+  },
+  "cam0": {
+    "topic": "/cam0/color/image_raw",
+    "source_timestamp_ns": 1788490269032015872,
+    "width": 640,
+    "height": 400,
+    "encoding": "rgb8"
+  },
+  "cam1": {
+    "topic": "/cam1/color/image_raw",
+    "source_timestamp_ns": 1788490269142712064,
+    "width": 640,
+    "height": 480,
+    "encoding": "rgb8"
+  },
+  "cam2": {
+    "topic": "/cam2/color/image_raw",
+    "source_timestamp_ns": 1788490269122001920,
+    "width": 640,
+    "height": 480,
+    "encoding": "rgb8"
+  },
+  "cam0_depth": {
+    "topic": "/cam0/depth/image_raw",
+    "source_timestamp_ns": 1788490269033016064,
+    "width": 640,
+    "height": 400,
+    "encoding": "16UC1"
+  },
+  "cam0_depth_info": {
+    "topic": "/cam0/depth/camera_info",
+    "source_timestamp_ns": 1788490269083015936,
+    "width": 640,
+    "height": 400,
+    "K": [
+      310.17462158203125,
+      0.0,
+      315.0,
+      0.0,
+      310.17462158203125,
+      201.5,
+      0.0,
+      0.0,
+      1.0
+    ]
+  }
+}

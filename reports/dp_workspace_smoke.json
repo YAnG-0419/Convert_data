@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "workspace": "diffusion_policy.workspace.train_diffusion_unet_image_workspace.TrainDiffusionUnetImageWorkspace",
+  "device": "cpu",
+  "epochs": 1,
+  "max_train_steps": 1,
+  "use_ema": false,
+  "unet_down_dims": [
+    64,
+    128
+  ],
+  "inference_steps": 2,
+  "logging_mode": "disabled",
+  "metrics": {
+    "train_loss": 1.221318006515503,
+    "global_step": 0,
+    "epoch": 0,
+    "lr": 2.0000000000000002e-07,
+    "train_action_mse_error": 0.15406465530395508
+  },
+  "checkpoints": [
+    {
+      "path": "outputs/dp_training/episode60_smoke/checkpoints/epoch=0000-train_loss=1.2213.ckpt",
+      "bytes": 629355552
+    },
+    {
+      "path": "outputs/dp_training/episode60_smoke/checkpoints/latest.ckpt",
+      "bytes": 629355552
+    }
+  ]
+}

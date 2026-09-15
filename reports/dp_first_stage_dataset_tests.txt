@@ -1,0 +1,9 @@
+/home/descfly/miniforge3/envs/robodiff5090/lib/python3.10/site-packages/zarr/util.py:137: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  return guess_chunks(shape, typesize)
+./home/descfly/miniforge3/envs/robodiff5090/lib/python3.10/site-packages/zarr/util.py:137: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  return guess_chunks(shape, typesize)
+.....
+----------------------------------------------------------------------
+Ran 6 tests in 1.303s
+
+OK

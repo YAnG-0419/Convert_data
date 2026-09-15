@@ -1,0 +1,15 @@
+test_group_split_and_train_only_statistics (test_dp_dataset.DatasetTests) ... /home/descfly/miniforge3/envs/robodiff5090/lib/python3.10/site-packages/zarr/util.py:137: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  return guess_chunks(shape, typesize)
+ok
+test_padding_depth_and_no_cross_episode_sampling (test_dp_dataset.DatasetTests) ... /home/descfly/miniforge3/envs/robodiff5090/lib/python3.10/site-packages/zarr/util.py:137: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  return guess_chunks(shape, typesize)
+ok
+test_single_recording_has_no_validation_leakage (test_dp_dataset.DatasetTests) ... /home/descfly/miniforge3/envs/robodiff5090/lib/python3.10/site-packages/zarr/util.py:137: DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.
+  return guess_chunks(shape, typesize)
+ok
+test_wrong_dimension_and_uncommitted_store_rejected (test_dp_dataset.DatasetTests) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.325s
+
+OK

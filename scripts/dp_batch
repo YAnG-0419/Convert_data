@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+project_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+export PYTHONPATH="$project_root/src"
+export PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1
+cd "$project_root"
+exec "${PYTHON_BIN:-$project_root/.runtime/bin/python}" -m convest.dp.batch "$@"

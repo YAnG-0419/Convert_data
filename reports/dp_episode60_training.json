@@ -1,0 +1,61 @@
+{
+  "ok": true,
+  "dataset": "/home/descfly/lcl_work/Convert_data/outputs/dp/episode60",
+  "train_sequences": 1294,
+  "validation_sequences": 0,
+  "obs_shapes": {
+    "head_depth": [
+      1,
+      2,
+      1,
+      240,
+      320
+    ],
+    "head_rgb": [
+      1,
+      2,
+      3,
+      240,
+      320
+    ],
+    "joint_pos": [
+      1,
+      2,
+      54
+    ],
+    "left_wrist_rgb": [
+      1,
+      2,
+      3,
+      240,
+      320
+    ],
+    "right_wrist_rgb": [
+      1,
+      2,
+      3,
+      240,
+      320
+    ]
+  },
+  "action_shape": [
+    1,
+    16,
+    54
+  ],
+  "prediction_shape": [
+    1,
+    8,
+    54
+  ],
+  "loss": 1.0841282606124878,
+  "finite_gradients": true,
+  "torch_version": "2.11.0+cu128",
+  "numpy_version": "1.26.4",
+  "device": "cpu",
+  "test_unet_down_dims": [
+    64,
+    128
+  ],
+  "inference_steps": 2
+}
