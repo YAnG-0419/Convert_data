@@ -1,0 +1,190 @@
+rosbag2_bagfile_information:
+  version: 5
+  storage_identifier: sqlite3
+  duration:
+    nanoseconds: 38017125695
+  starting_time:
+    nanoseconds_since_epoch: 1789440931460497832
+  message_count: 46719
+  topics_with_message_count:
+  - topic_metadata:
+      name: /teleop/wuji/telemetry_status
+      type: teleop_interfaces/msg/HandTelemetryStatus
+      serialization_format: cdr
+      offered_qos_profiles: "- history: 1\n  depth: 10\n  reliability: 1\n  durability:\
+        \ 2\n  deadline:\n    sec: 9223372036\n    nsec: 854775807\n  lifespan:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  liveliness: 1\n  liveliness_lease_duration:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  avoid_ros_namespace_conventions:\
+        \ false"
+    message_count: 5565
+  - topic_metadata:
+      name: /teleop/wuji/right/joint_states
+      type: sensor_msgs/msg/JointState
+      serialization_format: cdr
+      offered_qos_profiles: "- history: 1\n  depth: 10\n  reliability: 1\n  durability:\
+        \ 2\n  deadline:\n    sec: 9223372036\n    nsec: 854775807\n  lifespan:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  liveliness: 1\n  liveliness_lease_duration:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  avoid_ros_namespace_conventions:\
+        \ false"
+    message_count: 2696
+  - topic_metadata:
+      name: /teleop/wuji/right/command
+      type: sensor_msgs/msg/JointState
+      serialization_format: cdr
+      offered_qos_profiles: "- history: 1\n  depth: 10\n  reliability: 1\n  durability:\
+        \ 2\n  deadline:\n    sec: 9223372036\n    nsec: 854775807\n  lifespan:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  liveliness: 1\n  liveliness_lease_duration:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  avoid_ros_namespace_conventions:\
+        \ false"
+    message_count: 2695
+  - topic_metadata:
+      name: /teleop/wuji/left/joint_states
+      type: sensor_msgs/msg/JointState
+      serialization_format: cdr
+      offered_qos_profiles: "- history: 1\n  depth: 10\n  reliability: 1\n  durability:\
+        \ 2\n  deadline:\n    sec: 9223372036\n    nsec: 854775807\n  lifespan:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  liveliness: 1\n  liveliness_lease_duration:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  avoid_ros_namespace_conventions:\
+        \ false"
+    message_count: 2868
+  - topic_metadata:
+      name: /teleop/wuji/left/command
+      type: sensor_msgs/msg/JointState
+      serialization_format: cdr
+      offered_qos_profiles: "- history: 1\n  depth: 10\n  reliability: 1\n  durability:\
+        \ 2\n  deadline:\n    sec: 9223372036\n    nsec: 854775807\n  lifespan:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  liveliness: 1\n  liveliness_lease_duration:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  avoid_ros_namespace_conventions:\
+        \ false"
+    message_count: 2868
+  - topic_metadata:
+      name: /cam2/color/image_raw
+      type: sensor_msgs/msg/Image
+      serialization_format: cdr
+      offered_qos_profiles: "- history: 1\n  depth: 10\n  reliability: 1\n  durability:\
+        \ 2\n  deadline:\n    sec: 9223372036\n    nsec: 854775807\n  lifespan:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  liveliness: 1\n  liveliness_lease_duration:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  avoid_ros_namespace_conventions:\
+        \ false"
+    message_count: 1142
+  - topic_metadata:
+      name: /cam2/color/camera_info
+      type: sensor_msgs/msg/CameraInfo
+      serialization_format: cdr
+      offered_qos_profiles: "- history: 1\n  depth: 10\n  reliability: 1\n  durability:\
+        \ 2\n  deadline:\n    sec: 9223372036\n    nsec: 854775807\n  lifespan:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  liveliness: 1\n  liveliness_lease_duration:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  avoid_ros_namespace_conventions:\
+        \ false"
+    message_count: 1142
+  - topic_metadata:
+      name: /teleop/arm_command_status
+      type: teleop_interfaces/msg/ArmCommandStatus
+      serialization_format: cdr
+      offered_qos_profiles: "- history: 1\n  depth: 10\n  reliability: 1\n  durability:\
+        \ 2\n  deadline:\n    sec: 9223372036\n    nsec: 854775807\n  lifespan:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  liveliness: 1\n  liveliness_lease_duration:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  avoid_ros_namespace_conventions:\
+        \ false"
+    message_count: 3591
+  - topic_metadata:
+      name: /right/franka/joint_states
+      type: sensor_msgs/msg/JointState
+      serialization_format: cdr
+      offered_qos_profiles: "- history: 1\n  depth: 1\n  reliability: 1\n  durability:\
+        \ 2\n  deadline:\n    sec: 9223372036\n    nsec: 854775807\n  lifespan:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  liveliness: 1\n  liveliness_lease_duration:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  avoid_ros_namespace_conventions:\
+        \ false"
+    message_count: 7630
+  - topic_metadata:
+      name: /teleop/validated_arm_commands
+      type: sensor_msgs/msg/JointState
+      serialization_format: cdr
+      offered_qos_profiles: "- history: 1\n  depth: 10\n  reliability: 1\n  durability:\
+        \ 2\n  deadline:\n    sec: 9223372036\n    nsec: 854775807\n  lifespan:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  liveliness: 1\n  liveliness_lease_duration:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  avoid_ros_namespace_conventions:\
+        \ false"
+    message_count: 3591
+  - topic_metadata:
+      name: /left/franka/joint_states
+      type: sensor_msgs/msg/JointState
+      serialization_format: cdr
+      offered_qos_profiles: "- history: 1\n  depth: 1\n  reliability: 1\n  durability:\
+        \ 2\n  deadline:\n    sec: 9223372036\n    nsec: 854775807\n  lifespan:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  liveliness: 1\n  liveliness_lease_duration:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  avoid_ros_namespace_conventions:\
+        \ false"
+    message_count: 7614
+  - topic_metadata:
+      name: /cam0/depth/camera_info
+      type: sensor_msgs/msg/CameraInfo
+      serialization_format: cdr
+      offered_qos_profiles: "- history: 1\n  depth: 10\n  reliability: 1\n  durability:\
+        \ 2\n  deadline:\n    sec: 9223372036\n    nsec: 854775807\n  lifespan:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  liveliness: 1\n  liveliness_lease_duration:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  avoid_ros_namespace_conventions:\
+        \ false"
+    message_count: 759
+  - topic_metadata:
+      name: /cam0/depth/image_raw
+      type: sensor_msgs/msg/Image
+      serialization_format: cdr
+      offered_qos_profiles: "- history: 1\n  depth: 10\n  reliability: 1\n  durability:\
+        \ 2\n  deadline:\n    sec: 9223372036\n    nsec: 854775807\n  lifespan:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  liveliness: 1\n  liveliness_lease_duration:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  avoid_ros_namespace_conventions:\
+        \ false"
+    message_count: 759
+  - topic_metadata:
+      name: /cam0/color/image_raw
+      type: sensor_msgs/msg/Image
+      serialization_format: cdr
+      offered_qos_profiles: "- history: 1\n  depth: 10\n  reliability: 1\n  durability:\
+        \ 2\n  deadline:\n    sec: 9223372036\n    nsec: 854775807\n  lifespan:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  liveliness: 1\n  liveliness_lease_duration:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  avoid_ros_namespace_conventions:\
+        \ false"
+    message_count: 759
+  - topic_metadata:
+      name: /cam1/color/image_raw
+      type: sensor_msgs/msg/Image
+      serialization_format: cdr
+      offered_qos_profiles: "- history: 1\n  depth: 10\n  reliability: 1\n  durability:\
+        \ 2\n  deadline:\n    sec: 9223372036\n    nsec: 854775807\n  lifespan:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  liveliness: 1\n  liveliness_lease_duration:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  avoid_ros_namespace_conventions:\
+        \ false"
+    message_count: 1141
+  - topic_metadata:
+      name: /cam1/color/camera_info
+      type: sensor_msgs/msg/CameraInfo
+      serialization_format: cdr
+      offered_qos_profiles: "- history: 1\n  depth: 10\n  reliability: 1\n  durability:\
+        \ 2\n  deadline:\n    sec: 9223372036\n    nsec: 854775807\n  lifespan:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  liveliness: 1\n  liveliness_lease_duration:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  avoid_ros_namespace_conventions:\
+        \ false"
+    message_count: 1140
+  - topic_metadata:
+      name: /cam0/color/camera_info
+      type: sensor_msgs/msg/CameraInfo
+      serialization_format: cdr
+      offered_qos_profiles: "- history: 1\n  depth: 10\n  reliability: 1\n  durability:\
+        \ 2\n  deadline:\n    sec: 9223372036\n    nsec: 854775807\n  lifespan:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  liveliness: 1\n  liveliness_lease_duration:\n\
+        \    sec: 9223372036\n    nsec: 854775807\n  avoid_ros_namespace_conventions:\
+        \ false"
+    message_count: 759
+  compression_format: ''
+  compression_mode: ''
+  relative_file_paths:
+  - episode600_0.db3
+  files:
+  - path: episode600_0.db3
+    starting_time:
+      nanoseconds_since_epoch: 1789440931460497832
+    duration:
+      nanoseconds: 38017125695
+    message_count: 46719

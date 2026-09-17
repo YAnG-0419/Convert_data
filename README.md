@@ -83,6 +83,23 @@ Pi05 配置默认使用 `segments: all`。没有完成标记的 bag 仍输出一
 `clock: ros` 并落在验证后的有效区间内；带标记的数据若在对齐后存在断档也会拒绝转换，
 避免前缀 episode 跨越无效数据。
 
+清洗后压缩时间轴的数据可使用 `--segments first-milestone-or-full`：有标记时只输出从
+有效起点到第一个标记的前缀，没有标记时输出完整 episode。若清洗目录保留
+`source_collection_state.json` 和 `trim_report.json`，读取器会在内存中校正有效窗口、标记
+以及未被清洗器改写的自定义状态消息时间戳；源 `.db3` 不会被修改。不要把
+`source_collection_state.json` 直接改名为 `collection_state.json`，否则会混用压缩前后的时间轴。
+
+例如转换清洗后的 `datasets/B`：
+
+```bash
+scripts/convest convert \
+  --source-root datasets/B --segments first-milestone-or-full \
+  --output outputs/fr3_wuji/tomato_B_cleaned \
+  --repo-id fr3_wuji/tomato_B_cleaned \
+  --resume --workers 8
+scripts/convest verify outputs/fr3_wuji/tomato_B_cleaned
+```
+
 `segment_tasks` 可为不同阶段设置任务。当前番茄配置将 `milestone_1` 标为
 `Pick up a tomato truss with the right hand.`，完整段继续使用顶层 `task`。未配置的其他
 milestone 使用其 ID 作为占位任务名。输出的 `meta/episodes.jsonl` 和转换记录包含

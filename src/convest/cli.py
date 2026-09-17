@@ -22,9 +22,11 @@ def main():
             command.add_argument("--output", type=Path)
             command.add_argument("--repo-id", help="Immutable dataset id: namespace/dataset")
             command.add_argument("--source-root", type=Path)
-            command.add_argument("--segments", choices=("all", "full", "milestones"),
-                                 help="Export milestone prefixes plus full, full only, or prefixes only")
-            command.add_argument("--workers", type=int, default=1, help="Parallel bags (1-8); 4 is suitable for this host")
+            command.add_argument("--segments", choices=("all", "full", "milestones", "first-milestone-or-full"),
+                                 help=("Export prefixes plus full, full only, prefixes only, or the first "
+                                       "milestone prefix with full as the unmarked fallback"))
+            command.add_argument("--workers", type=int, default=1,
+                                 help="Parallel bags (1-8); each worker uses two H264 encoder threads")
     command = sub.add_parser("check-list", help="Read-only list and collection-state preflight")
     command.add_argument("episode_list", type=Path)
     command.add_argument("--config", type=Path, default=WORKSPACE / "configs/gello_pi05.yaml")

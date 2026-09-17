@@ -20,15 +20,98 @@ def natural_key(path):
     return [int(x) if x.isdigit() else x for x in re.split(r"(\d+)", str(path))]
 
 
+@dataclass(frozen=True)
+class CompactTimeMap:
+    """Map original absolute timestamps onto a cleaner's compacted time axis."""
+
+    intervals: tuple[tuple[int, int, int], ...]
+    unmodified_payload_types: frozenset[str]
+    report_path: str
+
+    @property
+    def compact_boundaries(self):
+        removed_before = 0
+        result = []
+        for start, _, removed in self.intervals:
+            result.append(start - removed_before)
+            removed_before += removed
+        return tuple(result)
+
+    def apply(self, timestamp_ns):
+        removed_before = 0
+        for start, end, removed in self.intervals:
+            if timestamp_ns < start:
+                break
+            if timestamp_ns < end:
+                # The cleaner clamps typed timestamps that fall inside removed ranges.
+                return start - removed_before
+            removed_before += removed
+        return timestamp_ns - removed_before
+
+
+def load_compact_time_map(path):
+    path = Path(path)
+    report_path = path / "trim_report.json"
+    if not report_path.is_file():
+        return None
+    report = json.loads(report_path.read_text())
+    if report.get("compact") is not True or report.get("timestamps") != "compact_shared_time_mapping":
+        raise ValueError(f"Unsupported trim report time policy: {report_path}")
+    raw_mapping = report.get("mapping")
+    if not isinstance(raw_mapping, list) or not raw_mapping:
+        raise ValueError(f"Missing compact timestamp mapping: {report_path}")
+    intervals = []
+    previous_end = None
+    for index, entry in enumerate(raw_mapping):
+        try:
+            start = int(entry["source_start_ns"])
+            end = int(entry["source_end_ns"])
+            removed = int(entry["removed_ns"])
+        except (KeyError, TypeError, ValueError) as exc:
+            raise ValueError(f"Invalid compact mapping entry {index}: {report_path}") from exc
+        if start >= end or removed != end - start or (previous_end is not None and start < previous_end):
+            raise ValueError(f"Invalid/overlapping compact mapping entry {index}: {report_path}")
+        intervals.append((start, end, removed))
+        previous_end = end
+    payload_types = report.get("unmodified_payload_types", {})
+    if not isinstance(payload_types, dict) or any(not isinstance(name, str) for name in payload_types):
+        raise ValueError(f"Invalid unmodified_payload_types: {report_path}")
+    return CompactTimeMap(tuple(intervals), frozenset(payload_types), str(report_path.resolve()))
+
+
+def _map_state_timestamps(value, time_map, key=None):
+    if isinstance(value, dict):
+        return {name: _map_state_timestamps(item, time_map, name) for name, item in value.items()}
+    if isinstance(value, list):
+        return [_map_state_timestamps(item, time_map, key) for item in value]
+    is_absolute_time = key == "timestamp_ns" or (isinstance(key, str) and key.endswith(("_time_ns", "_header_ns")))
+    return time_map.apply(value) if is_absolute_time and type(value) is int else value
+
+
+def load_collection_state(path):
+    """Load raw state, or adapt a cleaner-preserved source state without rewriting the bag."""
+    path = Path(path)
+    time_map = load_compact_time_map(path)
+    state_path = path / "collection_state.json"
+    if state_path.is_file():
+        return json.loads(state_path.read_text()), time_map, state_path.name
+    source_state_path = path / "source_collection_state.json"
+    if not source_state_path.is_file():
+        raise FileNotFoundError(f"Missing collection_state.json: {path}")
+    if time_map is None:
+        raise ValueError(f"source_collection_state.json requires trim_report.json: {path}")
+    state = json.loads(source_state_path.read_text())
+    return _map_state_timestamps(state, time_map), time_map, source_state_path.name
+
+
 def discover(root):
     root = Path(root).resolve()
     paths = [root / "metadata.yaml"] if (root / "metadata.yaml").exists() else root.rglob("metadata.yaml")
     results = []
     for metadata in sorted(paths, key=natural_key):
         path = metadata.parent
-        state_path = path / "collection_state.json"
         try:
-            state = json.loads(state_path.read_text())
+            state, time_map, state_file = load_collection_state(path)
             eligible = state.get("finalized") is True and state.get("state") == "finalized" and not state.get("failures")
             reason = None if eligible else f"collection state: {state.get('state')}; failures={state.get('failures', [])}"
             report = state.get("validation_report", {})
@@ -37,12 +120,18 @@ def discover(root):
                 eligible, reason = False, "missing/empty validated source-time window"
             milestones = state.get("milestones", [])
             source_recording_id = state.get("source_recording_id") or str(path)
+            source_time_adapter = ({"kind": "compact_trim_report", "state_file": state_file,
+                                    "trim_report": time_map.report_path,
+                                    "mapped_payload_types": sorted(time_map.unmodified_payload_types)}
+                                   if state_file == "source_collection_state.json" else None)
         except (OSError, ValueError) as exc:
             eligible, reason, start, end = False, str(exc), None, None
             milestones, source_recording_id = [], str(path)
+            source_time_adapter = None
         results.append({"path": str(path), "eligible": eligible, "reason": reason,
                         "source_start_ns": start, "source_end_ns": end,
                         "source_recording_id": source_recording_id, "milestones": milestones,
+                        "source_time_adapter": source_time_adapter,
                         "bytes": sum(p.stat().st_size for p in path.glob("*.db3"))})
     if not results:
         raise ValueError(f"No ROS2 bag metadata found under {root}")
@@ -93,6 +182,51 @@ class Series:
         return np.searchsorted(self.times, timeline, side="right") - 1
 
 
+def bridge_compact_image_boundaries(streams, time_map, start, end, fps, max_age_ns,
+                                    camera_keys=("cam0", "cam1", "cam2")):
+    """Reset a held image at a compact splice only when a grid frame would be stale.
+
+    Trim ranges are selected in bag-receive time. Standard Image header stamps are
+    compacted separately, so their receive/header latency can leave a one- or two-grid
+    hole immediately before the splice. Re-stamping the last causal image at the first
+    stale grid point preserves sample-and-hold semantics without admitting a future
+    image or relaxing freshness away from cleaner-created boundaries.
+    """
+    if time_map is None:
+        return {}
+    count = (end - start) * fps // 1_000_000_000 + 1
+    timeline = start + np.arange(count, dtype=np.int64) * 1_000_000_000 // fps
+    inserted = {}
+    for key in camera_keys:
+        series = streams[key]
+        count_for_key = 0
+        for boundary in time_map.compact_boundaries:
+            position = int(np.searchsorted(series.times, boundary, side="left"))
+            if position <= 0 or position >= len(series.times):
+                continue
+            previous_time = int(series.times[position - 1])
+            next_time = int(series.times[position])
+            if not previous_time < boundary <= next_time:
+                continue
+            first = int(np.searchsorted(timeline, previous_time + max_age_ns, side="right"))
+            if first >= len(timeline) or int(timeline[first]) >= next_time:
+                continue
+            hold_time = int(timeline[first])
+            if hold_time > boundary or boundary - hold_time > max_age_ns:
+                continue
+            hold_position = int(np.searchsorted(series.times, hold_time, side="left"))
+            if hold_position < len(series.times) and series.times[hold_position] == hold_time:
+                continue
+            series.times = np.insert(series.times, hold_position, hold_time)
+            series.values.insert(hold_position, series.values[hold_position - 1])
+            if series.receive_times is not None:
+                series.receive_times = np.insert(series.receive_times, hold_position, hold_time)
+            count_for_key += 1
+        if count_for_key:
+            inserted[key] = count_for_key
+    return inserted
+
+
 class Bag:
     def __init__(self, path, schema_dir):
         self.path = Path(path)
@@ -103,6 +237,7 @@ class Bag:
         self.connections = []
         self.topics = {}
         self.stack = ExitStack()
+        self.compact_time_map = load_compact_time_map(self.path)
 
     def __enter__(self):
         try:
@@ -141,6 +276,8 @@ class Bag:
                 f"SELECT id,timestamp,{field} FROM messages WHERE topic_id=? ORDER BY timestamp,id", (ident,)
             ):
                 time = header_ns(payload)
+                if self.compact_time_map and kind in self.compact_time_map.unmodified_payload_types:
+                    time = self.compact_time_map.apply(time)
                 value = (db, row_id) if image else self.store.deserialize_cdr(payload, kind)
                 yield (time, value, received) if include_receive else (time, value)
 

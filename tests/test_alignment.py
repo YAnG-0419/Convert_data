@@ -5,7 +5,9 @@ import numpy as np
 import pytest
 
 from convest.align import align, GROUPS, valid_segments
-from convest.sources.gello_rosbag2 import Series, header_ns, joint_values
+from convest.sources.gello_rosbag2 import (CompactTimeMap, Series,
+                                           bridge_compact_image_boundaries,
+                                           header_ns, joint_values)
 from convest.recipes.pi05 import output_segments
 
 
@@ -100,3 +102,50 @@ def test_invalid_milestones_are_rejected(milestones, error):
     config = {"segments": "all", "segment_tasks": {}, "task": "Full task", "min_segment_frames": 2}
     with pytest.raises(ValueError, match=error):
         output_segments(item, aligned, config)
+
+
+@pytest.mark.parametrize("milestones,expected", [
+    ([], [("full", (0, 21))]),
+    ([{"id": "milestone_1", "timestamp_ns": 1_500_000_000, "clock": "ros"}],
+     [("milestone_1", (0, 6))]),
+    ([{"id": "milestone_1", "timestamp_ns": 1_500_000_000, "clock": "ros"},
+      {"id": "milestone_2", "timestamp_ns": 2_000_000_000, "clock": "ros"}],
+     [("milestone_1", (0, 6))]),
+])
+def test_first_milestone_or_full_mode(milestones, expected):
+    aligned = align(streams(), 1_000_000_000, 3_000_000_000, 10, 150_000_000)
+    item = {"path": "/bags/episode1", "source_end_ns": 3_000_000_000,
+            "source_recording_id": "recording-1", "milestones": milestones}
+    config = {"segments": "first-milestone-or-full", "segment_tasks": {},
+              "task": "Full task", "min_segment_frames": 2}
+    result = output_segments(item, aligned, config)
+    assert [(segment["segment_id"], segment["bounds"]) for segment in result] == expected
+
+
+def test_first_milestone_mode_trims_leading_invalid_but_rejects_internal_gap():
+    aligned = align(streams(), 1_000_000_000, 3_000_000_000, 10, 150_000_000)
+    item = {"path": "/bags/episode1", "source_end_ns": 3_000_000_000,
+            "milestones": [{"id": "milestone_1", "timestamp_ns": 1_500_000_000, "clock": "ros"}]}
+    config = {"segments": "first-milestone-or-full", "segment_tasks": {},
+              "task": "Task", "min_segment_frames": 2}
+    aligned.segments = [(1, len(aligned.timeline))]
+    assert output_segments(item, aligned, config)[0]["bounds"] == (1, 6)
+    aligned.segments = [(1, 3), (4, len(aligned.timeline))]
+    with pytest.raises(ValueError, match="internal invalid interval"):
+        output_segments(item, aligned, config)
+
+
+def test_compact_boundary_hold_is_inserted_only_for_a_stale_grid_hole():
+    series = Series(np.array([200_000_000, 600_000_000], dtype=np.int64), ["before", "after"])
+    mapping = CompactTimeMap(((400_000_000, 500_000_000, 100_000_000),), frozenset(), "trim.json")
+    inserted = bridge_compact_image_boundaries(
+        {"cam0": series}, mapping, 0, 1_000_000_000, 10, 150_000_000, camera_keys=("cam0",),
+    )
+    assert inserted == {"cam0": 1}
+    assert series.times.tolist() == [200_000_000, 400_000_000, 600_000_000]
+    assert series.values == ["before", "before", "after"]
+
+    fresh = Series(np.array([350_000_000, 450_000_000], dtype=np.int64), ["before", "after"])
+    assert bridge_compact_image_boundaries(
+        {"cam0": fresh}, mapping, 0, 1_000_000_000, 10, 150_000_000, camera_keys=("cam0",),
+    ) == {}

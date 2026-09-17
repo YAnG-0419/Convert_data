@@ -1,0 +1,1067 @@
+{
+  "bag_contract_version": 1,
+  "boundary_warnings": [],
+  "calibration_ids": {
+    "cameras": "data_collection/config/cameras.yaml",
+    "hands": "adapters/manus/config",
+    "left_arm": "config/modes/gello.yaml",
+    "right_arm": "config/modes/gello.yaml"
+  },
+  "control_config_id": "gello-incremental-safety-gateway-v1",
+  "device_identities": {
+    "cam0_semantic": "head",
+    "cam0_serial": "CP4N5630008Z",
+    "cam1_semantic": "left_wrist",
+    "cam1_serial": "CV275610008G",
+    "cam2_semantic": "right_wrist",
+    "cam2_serial": "CV2T661000EV",
+    "workcell": "config/workcell/current.yaml"
+  },
+  "failures": [],
+  "finalized": true,
+  "milestones": [
+    {
+      "clock": "ros",
+      "id": "milestone_1",
+      "timestamp_ns": 1789010745415094654
+    }
+  ],
+  "source_bag": "/collection_data/bags/gello/episode394",
+  "source_recording_id": "34063aeccf0f49b6ac4236289aba0bea",
+  "source_topic_contract": {
+    "arm_command_status": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 5.0,
+      "required": true,
+      "topic": "/teleop/arm_command_status",
+      "type": "teleop_interfaces/msg/ArmCommandStatus"
+    },
+    "cam0": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 18.0,
+      "required": true,
+      "topic": "/cam0/color/image_raw",
+      "type": "sensor_msgs/msg/Image"
+    },
+    "cam0_depth": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 18.0,
+      "required": true,
+      "topic": "/cam0/depth/image_raw",
+      "type": "sensor_msgs/msg/Image"
+    },
+    "cam1": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 10.0,
+      "required": true,
+      "topic": "/cam1/color/image_raw",
+      "type": "sensor_msgs/msg/Image"
+    },
+    "cam2": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 10.0,
+      "required": true,
+      "topic": "/cam2/color/image_raw",
+      "type": "sensor_msgs/msg/Image"
+    },
+    "hand_telemetry_status": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 10.0,
+      "required": true,
+      "topic": "/teleop/wuji/telemetry_status",
+      "type": "teleop_interfaces/msg/HandTelemetryStatus"
+    },
+    "left_arm_state": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 10.0,
+      "required": true,
+      "topic": "/left/franka/joint_states",
+      "type": "sensor_msgs/msg/JointState"
+    },
+    "left_hand_action": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 10.0,
+      "required": true,
+      "topic": "/teleop/wuji/left/command",
+      "type": "sensor_msgs/msg/JointState"
+    },
+    "left_hand_state": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 10.0,
+      "required": true,
+      "topic": "/teleop/wuji/left/joint_states",
+      "type": "sensor_msgs/msg/JointState"
+    },
+    "right_arm_state": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 10.0,
+      "required": true,
+      "topic": "/right/franka/joint_states",
+      "type": "sensor_msgs/msg/JointState"
+    },
+    "right_hand_action": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 10.0,
+      "required": true,
+      "topic": "/teleop/wuji/right/command",
+      "type": "sensor_msgs/msg/JointState"
+    },
+    "right_hand_state": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 10.0,
+      "required": true,
+      "topic": "/teleop/wuji/right/joint_states",
+      "type": "sensor_msgs/msg/JointState"
+    },
+    "validated_arm_action": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 5.0,
+      "required": true,
+      "topic": "/teleop/validated_arm_commands",
+      "type": "sensor_msgs/msg/JointState"
+    }
+  },
+  "state": "finalized",
+  "teleoperator": "gello",
+  "timestamp_policy": "preserve_source_header_and_bag_receive_time",
+  "topics": {
+    "arm_command_status": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 5.0,
+      "required": true,
+      "topic": "/teleop/arm_command_status",
+      "type": "teleop_interfaces/msg/ArmCommandStatus"
+    },
+    "cam0": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 18.0,
+      "required": true,
+      "topic": "/cam0/color/image_raw",
+      "type": "sensor_msgs/msg/Image"
+    },
+    "cam0_depth": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 18.0,
+      "required": true,
+      "topic": "/cam0/depth/image_raw",
+      "type": "sensor_msgs/msg/Image"
+    },
+    "cam1": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 10.0,
+      "required": true,
+      "topic": "/cam1/color/image_raw",
+      "type": "sensor_msgs/msg/Image"
+    },
+    "cam2": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 10.0,
+      "required": true,
+      "topic": "/cam2/color/image_raw",
+      "type": "sensor_msgs/msg/Image"
+    },
+    "hand_telemetry_status": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 10.0,
+      "required": true,
+      "topic": "/teleop/wuji/telemetry_status",
+      "type": "teleop_interfaces/msg/HandTelemetryStatus"
+    },
+    "left_arm_state": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 10.0,
+      "required": true,
+      "topic": "/left/franka/joint_states",
+      "type": "sensor_msgs/msg/JointState"
+    },
+    "left_hand_action": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 10.0,
+      "required": true,
+      "topic": "/teleop/wuji/left/command",
+      "type": "sensor_msgs/msg/JointState"
+    },
+    "left_hand_state": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 10.0,
+      "required": true,
+      "topic": "/teleop/wuji/left/joint_states",
+      "type": "sensor_msgs/msg/JointState"
+    },
+    "right_arm_state": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 10.0,
+      "required": true,
+      "topic": "/right/franka/joint_states",
+      "type": "sensor_msgs/msg/JointState"
+    },
+    "right_hand_action": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 10.0,
+      "required": true,
+      "topic": "/teleop/wuji/right/command",
+      "type": "sensor_msgs/msg/JointState"
+    },
+    "right_hand_state": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 10.0,
+      "required": true,
+      "topic": "/teleop/wuji/right/joint_states",
+      "type": "sensor_msgs/msg/JointState"
+    },
+    "validated_arm_action": {
+      "max_gap_ms": 150.0,
+      "min_frequency_hz": 5.0,
+      "required": true,
+      "topic": "/teleop/validated_arm_commands",
+      "type": "sensor_msgs/msg/JointState"
+    }
+  },
+  "transport_warnings": [
+    "/cam0/color/image_raw: bag_max_internal_gap_ms 202.0 ms exceeds 150.0 ms",
+    "/cam0/depth/image_raw: bag_max_internal_gap_ms 251.8 ms exceeds 150.0 ms"
+  ],
+  "trim_end_sec": 0.2,
+  "trim_start_sec": 1.0,
+  "updated_at_ns": 1789010772078183089,
+  "validation_policy": "source_header_continuity_trimmed_boundary_v3",
+  "validation_report": {
+    "bag_end_time_ns": 1789010762273590541,
+    "bag_start_time_ns": 1789010689137331206,
+    "boundary_warnings": [],
+    "effective_bag_end_time_ns": 1789010762073590541,
+    "effective_bag_start_time_ns": 1789010690137331206,
+    "engagement": {
+      "arm:left": {
+        "disengaged_sample_count": 0,
+        "engaged_sample_count": 6895,
+        "sample_count": 6895
+      },
+      "arm:right": {
+        "disengaged_sample_count": 0,
+        "engaged_sample_count": 6895,
+        "sample_count": 6895
+      },
+      "hand:left": {
+        "disengaged_sample_count": 0,
+        "engaged_sample_count": 5729,
+        "sample_count": 5729
+      },
+      "hand:right": {
+        "disengaged_sample_count": 0,
+        "engaged_sample_count": 5390,
+        "sample_count": 5390
+      }
+    },
+    "source_common_end_time_ns": 1789010762153985024,
+    "source_common_start_time_ns": 1789010689247331383,
+    "source_effective_end_time_ns": 1789010761953985024,
+    "source_effective_start_time_ns": 1789010690247331383,
+    "source_end_time_ns": 1789010762273545046,
+    "source_start_time_ns": 1789010689124890112,
+    "streams": {
+      "/cam0/color/image_raw": {
+        "bag_timing": {
+          "first_time_ns": 1789010689261148361,
+          "frequency_hz": 19.99837206183499,
+          "last_time_ns": 1789010762267090819,
+          "leading_gap_ms": 123.817155,
+          "max_internal_gap_ms": 202.008571,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73005942458,
+          "timestamp_count": 1461,
+          "trailing_gap_ms": 6.499722
+        },
+        "first_bag_time_ns": 1789010689261148361,
+        "first_source_header_ns": 1789010689124890112,
+        "frequency_hz": 19.99837206183499,
+        "last_bag_time_ns": 1789010762267090819,
+        "last_source_header_ns": 1789010762153985024,
+        "leading_gap_ms": 123.817155,
+        "max_internal_gap_ms": 202.008571,
+        "message_count": 1461,
+        "recording_duration_ns": 73136259335,
+        "source_full_timing": {
+          "first_time_ns": 1789010689124890112,
+          "frequency_hz": 19.992031966975613,
+          "last_time_ns": 1789010762153985024,
+          "max_internal_gap_ms": 51.001088,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73029094912,
+          "timestamp_count": 1461
+        },
+        "source_header_count": 1461,
+        "source_header_nonmonotonic": 0,
+        "source_timing": {
+          "first_time_ns": 1789010690274878976,
+          "frequency_hz": 19.99187258676654,
+          "last_time_ns": 1789010761903986944,
+          "leading_gap_ms": 27.547593,
+          "max_internal_gap_ms": 51.001088,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 71629107968,
+          "timestamp_count": 1433,
+          "trailing_gap_ms": 49.99808
+        },
+        "trailing_gap_ms": 6.499722
+      },
+      "/cam0/depth/image_raw": {
+        "bag_timing": {
+          "first_time_ns": 1789010689260489660,
+          "frequency_hz": 19.998709616684483,
+          "last_time_ns": 1789010762265199863,
+          "leading_gap_ms": 123.158454,
+          "max_internal_gap_ms": 251.778519,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73004710203,
+          "timestamp_count": 1461,
+          "trailing_gap_ms": 8.390678
+        },
+        "first_bag_time_ns": 1789010689260489660,
+        "first_source_header_ns": 1789010689125890048,
+        "frequency_hz": 19.998709616684483,
+        "last_bag_time_ns": 1789010762265199863,
+        "last_source_header_ns": 1789010762154985984,
+        "leading_gap_ms": 123.158454,
+        "max_internal_gap_ms": 251.778519,
+        "message_count": 1461,
+        "recording_duration_ns": 73136259335,
+        "source_full_timing": {
+          "first_time_ns": 1789010689125890048,
+          "frequency_hz": 19.992031686651167,
+          "last_time_ns": 1789010762154985984,
+          "max_internal_gap_ms": 51.001088,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73029095936,
+          "timestamp_count": 1461
+        },
+        "source_header_count": 1461,
+        "source_header_nonmonotonic": 0,
+        "source_timing": {
+          "first_time_ns": 1789010690275878912,
+          "frequency_hz": 19.99187258676654,
+          "last_time_ns": 1789010761904986880,
+          "leading_gap_ms": 28.547529,
+          "max_internal_gap_ms": 51.001088,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 71629107968,
+          "timestamp_count": 1433,
+          "trailing_gap_ms": 48.998144
+        },
+        "trailing_gap_ms": 8.390678
+      },
+      "/cam1/color/image_raw": {
+        "bag_timing": {
+          "first_time_ns": 1789010689253137143,
+          "frequency_hz": 30.02175516901083,
+          "last_time_ns": 1789010762266856283,
+          "leading_gap_ms": 115.805937,
+          "max_internal_gap_ms": 132.293314,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73013719140,
+          "timestamp_count": 2193,
+          "trailing_gap_ms": 6.734258
+        },
+        "first_bag_time_ns": 1789010689253137143,
+        "first_source_header_ns": 1789010689225040896,
+        "frequency_hz": 30.02175516901083,
+        "last_bag_time_ns": 1789010762266856283,
+        "last_source_header_ns": 1789010762238266112,
+        "leading_gap_ms": 115.805937,
+        "max_internal_gap_ms": 132.293314,
+        "message_count": 2193,
+        "recording_duration_ns": 73136259335,
+        "source_full_timing": {
+          "first_time_ns": 1789010689225040896,
+          "frequency_hz": 30.02195826188005,
+          "last_time_ns": 1789010762238266112,
+          "max_internal_gap_ms": 33.381888,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73013225216,
+          "timestamp_count": 2193
+        },
+        "source_header_count": 2193,
+        "source_header_nonmonotonic": 0,
+        "source_timing": {
+          "first_time_ns": 1789010690257666048,
+          "frequency_hz": 30.021977569706905,
+          "last_time_ns": 1789010761938487040,
+          "leading_gap_ms": 10.334665,
+          "max_internal_gap_ms": 33.381888,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 71680820992,
+          "timestamp_count": 2153,
+          "trailing_gap_ms": 15.497984
+        },
+        "trailing_gap_ms": 6.734258
+      },
+      "/cam2/color/image_raw": {
+        "bag_timing": {
+          "first_time_ns": 1789010689169127736,
+          "frequency_hz": 30.02241455435285,
+          "last_time_ns": 1789010762247860162,
+          "leading_gap_ms": 31.79653,
+          "max_internal_gap_ms": 133.046318,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73078732426,
+          "timestamp_count": 2195,
+          "trailing_gap_ms": 25.730379
+        },
+        "first_bag_time_ns": 1789010689169127736,
+        "first_source_header_ns": 1789010689140579072,
+        "frequency_hz": 30.02241455435285,
+        "last_bag_time_ns": 1789010762247860162,
+        "last_source_header_ns": 1789010762220047104,
+        "leading_gap_ms": 31.79653,
+        "max_internal_gap_ms": 133.046318,
+        "message_count": 2195,
+        "recording_duration_ns": 73136259335,
+        "source_full_timing": {
+          "first_time_ns": 1789010689140579072,
+          "frequency_hz": 30.022112353627048,
+          "last_time_ns": 1789010762220047104,
+          "max_internal_gap_ms": 33.362944,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73079468032,
+          "timestamp_count": 2195
+        },
+        "source_header_count": 2195,
+        "source_header_nonmonotonic": 0,
+        "source_timing": {
+          "first_time_ns": 1789010690273078016,
+          "frequency_hz": 30.022112453224388,
+          "last_time_ns": 1789010761953576960,
+          "leading_gap_ms": 25.746633,
+          "max_internal_gap_ms": 33.362944,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 71680498944,
+          "timestamp_count": 2153,
+          "trailing_gap_ms": 0.408064
+        },
+        "trailing_gap_ms": 25.730379
+      },
+      "/left/franka/joint_states": {
+        "bag_timing": {
+          "first_time_ns": 1789010689247829448,
+          "frequency_hz": 200.63674627216514,
+          "last_time_ns": 1789010762270345374,
+          "leading_gap_ms": 110.498242,
+          "max_internal_gap_ms": 10.435355,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73022515926,
+          "timestamp_count": 14652,
+          "trailing_gap_ms": 3.245167
+        },
+        "first_bag_time_ns": 1789010689247829448,
+        "first_source_header_ns": 1789010689247331383,
+        "frequency_hz": 200.63674627216514,
+        "last_bag_time_ns": 1789010762270345374,
+        "last_source_header_ns": 1789010762270192679,
+        "leading_gap_ms": 110.498242,
+        "max_internal_gap_ms": 10.435355,
+        "message_count": 14652,
+        "recording_duration_ns": 73136259335,
+        "source_full_timing": {
+          "first_time_ns": 1789010689247331383,
+          "frequency_hz": 200.63579733765573,
+          "last_time_ns": 1789010762270192679,
+          "max_internal_gap_ms": 10.060152,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73022861296,
+          "timestamp_count": 14652
+        },
+        "source_header_count": 14652,
+        "source_header_nonmonotonic": 0,
+        "source_timing": {
+          "first_time_ns": 1789010690248298318,
+          "frequency_hz": 200.6641663160378,
+          "last_time_ns": 1789010761950188417,
+          "leading_gap_ms": 0.966935,
+          "max_internal_gap_ms": 10.060152,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 71701890099,
+          "timestamp_count": 14389,
+          "trailing_gap_ms": 3.796607
+        },
+        "trailing_gap_ms": 3.245167
+      },
+      "/right/franka/joint_states": {
+        "bag_timing": {
+          "first_time_ns": 1789010689137965852,
+          "frequency_hz": 200.6751860015415,
+          "last_time_ns": 1789010762271073599,
+          "leading_gap_ms": 0.634646,
+          "max_internal_gap_ms": 10.513271,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73133107747,
+          "timestamp_count": 14677,
+          "trailing_gap_ms": 2.516942
+        },
+        "first_bag_time_ns": 1789010689137965852,
+        "first_source_header_ns": 1789010689137736971,
+        "frequency_hz": 200.6751860015415,
+        "last_bag_time_ns": 1789010762271073599,
+        "last_source_header_ns": 1789010762270901040,
+        "leading_gap_ms": 0.634646,
+        "max_internal_gap_ms": 10.513271,
+        "message_count": 14677,
+        "recording_duration_ns": 73136259335,
+        "source_full_timing": {
+          "first_time_ns": 1789010689137736971,
+          "frequency_hz": 200.67503145568026,
+          "last_time_ns": 1789010762270901040,
+          "max_internal_gap_ms": 10.100818,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73133164069,
+          "timestamp_count": 14677
+        },
+        "source_header_count": 14677,
+        "source_header_nonmonotonic": 0,
+        "source_timing": {
+          "first_time_ns": 1789010690248730111,
+          "frequency_hz": 200.69407159072202,
+          "last_time_ns": 1789010761949901381,
+          "leading_gap_ms": 1.398728,
+          "max_internal_gap_ms": 10.06487,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 71701171270,
+          "timestamp_count": 14391,
+          "trailing_gap_ms": 4.083643
+        },
+        "trailing_gap_ms": 2.516942
+      },
+      "/teleop/arm_command_status": {
+        "bag_timing": {
+          "first_time_ns": 1789010689141240083,
+          "frequency_hz": 94.27026564437122,
+          "last_time_ns": 1789010762271404222,
+          "leading_gap_ms": 3.908877,
+          "max_internal_gap_ms": 23.022618,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73130164139,
+          "timestamp_count": 6895,
+          "trailing_gap_ms": 2.186319
+        },
+        "first_bag_time_ns": 1789010689141240083,
+        "first_source_header_ns": 1789010689141093425,
+        "frequency_hz": 94.27026564437122,
+        "last_bag_time_ns": 1789010762271404222,
+        "last_source_header_ns": 1789010762271284976,
+        "leading_gap_ms": 3.908877,
+        "max_internal_gap_ms": 23.022618,
+        "message_count": 6895,
+        "recording_duration_ns": 73136259335,
+        "source_full_timing": {
+          "first_time_ns": 1789010689141093425,
+          "frequency_hz": 94.27023030826082,
+          "last_time_ns": 1789010762271284976,
+          "max_internal_gap_ms": 22.138338,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73130191551,
+          "timestamp_count": 6895
+        },
+        "source_header_count": 6895,
+        "source_header_nonmonotonic": 0,
+        "source_timing": {
+          "first_time_ns": 1789010690251163724,
+          "frequency_hz": 94.2399745385586,
+          "last_time_ns": 1789010761951098206,
+          "leading_gap_ms": 3.832341,
+          "max_internal_gap_ms": 22.138338,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 71699934482,
+          "timestamp_count": 6758,
+          "trailing_gap_ms": 2.886818
+        },
+        "trailing_gap_ms": 2.186319
+      },
+      "/teleop/validated_arm_commands": {
+        "bag_timing": {
+          "first_time_ns": 1789010689141261024,
+          "frequency_hz": 94.27020272724107,
+          "last_time_ns": 1789010762271473971,
+          "leading_gap_ms": 3.929818,
+          "max_internal_gap_ms": 30.371692,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73130212947,
+          "timestamp_count": 6895,
+          "trailing_gap_ms": 2.11657
+        },
+        "first_bag_time_ns": 1789010689141261024,
+        "first_source_header_ns": 1789010689141185728,
+        "frequency_hz": 94.27020272724107,
+        "last_bag_time_ns": 1789010762271473971,
+        "last_source_header_ns": 1789010762271398249,
+        "leading_gap_ms": 3.929818,
+        "max_internal_gap_ms": 30.371692,
+        "message_count": 6895,
+        "recording_duration_ns": 73136259335,
+        "source_full_timing": {
+          "first_time_ns": 1789010689141185728,
+          "frequency_hz": 94.2702032763863,
+          "last_time_ns": 1789010762271398249,
+          "max_internal_gap_ms": 22.554955,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73130212521,
+          "timestamp_count": 6895
+        },
+        "source_header_count": 6895,
+        "source_header_nonmonotonic": 0,
+        "source_timing": {
+          "first_time_ns": 1789010690251303890,
+          "frequency_hz": 94.24003846937673,
+          "last_time_ns": 1789010761951189732,
+          "leading_gap_ms": 3.972507,
+          "max_internal_gap_ms": 22.554955,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 71699885842,
+          "timestamp_count": 6758,
+          "trailing_gap_ms": 2.795292
+        },
+        "trailing_gap_ms": 2.11657
+      },
+      "/teleop/validated_arm_commands#left": {
+        "bag_timing": {
+          "first_time_ns": 1789010689141261024,
+          "frequency_hz": 94.27020272724107,
+          "last_time_ns": 1789010762271473971,
+          "leading_gap_ms": 3.929818,
+          "max_internal_gap_ms": 30.371692,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73130212947,
+          "timestamp_count": 6895,
+          "trailing_gap_ms": 2.11657
+        },
+        "first_bag_time_ns": 1789010689141261024,
+        "first_source_header_ns": 1789010689141185728,
+        "frequency_hz": 94.27020272724107,
+        "last_bag_time_ns": 1789010762271473971,
+        "last_source_header_ns": 1789010762271398249,
+        "leading_gap_ms": 3.929818,
+        "max_internal_gap_ms": 30.371692,
+        "message_count": 6895,
+        "recording_duration_ns": 73136259335,
+        "source_full_timing": {
+          "first_time_ns": 1789010689141185728,
+          "frequency_hz": 94.2702032763863,
+          "last_time_ns": 1789010762271398249,
+          "max_internal_gap_ms": 22.554955,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73130212521,
+          "timestamp_count": 6895
+        },
+        "source_header_count": 6895,
+        "source_header_nonmonotonic": 0,
+        "source_timing": {
+          "first_time_ns": 1789010690251303890,
+          "frequency_hz": 94.24003846937673,
+          "last_time_ns": 1789010761951189732,
+          "leading_gap_ms": 3.972507,
+          "max_internal_gap_ms": 22.554955,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 71699885842,
+          "timestamp_count": 6758,
+          "trailing_gap_ms": 2.795292
+        },
+        "trailing_gap_ms": 2.11657
+      },
+      "/teleop/validated_arm_commands#right": {
+        "bag_timing": {
+          "first_time_ns": 1789010689141261024,
+          "frequency_hz": 94.27020272724107,
+          "last_time_ns": 1789010762271473971,
+          "leading_gap_ms": 3.929818,
+          "max_internal_gap_ms": 30.371692,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73130212947,
+          "timestamp_count": 6895,
+          "trailing_gap_ms": 2.11657
+        },
+        "first_bag_time_ns": 1789010689141261024,
+        "first_source_header_ns": 1789010689141185728,
+        "frequency_hz": 94.27020272724107,
+        "last_bag_time_ns": 1789010762271473971,
+        "last_source_header_ns": 1789010762271398249,
+        "leading_gap_ms": 3.929818,
+        "max_internal_gap_ms": 30.371692,
+        "message_count": 6895,
+        "recording_duration_ns": 73136259335,
+        "source_full_timing": {
+          "first_time_ns": 1789010689141185728,
+          "frequency_hz": 94.2702032763863,
+          "last_time_ns": 1789010762271398249,
+          "max_internal_gap_ms": 22.554955,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73130212521,
+          "timestamp_count": 6895
+        },
+        "source_header_count": 6895,
+        "source_header_nonmonotonic": 0,
+        "source_timing": {
+          "first_time_ns": 1789010690251303890,
+          "frequency_hz": 94.24003846937673,
+          "last_time_ns": 1789010761951189732,
+          "leading_gap_ms": 3.972507,
+          "max_internal_gap_ms": 22.554955,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 71699885842,
+          "timestamp_count": 6758,
+          "trailing_gap_ms": 2.795292
+        },
+        "trailing_gap_ms": 2.11657
+      },
+      "/teleop/wuji/left/command": {
+        "bag_timing": {
+          "first_time_ns": 1789010689145430694,
+          "frequency_hz": 78.31684598462726,
+          "last_time_ns": 1789010762271460324,
+          "leading_gap_ms": 8.099488,
+          "max_internal_gap_ms": 57.510621,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73126029630,
+          "timestamp_count": 5728,
+          "trailing_gap_ms": 2.130217
+        },
+        "first_bag_time_ns": 1789010689145430694,
+        "first_source_header_ns": 1789010689142802429,
+        "frequency_hz": 78.31684598462726,
+        "last_bag_time_ns": 1789010762271460324,
+        "last_source_header_ns": 1789010762270802226,
+        "leading_gap_ms": 8.099488,
+        "max_internal_gap_ms": 57.510621,
+        "message_count": 5728,
+        "recording_duration_ns": 73136259335,
+        "source_full_timing": {
+          "first_time_ns": 1789010689142802429,
+          "frequency_hz": 78.31473602310868,
+          "last_time_ns": 1789010762270802226,
+          "max_internal_gap_ms": 56.510124,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73127999797,
+          "timestamp_count": 5728
+        },
+        "source_header_count": 5728,
+        "source_header_nonmonotonic": 0,
+        "source_timing": {
+          "first_time_ns": 1789010690247484959,
+          "frequency_hz": 78.08762755990942,
+          "last_time_ns": 1789010761948984607,
+          "leading_gap_ms": 0.153576,
+          "max_internal_gap_ms": 56.510124,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 71701499648,
+          "timestamp_count": 5600,
+          "trailing_gap_ms": 5.000417
+        },
+        "trailing_gap_ms": 2.130217
+      },
+      "/teleop/wuji/left/joint_states": {
+        "bag_timing": {
+          "first_time_ns": 1789010689145457284,
+          "frequency_hz": 78.31674078624279,
+          "last_time_ns": 1789010762271585140,
+          "leading_gap_ms": 8.126078,
+          "max_internal_gap_ms": 57.531415,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73126127856,
+          "timestamp_count": 5728,
+          "trailing_gap_ms": 2.005401
+        },
+        "first_bag_time_ns": 1789010689145457284,
+        "first_source_header_ns": 1789010689142802429,
+        "frequency_hz": 78.31674078624279,
+        "last_bag_time_ns": 1789010762271585140,
+        "last_source_header_ns": 1789010762270802226,
+        "leading_gap_ms": 8.126078,
+        "max_internal_gap_ms": 57.531415,
+        "message_count": 5728,
+        "recording_duration_ns": 73136259335,
+        "source_full_timing": {
+          "first_time_ns": 1789010689142802429,
+          "frequency_hz": 78.31473602310868,
+          "last_time_ns": 1789010762270802226,
+          "max_internal_gap_ms": 56.510124,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73127999797,
+          "timestamp_count": 5728
+        },
+        "source_header_count": 5728,
+        "source_header_nonmonotonic": 0,
+        "source_timing": {
+          "first_time_ns": 1789010690247484959,
+          "frequency_hz": 78.08762755990942,
+          "last_time_ns": 1789010761948984607,
+          "leading_gap_ms": 0.153576,
+          "max_internal_gap_ms": 56.510124,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 71701499648,
+          "timestamp_count": 5600,
+          "trailing_gap_ms": 5.000417
+        },
+        "trailing_gap_ms": 2.005401
+      },
+      "/teleop/wuji/right/command": {
+        "bag_timing": {
+          "first_time_ns": 1789010689145825365,
+          "frequency_hz": 73.6793590367607,
+          "last_time_ns": 1789010762273497354,
+          "leading_gap_ms": 8.494159,
+          "max_internal_gap_ms": 58.038139,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73127671989,
+          "timestamp_count": 5389,
+          "trailing_gap_ms": 0.093187
+        },
+        "first_bag_time_ns": 1789010689145825365,
+        "first_source_header_ns": 1789010689142802429,
+        "frequency_hz": 73.6793590367607,
+        "last_bag_time_ns": 1789010762273497354,
+        "last_source_header_ns": 1789010762270802226,
+        "leading_gap_ms": 8.494159,
+        "max_internal_gap_ms": 58.038139,
+        "message_count": 5389,
+        "recording_duration_ns": 73136259335,
+        "source_full_timing": {
+          "first_time_ns": 1789010689142802429,
+          "frequency_hz": 73.67902875720439,
+          "last_time_ns": 1789010762270802226,
+          "max_internal_gap_ms": 56.609873,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73127999797,
+          "timestamp_count": 5389
+        },
+        "source_header_count": 5389,
+        "source_header_nonmonotonic": 0,
+        "source_timing": {
+          "first_time_ns": 1789010690247484959,
+          "frequency_hz": 73.4294265231154,
+          "last_time_ns": 1789010761948984607,
+          "leading_gap_ms": 0.153576,
+          "max_internal_gap_ms": 56.609873,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 71701499648,
+          "timestamp_count": 5266,
+          "trailing_gap_ms": 5.000417
+        },
+        "trailing_gap_ms": 0.093187
+      },
+      "/teleop/wuji/right/joint_states": {
+        "bag_timing": {
+          "first_time_ns": 1789010689137337651,
+          "frequency_hz": 73.68444212017818,
+          "last_time_ns": 1789010762273536351,
+          "leading_gap_ms": 0.006445,
+          "max_internal_gap_ms": 58.315657,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73136198700,
+          "timestamp_count": 5390,
+          "trailing_gap_ms": 0.05419
+        },
+        "first_bag_time_ns": 1789010689137337651,
+        "first_source_header_ns": 1789010689132777860,
+        "frequency_hz": 73.68444212017818,
+        "last_bag_time_ns": 1789010762273536351,
+        "last_source_header_ns": 1789010762270802226,
+        "leading_gap_ms": 0.006445,
+        "max_internal_gap_ms": 58.315657,
+        "message_count": 5390,
+        "recording_duration_ns": 73136259335,
+        "source_full_timing": {
+          "first_time_ns": 1789010689132777860,
+          "frequency_hz": 73.68260281453827,
+          "last_time_ns": 1789010762270802226,
+          "max_internal_gap_ms": 56.609873,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73138024366,
+          "timestamp_count": 5390
+        },
+        "source_header_count": 5390,
+        "source_header_nonmonotonic": 0,
+        "source_timing": {
+          "first_time_ns": 1789010690247484959,
+          "frequency_hz": 73.4294265231154,
+          "last_time_ns": 1789010761948984607,
+          "leading_gap_ms": 0.153576,
+          "max_internal_gap_ms": 56.609873,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 71701499648,
+          "timestamp_count": 5266,
+          "trailing_gap_ms": 5.000417
+        },
+        "trailing_gap_ms": 0.05419
+      },
+      "/teleop/wuji/telemetry_status": {
+        "bag_timing": {
+          "first_time_ns": 1789010689137331206,
+          "frequency_hz": 152.0176189087563,
+          "last_time_ns": 1789010762273590541,
+          "leading_gap_ms": 0.0,
+          "max_internal_gap_ms": 57.582692,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73136259335,
+          "timestamp_count": 11119,
+          "trailing_gap_ms": 0.0
+        },
+        "first_bag_time_ns": 1789010689137331206,
+        "first_source_header_ns": 1789010689135486159,
+        "frequency_hz": 152.0176189087563,
+        "last_bag_time_ns": 1789010762273590541,
+        "last_source_header_ns": 1789010762273545046,
+        "leading_gap_ms": 0.0,
+        "max_internal_gap_ms": 57.582692,
+        "message_count": 11119,
+        "recording_duration_ns": 73136259335,
+        "source_full_timing": {
+          "first_time_ns": 1789010689135486159,
+          "frequency_hz": 152.0138785359011,
+          "last_time_ns": 1789010762273545046,
+          "max_internal_gap_ms": 57.533175,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73138058887,
+          "timestamp_count": 11119
+        },
+        "source_header_count": 11119,
+        "source_header_nonmonotonic": 0,
+        "source_timing": {
+          "first_time_ns": 1789010690249565487,
+          "frequency_hz": 151.52885463954516,
+          "last_time_ns": 1789010761952080667,
+          "leading_gap_ms": 2.234104,
+          "max_internal_gap_ms": 57.533175,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 71702515180,
+          "timestamp_count": 10866,
+          "trailing_gap_ms": 1.904357
+        },
+        "trailing_gap_ms": 0.0
+      },
+      "/teleop/wuji/telemetry_status#left": {
+        "bag_timing": {
+          "first_time_ns": 1789010689137331206,
+          "frequency_hz": 78.32161590289675,
+          "last_time_ns": 1789010762271675205,
+          "leading_gap_ms": 0.0,
+          "max_internal_gap_ms": 57.582692,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73134343999,
+          "timestamp_count": 5729,
+          "trailing_gap_ms": 1.915336
+        },
+        "first_bag_time_ns": 1789010689137331206,
+        "first_source_header_ns": 1789010689135486159,
+        "frequency_hz": 78.32161590289675,
+        "last_bag_time_ns": 1789010762271675205,
+        "last_source_header_ns": 1789010762271591642,
+        "leading_gap_ms": 0.0,
+        "max_internal_gap_ms": 57.582692,
+        "message_count": 5729,
+        "recording_duration_ns": 73136259335,
+        "source_full_timing": {
+          "first_time_ns": 1789010689135486159,
+          "frequency_hz": 78.31972952581451,
+          "last_time_ns": 1789010762271591642,
+          "max_internal_gap_ms": 57.533175,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73136105483,
+          "timestamp_count": 5729
+        },
+        "source_header_count": 5729,
+        "source_header_nonmonotonic": 0,
+        "source_timing": {
+          "first_time_ns": 1789010690249565487,
+          "frequency_hz": 78.08688533072795,
+          "last_time_ns": 1789010761951746670,
+          "leading_gap_ms": 2.234104,
+          "max_internal_gap_ms": 57.533175,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 71702181183,
+          "timestamp_count": 5600,
+          "trailing_gap_ms": 2.238354
+        },
+        "trailing_gap_ms": 1.915336
+      },
+      "/teleop/wuji/telemetry_status#right": {
+        "bag_timing": {
+          "first_time_ns": 1789010689137342044,
+          "frequency_hz": 73.68439194992416,
+          "last_time_ns": 1789010762273590541,
+          "leading_gap_ms": 0.010838,
+          "max_internal_gap_ms": 58.281003,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73136248497,
+          "timestamp_count": 5390,
+          "trailing_gap_ms": 0.0
+        },
+        "first_bag_time_ns": 1789010689137342044,
+        "first_source_header_ns": 1789010689135797387,
+        "frequency_hz": 73.68439194992416,
+        "last_bag_time_ns": 1789010762273590541,
+        "last_source_header_ns": 1789010762273545046,
+        "leading_gap_ms": 0.010838,
+        "max_internal_gap_ms": 58.281003,
+        "message_count": 5390,
+        "recording_duration_ns": 73136259335,
+        "source_full_timing": {
+          "first_time_ns": 1789010689135797387,
+          "frequency_hz": 73.68288158292572,
+          "last_time_ns": 1789010762273545046,
+          "max_internal_gap_ms": 58.119781,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 73137747659,
+          "timestamp_count": 5390
+        },
+        "source_header_count": 5390,
+        "source_header_nonmonotonic": 0,
+        "source_timing": {
+          "first_time_ns": 1789010690249823433,
+          "frequency_hz": 73.42865068832765,
+          "last_time_ns": 1789010761952080667,
+          "leading_gap_ms": 2.49205,
+          "max_internal_gap_ms": 58.119781,
+          "nonmonotonic_count": 0,
+          "observed_duration_ns": 71702257234,
+          "timestamp_count": 5266,
+          "trailing_gap_ms": 1.904357
+        },
+        "trailing_gap_ms": 0.0
+      }
+    },
+    "telemetry": {
+      "delta_receiver_duplicate_packets": 0,
+      "delta_receiver_invalid_packets": 0,
+      "delta_receiver_lost_packets": 0,
+      "delta_receiver_out_of_order_packets": 0,
+      "delta_receiver_stale_packets": 0,
+      "delta_sender_dropped_packets": 0,
+      "first_receiver_duplicate_packets": 0,
+      "first_receiver_invalid_packets": 0,
+      "first_receiver_lost_packets": 0,
+      "first_receiver_out_of_order_packets": 0,
+      "first_receiver_stale_packets": 0,
+      "first_sender_dropped_packets": 0,
+      "last_receiver_duplicate_packets": 0,
+      "last_receiver_invalid_packets": 0,
+      "last_receiver_lost_packets": 0,
+      "last_receiver_out_of_order_packets": 0,
+      "last_receiver_stale_packets": 0,
+      "last_sender_dropped_packets": 0,
+      "max_receiver_duplicate_packets": 0,
+      "max_receiver_invalid_packets": 0,
+      "max_receiver_lost_packets": 0,
+      "max_receiver_out_of_order_packets": 0,
+      "max_receiver_stale_packets": 0,
+      "max_sender_dropped_packets": 0,
+      "velocity_sources": [
+        "finite_difference"
+      ]
+    },
+    "transport_warnings": [
+      "/cam0/color/image_raw: bag_max_internal_gap_ms 202.0 ms exceeds 150.0 ms",
+      "/cam0/depth/image_raw: bag_max_internal_gap_ms 251.8 ms exceeds 150.0 ms"
+    ],
+    "trim_end_sec": 0.2,
+    "trim_start_sec": 1.0
+  },
+  "workcell_config_hash": "03de98926b37e6b4765d65d71c365919e515a71653e418bc9a6524e9c980ddf4",
+  "workcell_id": "gello-dual-fr3-wuji"
+}

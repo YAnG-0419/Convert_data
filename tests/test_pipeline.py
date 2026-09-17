@@ -11,7 +11,7 @@ import pyarrow.parquet as pq
 
 from convest.config import WORKSPACE, load_config
 from convest import pipeline
-from convest.sources.gello_rosbag2 import Bag, snapshot
+from convest.sources.gello_rosbag2 import Bag, discover, snapshot
 from convest.verify import verify
 
 
@@ -156,3 +156,36 @@ def test_milestone_bag_exports_overlapping_prefix_and_full_episodes(tmp_path, mo
     assert prefix["source_timestamp_ns"][-1].as_py() == 11_000_000_000
     for key in ("source_timestamp_ns", "observation.state", "action"):
         assert prefix[key].to_pylist() == full[key].slice(0, len(prefix)).to_pylist()
+
+
+def test_compact_cleaned_bag_maps_source_state_and_only_unmodified_payload_headers(tmp_path):
+    bag_path = tmp_path / "bags/episode622"
+    make_bag(bag_path)
+    state_path = bag_path / "collection_state.json"
+    state = json.loads(state_path.read_text())
+    state["milestones"] = [{"id": "milestone_1", "timestamp_ns": 11_000_000_000, "clock": "ros"}]
+    state_path.unlink()
+    (bag_path / "source_collection_state.json").write_text(json.dumps(state))
+    custom_types = {
+        "teleop_interfaces/msg/ArmCommandStatus": 21,
+        "teleop_interfaces/msg/HandTelemetryStatus": 42,
+    }
+    (bag_path / "trim_report.json").write_text(json.dumps({
+        "compact": True,
+        "timestamps": "compact_shared_time_mapping",
+        "unmodified_payload_types": custom_types,
+        "mapping": [{"source_start_ns": "9000000000", "source_end_ns": "9500000000",
+                     "removed_ns": "500000000"}],
+    }))
+
+    item = discover(tmp_path / "bags")[0]
+    assert item["eligible"] is True
+    assert (item["source_start_ns"], item["source_end_ns"]) == (9_700_000_000, 11_300_000_000)
+    assert item["milestones"][0]["timestamp_ns"] == 10_500_000_000
+    assert item["source_time_adapter"]["mapped_payload_types"] == sorted(custom_types)
+
+    with Bag(bag_path, WORKSPACE / "schemas") as bag:
+        custom_time, _ = next(bag.records("/teleop/arm_command_status"))
+        standard_time, _ = next(bag.records("/left/franka/joint_states"))
+    assert custom_time == 9_500_000_000
+    assert standard_time == 10_000_000_000

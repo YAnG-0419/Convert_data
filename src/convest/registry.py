@@ -18,7 +18,7 @@ class Target:
 TARGETS = {
     "lerobot_v21": Target("convest.recipes.pi05", "convest.formats.lerobot_v21",
                           "convest.verify", ("data/chunk-*/episode_*.parquet",
-                          "videos/chunk-*/*/episode_*.mp4"), "0.2.0"),
+                          "videos/chunk-*/*/episode_*.mp4"), "0.3.0"),
     "act_hdf5": Target("convest.recipes.act", "convest.formats.act_hdf5",
                        "convest.formats.act_hdf5", ("episode_*.hdf5",), "act-1"),
     "dp3_uncropped_zarr": Target("convest.recipes.dp3", "convest.formats.dp3_zarr",

@@ -11,8 +11,8 @@ def validate_config(config):
         raise ValueError("Invalid freshness limit")
     if not 0 <= config["video_crf"] <= 51 or config["video_threads"] < 1:
         raise ValueError("Invalid encoder settings")
-    if config.get("segments", "all") not in {"all", "full", "milestones"}:
-        raise ValueError("segments must be all, full, or milestones")
+    if config.get("segments", "all") not in {"all", "full", "milestones", "first-milestone-or-full"}:
+        raise ValueError("segments must be all, full, milestones, or first-milestone-or-full")
     tasks = config.get("segment_tasks", {})
     if not isinstance(tasks, dict) or any(not isinstance(key, str) or not key.strip()
                                            or not isinstance(value, str) or not value.strip()
@@ -27,8 +27,17 @@ def validate_contract(contract, config):
 
 def prepare(source, bag, item, config, contract):
     streams = source.read_streams(bag, contract)
+    max_age_ns = int(config["max_staleness_ms"] * 1e6)
+    compact_holds = source.bridge_compact_image_boundaries(
+        streams, bag.compact_time_map, item["source_start_ns"], item["source_end_ns"],
+        config["fps"], max_age_ns,
+    )
     aligned = align(streams, item["source_start_ns"], item["source_end_ns"], config["fps"],
-                    int(config["max_staleness_ms"] * 1e6), config["min_segment_frames"])
+                    max_age_ns, config["min_segment_frames"])
+    if compact_holds:
+        aligned.report["compact_boundary_image_holds"] = compact_holds
+    if item.get("source_time_adapter"):
+        aligned.report["source_time_adapter"] = item["source_time_adapter"]
     return streams, aligned
 
 
@@ -65,8 +74,9 @@ def output_segments(item, aligned, config):
 
     if mode == "milestones" and not markers:
         raise ValueError("milestones export requested but this bag has no milestones")
-    selected_markers = [] if mode == "full" else markers
-    if selected_markers and aligned.segments != [(0, len(aligned.timeline))]:
+    selected_markers = (markers[:1] if mode == "first-milestone-or-full"
+                        else [] if mode == "full" else markers)
+    if selected_markers and mode != "first-milestone-or-full" and aligned.segments != [(0, len(aligned.timeline))]:
         raise ValueError("A bag with milestones must have one continuous valid aligned interval")
 
     result = []
@@ -76,11 +86,17 @@ def output_segments(item, aligned, config):
         end = int(np.searchsorted(aligned.timeline, marker_ns, side="right"))
         if end < config["min_segment_frames"]:
             raise ValueError(f"{marker_id}: milestone prefix is shorter than min_segment_frames")
-        result.append({"bounds": (0, end), "segment_id": marker_id,
+        start = 0
+        if mode == "first-milestone-or-full":
+            prefix_segments = [(a, min(b, end)) for a, b in aligned.segments if a < end and b > 0]
+            if len(prefix_segments) != 1 or prefix_segments[0][1] != end:
+                raise ValueError(f"{marker_id}: milestone prefix contains an internal invalid interval")
+            start = prefix_segments[0][0]
+        result.append({"bounds": (start, end), "segment_id": marker_id,
                        "milestone_timestamp_ns": marker_ns, "source_recording_id": recording_id,
                        "task": description(marker_id)})
 
-    if mode in {"all", "full"}:
+    if mode in {"all", "full"} or (mode == "first-milestone-or-full" and not markers):
         many = len(aligned.segments) > 1
         for index, bounds in enumerate(aligned.segments, 1):
             segment_id = f"full_part_{index}" if many else "full"

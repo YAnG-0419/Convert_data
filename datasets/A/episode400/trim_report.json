@@ -1,0 +1,149 @@
+{
+  "source": "/home/descfly/company-remote/tomato/episode400/episode400_0.db3",
+  "output": "/home/descfly/GXC/tomato_clean/A/episode400_0_trimmed_20260917121832",
+  "time_basis": "bag_record_timestamp",
+  "interval_semantics": "[start,end)",
+  "source_start_ns": "1789011338837532215",
+  "timestamps": "compact_shared_time_mapping",
+  "time_fields_updated": 35484,
+  "time_fields_clamped_inside_removed_ranges": 22,
+  "unmodified_payload_types": {
+    "teleop_interfaces/msg/ArmCommandStatus": 5628,
+    "teleop_interfaces/msg/HandTelemetryStatus": 8508
+  },
+  "payload_policy": "Only typed builtin_interfaces/Time bytes change; other payload bytes remain identical. Unknown types keep payloads unchanged.",
+  "ranges": [
+    [
+      24.0,
+      28.0
+    ],
+    [
+      56.3,
+      63.2
+    ]
+  ],
+  "deleted_seconds": 10.9,
+  "deleted": 13718,
+  "kept": 73223,
+  "topics": [
+    {
+      "name": "/cam0/color/camera_info",
+      "before": 1429,
+      "deleted": 218,
+      "kept": 1211
+    },
+    {
+      "name": "/cam0/color/image_raw",
+      "before": 1429,
+      "deleted": 218,
+      "kept": 1211
+    },
+    {
+      "name": "/cam0/depth/camera_info",
+      "before": 1429,
+      "deleted": 218,
+      "kept": 1211
+    },
+    {
+      "name": "/cam0/depth/image_raw",
+      "before": 1427,
+      "deleted": 218,
+      "kept": 1209
+    },
+    {
+      "name": "/cam1/color/camera_info",
+      "before": 2145,
+      "deleted": 326,
+      "kept": 1819
+    },
+    {
+      "name": "/cam1/color/image_raw",
+      "before": 2145,
+      "deleted": 326,
+      "kept": 1819
+    },
+    {
+      "name": "/cam2/color/camera_info",
+      "before": 2146,
+      "deleted": 328,
+      "kept": 1818
+    },
+    {
+      "name": "/cam2/color/image_raw",
+      "before": 2144,
+      "deleted": 330,
+      "kept": 1814
+    },
+    {
+      "name": "/left/franka/joint_states",
+      "before": 14342,
+      "deleted": 2188,
+      "kept": 12154
+    },
+    {
+      "name": "/right/franka/joint_states",
+      "before": 14363,
+      "deleted": 2186,
+      "kept": 12177
+    },
+    {
+      "name": "/teleop/arm_command_status",
+      "before": 6653,
+      "deleted": 1025,
+      "kept": 5628
+    },
+    {
+      "name": "/teleop/validated_arm_commands",
+      "before": 6653,
+      "deleted": 1025,
+      "kept": 5628
+    },
+    {
+      "name": "/teleop/wuji/left/command",
+      "before": 5316,
+      "deleted": 880,
+      "kept": 4436
+    },
+    {
+      "name": "/teleop/wuji/left/joint_states",
+      "before": 5316,
+      "deleted": 880,
+      "kept": 4436
+    },
+    {
+      "name": "/teleop/wuji/right/command",
+      "before": 4896,
+      "deleted": 824,
+      "kept": 4072
+    },
+    {
+      "name": "/teleop/wuji/right/joint_states",
+      "before": 4896,
+      "deleted": 824,
+      "kept": 4072
+    },
+    {
+      "name": "/teleop/wuji/telemetry_status",
+      "before": 10212,
+      "deleted": 1704,
+      "kept": 8508
+    }
+  ],
+  "compact": true,
+  "unknown_types": [
+    "teleop_interfaces/msg/ArmCommandStatus",
+    "teleop_interfaces/msg/HandTelemetryStatus"
+  ],
+  "mapping": [
+    {
+      "source_start_ns": "1789011362837532215",
+      "source_end_ns": "1789011366837532215",
+      "removed_ns": "4000000000"
+    },
+    {
+      "source_start_ns": "1789011395137532215",
+      "source_end_ns": "1789011402037532215",
+      "removed_ns": "6900000000"
+    }
+  ]
+}
