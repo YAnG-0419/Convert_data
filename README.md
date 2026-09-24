@@ -100,6 +100,23 @@ scripts/convest convert \
 scripts/convest verify outputs/fr3_wuji/tomato_B_cleaned
 ```
 
+如果已经转换的数据集和源 bag 一起移动了位置，可显式执行位置迁移后续跑：
+
+```bash
+scripts/convest convert \
+  --source-root /new/path/to/clean/A \
+  --output outputs/fr3_wuji/moved/tomato_A_cleaned \
+  --repo-id fr3_wuji/tomato_A_cleaned \
+  --segments first-milestone-or-full \
+  --resume --relocate --workers 8
+```
+
+`--relocate` 只允许 `source_root` 和 `output_root` 改变。已有源目录仍可访问时，复制后
+时间戳不同的文件会逐个进行 SHA-256 内容核验；随输出目录整体移动且原位置已不存在的
+内部导入数据必须保持原文件名、大小及修改时间。验证通过后，迁移映射和新快照会追加到
+`conversion/manifest.json`，后续正常使用 `--resume` 即可，已提交的 bag 不会重复转换。
+不要通过手工编辑 manifest 绕过迁移检查。
+
 `segment_tasks` 可为不同阶段设置任务。当前番茄配置将 `milestone_1` 标为
 `Pick up a tomato truss with the right hand.`，完整段继续使用顶层 `task`。未配置的其他
 milestone 使用其 ID 作为占位任务名。输出的 `meta/episodes.jsonl` 和转换记录包含

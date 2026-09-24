@@ -14,6 +14,9 @@ def main():
             command.add_argument("--report", type=Path, default=WORKSPACE / "reports/inventory.json")
         else:
             command.add_argument("--resume", action="store_true")
+            command.add_argument("--relocate", action="store_true",
+                                 help=("With --resume, explicitly migrate an existing dataset after only "
+                                       "source_root/output_root changed; verifies committed sources first"))
             selection = command.add_mutually_exclusive_group()
             selection.add_argument("--limit", type=int)
             selection.add_argument("--episode")
@@ -81,7 +84,8 @@ def main():
             parser.error("--skip-ineligible requires --episode-list")
         try:
             result = convert(config, args.resume, args.limit, args.episode, args.workers,
-                             episode_list=args.episode_list, skip_ineligible=args.skip_ineligible)
+                             episode_list=args.episode_list, skip_ineligible=args.skip_ineligible,
+                             relocate=args.relocate)
         except (ValueError, FileExistsError, FileNotFoundError, BlockingIOError) as exc:
             parser.exit(2, f"Error: {exc}\n")
         raise SystemExit(result)

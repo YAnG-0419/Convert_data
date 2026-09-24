@@ -32,6 +32,114 @@ def load_records(root):
     return [json.loads(p.read_text()) for p in sorted((root / "conversion/records").glob("*.json"))]
 
 
+def conversion_fingerprint(config, contract, schemas, converter_version):
+    return digest({"config": config, "contract": contract, "schemas": schemas,
+                   "converter_version": converter_version})
+
+
+def _config_without_locations(config):
+    return {key: value for key, value in config.items() if key not in {"source_root", "output_root"}}
+
+
+def _resolved_record(record, index, relocations):
+    source, source_snapshot = record["source"], record["source_snapshot"]
+    key = f"{index:06d}"
+    for relocation in relocations:
+        override = relocation.get("records", {}).get(key)
+        if override:
+            source, source_snapshot = override["source"], override["source_snapshot"]
+    return source, source_snapshot
+
+
+def _map_relocated_path(path, old_config, new_config):
+    path = Path(path).resolve()
+    for key in ("source_root", "output_root"):
+        old_root = Path(old_config[key]).resolve()
+        if path.is_relative_to(old_root):
+            return Path(new_config[key]).resolve() / path.relative_to(old_root)
+    return path
+
+
+def _file_sha256(path):
+    checksum = hashlib.sha256()
+    with Path(path).open("rb") as stream:
+        for chunk in iter(lambda: stream.read(8 * 1024 * 1024), b""):
+            checksum.update(chunk)
+    return checksum.hexdigest()
+
+
+def _verify_same_source_files(old_path, new_path):
+    old_files = {p.name: p for p in Path(old_path).iterdir() if p.is_file()}
+    new_files = {p.name: p for p in Path(new_path).iterdir() if p.is_file()}
+    if old_files.keys() != new_files.keys():
+        raise ValueError(f"Relocated source file list differs: {old_path} -> {new_path}")
+    for name in sorted(old_files):
+        old_file, new_file = old_files[name], new_files[name]
+        if old_file.stat().st_size != new_file.stat().st_size:
+            raise ValueError(f"Relocated source file size differs: {old_file} -> {new_file}")
+        if _file_sha256(old_file) != _file_sha256(new_file):
+            raise ValueError(f"Relocated source file content differs: {old_file} -> {new_file}")
+
+
+def prepare_relocation(manifest, config, records, source_adapter):
+    """Verify a location-only move and return an auditable manifest event."""
+    old_config = manifest["config"]
+    if _config_without_locations(old_config) != _config_without_locations(config):
+        raise ValueError("Relocation permits only source_root and output_root changes")
+    changes = {
+        key: {"from": old_config[key], "to": config[key]}
+        for key in ("source_root", "output_root") if old_config[key] != config[key]
+    }
+    if not changes:
+        raise ValueError("Relocation requested but source_root and output_root are unchanged")
+    relocations = manifest.get("relocations", [])
+    if not isinstance(relocations, list):
+        raise ValueError("Invalid relocation history in conversion manifest")
+
+    overrides = {}
+    resolved_paths = set()
+    verification_counts = {"sha256": 0, "exact_snapshot": 0}
+    for index, record in enumerate(records):
+        current_source, current_snapshot = _resolved_record(record, index, relocations)
+        current_path = Path(current_source).resolve()
+        relocated_path = _map_relocated_path(current_path, old_config, config)
+        if not relocated_path.is_dir():
+            raise ValueError(f"Relocated source is missing: {relocated_path}")
+        relocated_snapshot = source_adapter.snapshot(relocated_path)
+        if current_path == relocated_path:
+            if relocated_snapshot != current_snapshot:
+                raise ValueError(f"Previously converted source changed: {current_path}")
+            verification_counts["exact_snapshot"] += 1
+        elif current_path.is_dir():
+            if source_adapter.snapshot(current_path) != current_snapshot:
+                raise ValueError(f"Previously converted source changed before relocation: {current_path}")
+            print(f"Relocation check [{index + 1}/{len(records)}] {current_path.name}: SHA-256", flush=True)
+            _verify_same_source_files(current_path, relocated_path)
+            verification_counts["sha256"] += 1
+        elif relocated_snapshot != current_snapshot:
+            # A directory moved with the output tree is verifiable from the original
+            # snapshot only when file names, sizes and mtimes were preserved exactly.
+            raise ValueError(f"Cannot verify moved source without its original: {current_path}")
+        else:
+            print(f"Relocation check [{index + 1}/{len(records)}] {current_path.name}: exact snapshot", flush=True)
+            verification_counts["exact_snapshot"] += 1
+        resolved = str(relocated_path)
+        if resolved in resolved_paths:
+            raise ValueError(f"Relocation maps multiple records to one source: {resolved}")
+        resolved_paths.add(resolved)
+        overrides[f"{index:06d}"] = {
+            "source": resolved,
+            "source_snapshot": relocated_snapshot,
+        }
+    return {
+        "timestamp_ns": time.time_ns(),
+        "changes": changes,
+        "verification": "exact snapshot or SHA-256 comparison against the previous source",
+        "verification_counts": verification_counts,
+        "records": overrides,
+    }
+
+
 def recover(root, records, target_format="lerobot_v21"):
     # Only operate inside an already identified convest dataset, under our own file patterns.
     referenced = {p for record in records for ep in record["episodes"] for p in ep["paths"]}
@@ -101,7 +209,8 @@ def prepared_in_order(items, config, contract, staging, workers):
             submit()
 
 
-def convert(config, resume=False, limit=None, episode=None, workers=1, *, episode_list=None, skip_ineligible=False):
+def convert(config, resume=False, limit=None, episode=None, workers=1, *, episode_list=None,
+            skip_ineligible=False, relocate=False):
     validate_repo_id(config["repo_id"])
     source_adapter = get_source(config["source_format"])
     target_spec = get_target(config["target_format"])
@@ -112,6 +221,8 @@ def convert(config, resume=False, limit=None, episode=None, workers=1, *, episod
         raise ValueError("--episode-list cannot be combined with --episode or --limit")
     if skip_ineligible and not episode_list:
         raise ValueError("--skip-ineligible requires --episode-list")
+    if relocate and not resume:
+        raise ValueError("--relocate requires --resume")
     root = Path(config["output_root"]).resolve()
     source = Path(config["source_root"]).resolve()
     if not root.is_relative_to(WORKSPACE) or root == WORKSPACE:
@@ -136,7 +247,7 @@ def convert(config, resume=False, limit=None, episode=None, workers=1, *, episod
     contract = yaml.safe_load(Path(config["contract"]).read_text())
     recipe.validate_contract(contract, config)
     schemas = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(Path(config["schema_dir"]).glob("*.msg"))}
-    fingerprint = digest({"config": config, "contract": contract, "schemas": schemas, "converter_version": target_spec.version})
+    fingerprint = conversion_fingerprint(config, contract, schemas, target_spec.version)
     (root / "conversion").mkdir(parents=True, exist_ok=True)
     with (root / "conversion/lock").open("a") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -146,15 +257,36 @@ def convert(config, resume=False, limit=None, episode=None, workers=1, *, episod
                 raise FileExistsError("Only an owned dataset can be reopened with --resume")
             if manifest.get("selection_mode") == "episode_list" and not episode_list:
                 raise ValueError("This dataset was created from a TXT list; --resume requires --episode-list to prevent accidental full conversion")
-            if manifest["fingerprint"] != fingerprint:
+            relocation_needed = manifest["fingerprint"] != fingerprint
+            if relocation_needed and not relocate:
                 raise ValueError("Conversion config/schema differs from existing dataset; use a new output")
         else:
+            if relocate:
+                raise ValueError("--relocate requires an existing converted dataset")
             atomic_json(marker, {"owner": "convest-data", "fingerprint": fingerprint, "config": config,
                                  "selection_mode": "episode_list" if episode_list else "discovery"})
+            manifest = json.loads(marker.read_text())
+            relocation_needed = False
         records = load_records(root)
-        for record in records:
-            if source_adapter.snapshot(record["source"]) != record["source_snapshot"]:
-                raise ValueError(f"Previously converted source changed: {record['source']}")
+        if relocation_needed:
+            old_fingerprint = conversion_fingerprint(manifest["config"], contract, schemas, target_spec.version)
+            if manifest["fingerprint"] != old_fingerprint:
+                raise ValueError("Existing config/schema/converter changed; location-only relocation refused")
+            relocation_event = prepare_relocation(manifest, config, records, source_adapter)
+            manifest = dict(manifest)
+            manifest["config"] = config
+            manifest["fingerprint"] = fingerprint
+            manifest["relocations"] = [*manifest.get("relocations", []), relocation_event]
+            atomic_json(marker, manifest)
+            print(f"Relocated {len(records)} committed source record(s): "
+                  f"{', '.join(relocation_event['changes'])}", flush=True)
+        relocations = manifest.get("relocations", [])
+        completed = set()
+        for index, record in enumerate(records):
+            resolved_source, resolved_snapshot = _resolved_record(record, index, relocations)
+            if source_adapter.snapshot(resolved_source) != resolved_snapshot:
+                raise ValueError(f"Previously converted source changed: {resolved_source}")
+            completed.add(resolved_source)
             for ep in record["episodes"]:
                 for path in ep["paths"]:
                     if not (root / path).is_file():
@@ -171,7 +303,6 @@ def convert(config, resume=False, limit=None, episode=None, workers=1, *, episod
                 if index in task_indices.values() and task not in task_indices:
                     raise ValueError("Committed task index refers to multiple task strings")
                 task_indices[task] = index
-        completed = {r["source"] for r in records}
         previous_count = len(records)
         errors = []
         atomic_json(root / "conversion/discovery.json", candidates)

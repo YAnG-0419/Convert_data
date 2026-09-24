@@ -1,5 +1,6 @@
 """End-to-end standard CDR/SQLite fixture, parallel commit, resume and immutability."""
 from dataclasses import fields
+from pathlib import Path
 import json
 import shutil
 import sqlite3
@@ -125,6 +126,99 @@ def test_real_cdr_parallel_pipeline_resume_and_read_only(tmp_path, monkeypatch):
         pipeline.convert(changed, resume=True)
     with pytest.raises(ValueError, match="workspace"):
         pipeline.convert(dict(config, output_root=str(tmp_path.parent / "unrelated")))
+
+
+def test_resume_can_relocate_source_and_output_without_reconverting(tmp_path, monkeypatch):
+    old_source, old_output = tmp_path / "old_bags", tmp_path / "old_output"
+    make_bag(old_source / "episode9")
+    config = load_config(WORKSPACE / "configs/gello_pi05.yaml")
+    config.update(source_root=str(old_source), output_root=str(old_output))
+    monkeypatch.setattr(pipeline, "WORKSPACE", tmp_path)
+    assert pipeline.convert(config) == 0
+
+    new_source, new_output = tmp_path / "new_bags", tmp_path / "moved_output"
+    shutil.copytree(old_source, new_source)
+    for path in (new_source / "episode9").iterdir():
+        if path.is_file():
+            path.touch()
+    make_bag(new_source / "episode10")
+    shutil.move(old_output, new_output)
+    relocated = dict(config, source_root=str(new_source), output_root=str(new_output))
+
+    with pytest.raises(ValueError, match="differs"):
+        pipeline.convert(relocated, resume=True)
+    assert pipeline.convert(relocated, resume=True, relocate=True) == 0
+    records = pipeline.load_records(new_output)
+    assert [Path(record["source"]).name for record in records] == ["episode9", "episode10"]
+    manifest = json.loads((new_output / "conversion/manifest.json").read_text())
+    assert manifest["config"]["source_root"] == str(new_source)
+    assert manifest["config"]["output_root"] == str(new_output)
+    assert manifest["relocations"][0]["changes"] == {
+        "source_root": {"from": str(old_source), "to": str(new_source)},
+        "output_root": {"from": str(old_output), "to": str(new_output)},
+    }
+    assert manifest["relocations"][0]["verification_counts"] == {"sha256": 1, "exact_snapshot": 0}
+    assert manifest["relocations"][0]["records"]["000000"]["source"] == str(new_source / "episode9")
+    assert pipeline.convert(relocated, resume=True) == 0
+    assert len(pipeline.load_records(new_output)) == 2
+
+
+def test_relocation_rejects_same_size_content_change(tmp_path, monkeypatch):
+    old_source, output = tmp_path / "old_bags", tmp_path / "output"
+    make_bag(old_source / "episode9")
+    config = load_config(WORKSPACE / "configs/gello_pi05.yaml")
+    config.update(source_root=str(old_source), output_root=str(output))
+    monkeypatch.setattr(pipeline, "WORKSPACE", tmp_path)
+    assert pipeline.convert(config) == 0
+
+    new_source = tmp_path / "new_bags"
+    shutil.copytree(old_source, new_source)
+    metadata = new_source / "episode9/metadata.yaml"
+    payload = bytearray(metadata.read_bytes())
+    payload[-2] ^= 1
+    metadata.write_bytes(payload)
+    relocated = dict(config, source_root=str(new_source))
+    with pytest.raises(ValueError, match="content differs"):
+        pipeline.convert(relocated, resume=True, relocate=True)
+    manifest = json.loads((output / "conversion/manifest.json").read_text())
+    assert manifest["config"]["source_root"] == str(old_source)
+
+
+def test_relocation_rejects_non_location_config_change(tmp_path, monkeypatch):
+    source, output = tmp_path / "bags", tmp_path / "output"
+    make_bag(source / "episode9")
+    config = load_config(WORKSPACE / "configs/gello_pi05.yaml")
+    config.update(source_root=str(source), output_root=str(output))
+    monkeypatch.setattr(pipeline, "WORKSPACE", tmp_path)
+    assert pipeline.convert(config) == 0
+    new_source = tmp_path / "new_bags"
+    shutil.copytree(source, new_source)
+    with pytest.raises(ValueError, match="only source_root and output_root"):
+        pipeline.convert(dict(config, source_root=str(new_source), fps=20),
+                         resume=True, relocate=True)
+
+
+def test_relocation_maps_output_owned_import_when_original_path_is_gone(tmp_path):
+    old_source, old_output = tmp_path / "bags", tmp_path / "old_output"
+    imported = old_output / "conversion/imports/batch/episode_000001"
+    imported.mkdir(parents=True)
+    (imported / "metadata.yaml").write_text("imported: true\n")
+    record = {"source": str(imported), "source_snapshot": snapshot(imported)}
+    old_config = {"source_root": str(old_source), "output_root": str(old_output), "format": "test"}
+    manifest = {"config": old_config, "relocations": []}
+
+    new_output = tmp_path / "moved_output"
+    shutil.move(old_output, new_output)
+    new_config = dict(old_config, output_root=str(new_output))
+
+    class SourceAdapter:
+        snapshot = staticmethod(snapshot)
+
+    event = pipeline.prepare_relocation(manifest, new_config, [record], SourceAdapter)
+    assert event["verification_counts"] == {"sha256": 0, "exact_snapshot": 1}
+    assert event["records"]["000000"]["source"] == str(
+        new_output / "conversion/imports/batch/episode_000001"
+    )
 
 
 def test_milestone_bag_exports_overlapping_prefix_and_full_episodes(tmp_path, monkeypatch):
