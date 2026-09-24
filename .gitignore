@@ -23,7 +23,9 @@ htmlcov/
 .hypothesis/
 .ipynb_checkpoints/
 
-# Converted datasets, checkpoints, and Pi05 assets (do not upload data)
+# Local source/cleaned datasets, converted datasets, checkpoints, and Pi05 assets
+# (do not upload data)
+/datasets/
 outputs/
 
 # Source bags and bulky artifacts if they appear outside outputs/
