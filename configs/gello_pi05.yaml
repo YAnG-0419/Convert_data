@@ -6,12 +6,24 @@ target_format: lerobot_v21
 contract: schemas/gello_contract.yaml
 schema_dir: schemas
 task: Pick up a tomato truss with the right hand, then pick a cherry tomato with the left hand and place it in the left basket.
+subtask_tasks:
+  右手抓取番茄: Pick up a tomato truss with the right hand.
+  右手放置番茄: Place the tomato truss with the right hand.
+  左手靠近、调整姿态并抓取番茄: Move the left hand closer, adjust its pose, and pick up a cherry tomato.
+  左手放置番茄: Place the cherry tomato with the left hand.
 # A marked bag produces one prefix per milestone followed by the full episode.
 segments: all
 segment_tasks:
   milestone_1: Pick up a tomato truss with the right hand.
 fps: 30
 max_staleness_ms: 150
+# Only internal camera gaps of at most two 30 Hz grid points may reuse past images.
+# State/action/status stay strict; source image timestamps are never rewritten.
+camera_short_gap_max_frames: 2
+camera_short_gap_max_age_ms: 250
+# Reject the entire source recording (all full/phase outputs) for an internal
+# camera gap of >=3 output grid frames. Original source files are never deleted.
+camera_gap_reject_min_frames: 3
 # Follow each recording's validated source_effective_start/end_time_ns.
 window: validated
 min_segment_frames: 2

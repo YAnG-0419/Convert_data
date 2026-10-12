@@ -119,7 +119,8 @@ def write_segment(root, bag, streams, aligned, bounds, ep_index, global_index, c
             "task_index": 0,
             "source_start_ns": int(aligned.timeline[start]), "source_end_ns": int(aligned.timeline[end - 1]),
             "features": features, "stats": stats, "paths": paths}
-    for key in ("segment_id", "source_recording_id", "milestone_timestamp_ns"):
+    for key in ("segment_id", "source_recording_id", "milestone_timestamp_ns",
+                "subtask_index", "subtask_start_ns", "subtask_end_ns"):
         if key in segment:
             result[key] = segment[key]
     return result
@@ -157,7 +158,8 @@ def write_metadata(root, records, config):
 
     jsonl("tasks.jsonl", [{"task_index": index, "task": task_rows[index]} for index in sorted(task_rows)])
     episode_keys = ("episode_index", "tasks", "length", "task_index", "segment_id",
-                    "source_recording_id", "milestone_timestamp_ns", "source_start_ns", "source_end_ns")
+                    "source_recording_id", "milestone_timestamp_ns", "subtask_index",
+                    "subtask_start_ns", "subtask_end_ns", "source_start_ns", "source_end_ns")
     jsonl("episodes.jsonl", [{k: ep[k] for k in episode_keys if k in ep} for ep in episodes])
     jsonl("episodes_stats.jsonl", [{"episode_index": ep["episode_index"], "stats": ep["stats"]} for ep in episodes])
     atomic_json(root / "meta/info.json", info)

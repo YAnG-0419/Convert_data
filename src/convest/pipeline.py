@@ -14,10 +14,48 @@ import yaml
 from convest.config import WORKSPACE, atomic_json, digest, validate_repo_id
 from convest.selection import select_episodes
 from convest.registry import get_source, get_target, get_writer
+from convest.quality import RecordingRejected
+
+
+def source_roots(value):
+    """Normalize the backwards-compatible scalar source_root into resolved roots."""
+    values = value if isinstance(value, list) else [value]
+    if not values or any(not isinstance(item, (str, Path)) for item in values):
+        raise ValueError("source_root must be a path or a nonempty list of paths")
+    roots = [Path(item).expanduser().resolve() for item in values]
+    if len(set(roots)) != len(roots):
+        raise ValueError("source_root contains a duplicate root")
+    for index, root in enumerate(roots):
+        for other in roots[index + 1:]:
+            if root.is_relative_to(other) or other.is_relative_to(root):
+                raise ValueError(f"Source roots must not overlap: {root} and {other}")
+    return roots
+
+
+def discover_sources(source_adapter, value):
+    results = []
+    seen = set()
+    for root in source_roots(value):
+        for item in source_adapter.discover(root):
+            path = str(Path(item["path"]).resolve())
+            if path in seen:
+                raise ValueError(f"Source roots discover the same bag more than once: {path}")
+            seen.add(path)
+            results.append(item)
+    return results
+
+
+def assess_candidates(candidates, recipe, config):
+    if not hasattr(recipe, "assess_candidate"):
+        return candidates
+    return [recipe.assess_candidate(item, config) for item in candidates]
 
 
 def inspect(config, report):
-    bags = get_source(config["source_format"]).discover(config["source_root"])
+    recipe = import_module(get_target(config["target_format"]).recipe)
+    bags = assess_candidates(
+        discover_sources(get_source(config["source_format"]), config["source_root"]), recipe, config,
+    )
     result = {"source_root": config["source_root"], "bags": bags,
               "total": len(bags), "eligible": sum(b["eligible"] for b in bags),
               "source_bytes": sum(b["bytes"] for b in bags),
@@ -83,6 +121,8 @@ def _verify_same_source_files(old_path, new_path):
 
 def prepare_relocation(manifest, config, records, source_adapter):
     """Verify a location-only move and return an auditable manifest event."""
+    if isinstance(manifest["config"].get("source_root"), list) or isinstance(config.get("source_root"), list):
+        raise ValueError("Relocation is not supported for datasets with multiple source roots")
     old_config = manifest["config"]
     if _config_without_locations(old_config) != _config_without_locations(config):
         raise ValueError("Relocation permits only source_root and output_root changes")
@@ -209,8 +249,54 @@ def prepared_in_order(items, config, contract, staging, workers):
             submit()
 
 
+def convert_separate(config, resume=False, limit=None, episode=None, workers=1, *,
+                     episode_list=None, skip_ineligible=False, relocate=False):
+    """Export independent datasets; each child owns its manifest and resume state."""
+    if config["target_format"] != "lerobot_v21":
+        raise ValueError("segments=both is only supported for lerobot_v21")
+    if relocate:
+        raise ValueError("Relocate each child dataset separately, not with segments=both")
+    validate_repo_id(config["repo_id"])
+    recipe = import_module(get_target(config["target_format"]).recipe)
+    recipe.validate_config(config)
+    root = Path(config["output_root"]).resolve()
+    if not root.is_relative_to(WORKSPACE) or root == WORKSPACE:
+        raise ValueError("Output must be a child of this workspace; existing projects are read-only")
+    for source in source_roots(config["source_root"]):
+        if root.is_relative_to(source) or source.is_relative_to(root):
+            raise ValueError("Source and output trees must not overlap")
+    if root.exists() and (not root.is_dir() or any(p.name not in {"full", "subtasks"} for p in root.iterdir())):
+        raise FileExistsError(f"Use a new parent directory for two datasets: {root}")
+    children = [dict(config, segments=mode, output_root=str(root / name),
+                     repo_id=f"{config['repo_id']}_{name}")
+                for name, mode in (("full", "full"), ("subtasks", "subtasks-only"))]
+    # Reject incompatible existing children before either dataset can be updated.
+    contract = yaml.safe_load(Path(config["contract"]).read_text())
+    schemas = {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+               for p in sorted(Path(config["schema_dir"]).glob("*.msg"))}
+    for child in children:
+        path = Path(child["output_root"])
+        if path.exists() and (not path.is_dir() or any(path.iterdir())):
+            marker = path / "conversion/manifest.json"
+            if not resume or not marker.is_file():
+                raise FileExistsError(f"Output exists: {path}; use --resume for an owned dataset")
+            manifest = json.loads(marker.read_text())
+            fingerprint = conversion_fingerprint(child, contract, schemas, get_target(child["target_format"]).version)
+            if manifest.get("owner") != "convest-data" or manifest.get("fingerprint") != fingerprint:
+                raise ValueError(f"Conversion config/schema/converter differs: {path}; use a new output")
+    results = []
+    for child in children:
+        print(f"Export {child['segments']}: {child['output_root']} ({child['repo_id']})", flush=True)
+        results.append(convert(child, resume, limit, episode, workers,
+                               episode_list=episode_list, skip_ineligible=skip_ineligible))
+    return max(results)
+
+
 def convert(config, resume=False, limit=None, episode=None, workers=1, *, episode_list=None,
             skip_ineligible=False, relocate=False):
+    if config.get("segments") == "both":
+        return convert_separate(config, resume, limit, episode, workers, episode_list=episode_list,
+                                skip_ineligible=skip_ineligible, relocate=relocate)
     validate_repo_id(config["repo_id"])
     source_adapter = get_source(config["source_format"])
     target_spec = get_target(config["target_format"])
@@ -224,15 +310,16 @@ def convert(config, resume=False, limit=None, episode=None, workers=1, *, episod
     if relocate and not resume:
         raise ValueError("--relocate requires --resume")
     root = Path(config["output_root"]).resolve()
-    source = Path(config["source_root"]).resolve()
+    sources = source_roots(config["source_root"])
     if not root.is_relative_to(WORKSPACE) or root == WORKSPACE:
         raise ValueError("Output must be a child of this workspace; existing projects are read-only")
-    if root.is_relative_to(source) or source.is_relative_to(root):
-        raise ValueError("Source and output trees must not overlap")
+    for source in sources:
+        if root.is_relative_to(source) or source.is_relative_to(root):
+            raise ValueError("Source and output trees must not overlap")
     marker = root / "conversion/manifest.json"
     if root.exists() and (not root.is_dir() or (any(root.iterdir()) and (not resume or not marker.is_file()))):
         raise FileExistsError(f"Output exists: {root}; only an owned dataset can be reopened with --resume")
-    candidates = source_adapter.discover(source)
+    candidates = assess_candidates(discover_sources(source_adapter, config["source_root"]), recipe, config)
     selection = None
     if episode_list:
         selected, selection = select_episodes(candidates, episode_list, skip_ineligible)
@@ -259,7 +346,7 @@ def convert(config, resume=False, limit=None, episode=None, workers=1, *, episod
                 raise ValueError("This dataset was created from a TXT list; --resume requires --episode-list to prevent accidental full conversion")
             relocation_needed = manifest["fingerprint"] != fingerprint
             if relocation_needed and not relocate:
-                raise ValueError("Conversion config/schema differs from existing dataset; use a new output")
+                raise ValueError("Conversion config/schema/converter differs from existing dataset; use a new output")
         else:
             if relocate:
                 raise ValueError("--relocate requires an existing converted dataset")
@@ -305,6 +392,7 @@ def convert(config, resume=False, limit=None, episode=None, workers=1, *, episod
                 task_indices[task] = index
         previous_count = len(records)
         errors = []
+        rejections = []
         atomic_json(root / "conversion/discovery.json", candidates)
         remaining = [item for item in selected if item["path"] not in completed]
         retained = sorted(completed - {item["path"] for item in selected})
@@ -347,6 +435,12 @@ def convert(config, resume=False, limit=None, episode=None, workers=1, *, episod
                 shutil.rmtree(stage)
                 writer.write_metadata(root, records, config)
                 print(f"[{len(records)}/{len(selected)}] {Path(item['path']).name}: committed {len(episodes)} episode(s), {record['elapsed_seconds']:.1f}s", flush=True)
+            except RecordingRejected as exc:
+                rejections.append({"source": item["path"], "reason": exc.reason, "details": exc.details})
+                if stage.exists():
+                    shutil.rmtree(stage)
+                print(f"  EXCLUDED: {Path(item['path']).name}: {exc.reason}", flush=True)
+                atomic_json(root / "conversion/rejections.json", rejections)
             except Exception as exc:
                 errors.append({"source": item["path"], "error": f"{type(exc).__name__}: {exc}"})
                 if stage.exists():
@@ -357,12 +451,14 @@ def convert(config, resume=False, limit=None, episode=None, workers=1, *, episod
                     raise
         recover(root, records, config["target_format"])
         atomic_json(root / "conversion/errors.json", errors)
+        atomic_json(root / "conversion/rejections.json", rejections)
         summary = {"converted_bags": len(records), "episodes": sum(len(r["episodes"]) for r in records),
                    "frames": sum(ep["length"] for r in records for ep in r["episodes"]),
                    "repo_id": config["repo_id"], "added_bags": len(records) - previous_count,
                    "selected_bags": len(selected), "skipped_selected_bags": selection["skipped"] if selection else [],
                    "retained_bags_not_in_current_selection": retained,
                    "skipped_by_collection_state": (len(selection["skipped"]) if selection else sum(not c["eligible"] for c in candidates)),
+                   "excluded_by_quality": len(rejections), "quality_rejections": rejections,
                    "errors": errors}
         atomic_json(root / "conversion/summary.json", summary)
         print(json.dumps(summary, ensure_ascii=False), flush=True)

@@ -16,6 +16,30 @@ import yaml
 from rosbags.typesys import Stores, get_typestore, get_types_from_msg
 
 
+STATUS_MESSAGE_TYPES = frozenset({
+    "teleop_interfaces/msg/ArmCommandStatus",
+    "teleop_interfaces/msg/HandTelemetryStatus",
+})
+
+
+def timestamp_policy(kind, time_map):
+    if time_map and kind in time_map.unmodified_payload_types:
+        # These custom headers can retain timestamps from earlier cleaning passes.
+        # The latest trim report cannot reconstruct that history, whereas bag
+        # record timestamps already live on the final compacted time axis.
+        return "bag_record_timestamp" if kind in STATUS_MESSAGE_TYPES else "mapped_header_timestamp"
+    return "header_timestamp"
+
+
+def sample_timestamp(header_timestamp, received, kind, time_map):
+    policy = timestamp_policy(kind, time_map)
+    if policy == "bag_record_timestamp":
+        return received
+    if policy == "mapped_header_timestamp":
+        return time_map.apply(header_timestamp)
+    return header_timestamp
+
+
 def natural_key(path):
     return [int(x) if x.isdigit() else x for x in re.split(r"(\d+)", str(path))]
 
@@ -58,7 +82,7 @@ def load_compact_time_map(path):
     if report.get("compact") is not True or report.get("timestamps") != "compact_shared_time_mapping":
         raise ValueError(f"Unsupported trim report time policy: {report_path}")
     raw_mapping = report.get("mapping")
-    if not isinstance(raw_mapping, list) or not raw_mapping:
+    if not isinstance(raw_mapping, list):
         raise ValueError(f"Missing compact timestamp mapping: {report_path}")
     intervals = []
     previous_end = None
@@ -88,10 +112,10 @@ def _map_state_timestamps(value, time_map, key=None):
     return time_map.apply(value) if is_absolute_time and type(value) is int else value
 
 
-def load_collection_state(path):
+def load_collection_state(path, time_map=None):
     """Load raw state, or adapt a cleaner-preserved source state without rewriting the bag."""
     path = Path(path)
-    time_map = load_compact_time_map(path)
+    time_map = time_map if time_map is not None else load_compact_time_map(path)
     state_path = path / "collection_state.json"
     if state_path.is_file():
         return json.loads(state_path.read_text()), time_map, state_path.name
@@ -104,6 +128,66 @@ def load_collection_state(path):
     return _map_state_timestamps(state, time_map), time_map, source_state_path.name
 
 
+def load_subtasks(path):
+    """Load gap-free cleaner annotations on their compact output timeline."""
+    path = Path(path)
+    annotation_path = path / "subtasks.yaml"
+    if not annotation_path.is_file():
+        return None
+    report_path = path / "trim_report.json"
+    if not report_path.is_file():
+        raise ValueError(f"subtasks.yaml requires trim_report.json: {path}")
+    annotation = yaml.safe_load(annotation_path.read_text())
+    report = json.loads(report_path.read_text())
+    if not isinstance(annotation, dict) or annotation.get("version") != 1:
+        raise ValueError(f"Unsupported subtask annotation version: {annotation_path}")
+    expected = {
+        "time_basis": "bag_record_timestamp",
+        "timestamps": "compact_shared_time_mapping",
+        "interval_semantics": "[start,end)",
+        "recommended_lerobot_column": "language_persistent",
+        "coverage": "gap_free",
+    }
+    for key, value in expected.items():
+        if annotation.get(key) != value:
+            raise ValueError(f"Unsupported {key} in {annotation_path}")
+    try:
+        origin_ns = int(report["source_start_ns"])
+    except (KeyError, TypeError, ValueError) as exc:
+        raise ValueError(f"Missing source_start_ns: {report_path}") from exc
+    raw = annotation.get("subtasks")
+    if not isinstance(raw, list) or not raw:
+        raise ValueError(f"Subtask list is empty: {annotation_path}")
+    subtasks, previous_end = [], None
+    for position, entry in enumerate(raw, 1):
+        try:
+            index = entry["index"]
+            task = entry["subtask"].strip()
+            output_start = float(entry["output_start"])
+            output_end = float(entry["output_end"])
+        except (KeyError, AttributeError, TypeError, ValueError) as exc:
+            raise ValueError(f"Invalid subtask {position}: {annotation_path}") from exc
+        if type(index) is not int or index != position or not task:
+            raise ValueError(f"Invalid subtask index/task at position {position}: {annotation_path}")
+        if not np.isfinite([output_start, output_end]).all() or output_end <= output_start:
+            raise ValueError(f"Invalid subtask interval at position {position}: {annotation_path}")
+        if previous_end is None:
+            if abs(output_start) > 1e-6:
+                raise ValueError(f"Gap-free subtask coverage must start at zero: {annotation_path}")
+        elif abs(output_start - previous_end) > 1e-6:
+            raise ValueError(f"Subtask coverage has a gap/overlap at position {position}: {annotation_path}")
+        start_ns = origin_ns + round(output_start * 1_000_000_000)
+        end_ns = origin_ns + round(output_end * 1_000_000_000)
+        subtasks.append({"index": index, "task": task, "start_ns": start_ns, "end_ns": end_ns,
+                         "output_start": output_start, "output_end": output_end})
+        previous_end = output_end
+    return {
+        "items": subtasks,
+        "source_recording_id": report.get("source") or str(path),
+        "annotation_file": str(annotation_path.resolve()),
+    }
+
+
 def discover(root):
     root = Path(root).resolve()
     paths = [root / "metadata.yaml"] if (root / "metadata.yaml").exists() else root.rglob("metadata.yaml")
@@ -111,26 +195,47 @@ def discover(root):
     for metadata in sorted(paths, key=natural_key):
         path = metadata.parent
         try:
-            state, time_map, state_file = load_collection_state(path)
-            eligible = state.get("finalized") is True and state.get("state") == "finalized" and not state.get("failures")
-            reason = None if eligible else f"collection state: {state.get('state')}; failures={state.get('failures', [])}"
-            report = state.get("validation_report", {})
-            start, end = (report.get(f"source_effective_{edge}_time_ns") for edge in ("start", "end"))
-            if eligible and (start is None or end is None or end <= start):
-                eligible, reason = False, "missing/empty validated source-time window"
-            milestones = state.get("milestones", [])
-            source_recording_id = state.get("source_recording_id") or str(path)
+            time_map = load_compact_time_map(path)
+            subtask_annotation = load_subtasks(path)
+            try:
+                state, time_map, state_file = load_collection_state(path, time_map)
+                eligible = state.get("finalized") is True and state.get("state") == "finalized" and not state.get("failures")
+                reason = None if eligible else f"collection state: {state.get('state')}; failures={state.get('failures', [])}"
+                report = state.get("validation_report", {})
+                start, end = (report.get(f"source_effective_{edge}_time_ns") for edge in ("start", "end"))
+                if eligible and (start is None or end is None or end <= start):
+                    eligible, reason = False, "missing/empty validated source-time window"
+                milestones = state.get("milestones", [])
+                source_recording_id = state.get("source_recording_id") or str(path)
+                eligibility_source = "collection_state"
+            except FileNotFoundError:
+                if subtask_annotation is None or time_map is None:
+                    raise
+                subtasks = subtask_annotation["items"]
+                eligible, reason = True, None
+                start, end = subtasks[0]["start_ns"], subtasks[-1]["end_ns"]
+                milestones = []
+                source_recording_id = subtask_annotation["source_recording_id"]
+                state_file = None
+                eligibility_source = "gap_free_subtasks"
             source_time_adapter = ({"kind": "compact_trim_report", "state_file": state_file,
                                     "trim_report": time_map.report_path,
-                                    "mapped_payload_types": sorted(time_map.unmodified_payload_types)}
-                                   if state_file == "source_collection_state.json" else None)
+                                    "mapped_payload_types": sorted(time_map.unmodified_payload_types - STATUS_MESSAGE_TYPES),
+                                    "record_timestamp_payload_types": sorted(time_map.unmodified_payload_types & STATUS_MESSAGE_TYPES)}
+                                   if time_map is not None else None)
+            subtasks = subtask_annotation["items"] if subtask_annotation else []
+            subtask_annotation_file = subtask_annotation["annotation_file"] if subtask_annotation else None
         except (OSError, ValueError) as exc:
             eligible, reason, start, end = False, str(exc), None, None
             milestones, source_recording_id = [], str(path)
             source_time_adapter = None
+            subtasks, subtask_annotation_file = [], None
+            eligibility_source = None
         results.append({"path": str(path), "eligible": eligible, "reason": reason,
                         "source_start_ns": start, "source_end_ns": end,
                         "source_recording_id": source_recording_id, "milestones": milestones,
+                        "subtasks": subtasks, "subtask_annotation_file": subtask_annotation_file,
+                        "eligibility_source": eligibility_source,
                         "source_time_adapter": source_time_adapter,
                         "bytes": sum(p.stat().st_size for p in path.glob("*.db3"))})
     if not results:
@@ -275,9 +380,7 @@ class Bag:
             for row_id, received, payload in db.execute(
                 f"SELECT id,timestamp,{field} FROM messages WHERE topic_id=? ORDER BY timestamp,id", (ident,)
             ):
-                time = header_ns(payload)
-                if self.compact_time_map and kind in self.compact_time_map.unmodified_payload_types:
-                    time = self.compact_time_map.apply(time)
+                time = sample_timestamp(header_ns(payload), received, kind, self.compact_time_map)
                 value = (db, row_id) if image else self.store.deserialize_cdr(payload, kind)
                 yield (time, value, received) if include_receive else (time, value)
 

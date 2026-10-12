@@ -135,6 +135,36 @@ def test_first_milestone_mode_trims_leading_invalid_but_rejects_internal_gap():
         output_segments(item, aligned, config)
 
 
+def test_subtasks_become_single_task_episodes_and_split_internal_gap():
+    aligned = align(streams(), 1_000_000_000, 3_000_000_000, 10, 150_000_000)
+    item = {"path": "/bags/episode1", "source_recording_id": "recording-1", "subtasks": [
+        {"index": 1, "task": "Phase 1", "start_ns": 1_000_000_000, "end_ns": 1_500_000_000},
+        {"index": 2, "task": "Phase 2", "start_ns": 1_500_000_000, "end_ns": 2_000_000_000},
+        {"index": 3, "task": "Phase 3", "start_ns": 2_000_000_000, "end_ns": 2_500_000_000},
+        {"index": 4, "task": "Phase 4", "start_ns": 2_500_000_000, "end_ns": 3_000_000_000},
+    ]}
+    config = {"segments": "subtasks", "segment_tasks": {}, "task": "Full task",
+              "subtask_tasks": {f"Phase {i}": f"English {i}" for i in range(1, 5)},
+              "min_segment_frames": 2}
+    result = output_segments(item, aligned, config)
+    assert [(part["segment_id"], part["task"], part["bounds"]) for part in result] == [
+        ("full", "Full task", (0, 20)),
+        ("subtask_1", "English 1", (0, 5)), ("subtask_2", "English 2", (5, 10)),
+        ("subtask_3", "English 3", (10, 15)), ("subtask_4", "English 4", (15, 20)),
+    ]
+    aligned.segments = [(0, 2), (3, len(aligned.timeline))]
+    result = output_segments(item, aligned, config)
+    assert [(part["segment_id"], part["task"], part["bounds"]) for part in result] == [
+        ("full_part_1", "Full task", (0, 2)),
+        ("full_part_2", "Full task", (3, 20)),
+        ("subtask_1_part_1", "English 1", (0, 2)),
+        ("subtask_1_part_2", "English 1", (3, 5)),
+        ("subtask_2", "English 2", (5, 10)),
+        ("subtask_3", "English 3", (10, 15)),
+        ("subtask_4", "English 4", (15, 20)),
+    ]
+
+
 def test_compact_boundary_hold_is_inserted_only_for_a_stale_grid_hole():
     series = Series(np.array([200_000_000, 600_000_000], dtype=np.int64), ["before", "after"])
     mapping = CompactTimeMap(((400_000_000, 500_000_000, 100_000_000),), frozenset(), "trim.json")

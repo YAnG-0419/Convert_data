@@ -252,7 +252,7 @@ def test_milestone_bag_exports_overlapping_prefix_and_full_episodes(tmp_path, mo
         assert prefix[key].to_pylist() == full[key].slice(0, len(prefix)).to_pylist()
 
 
-def test_compact_cleaned_bag_maps_source_state_and_only_unmodified_payload_headers(tmp_path):
+def test_compact_cleaned_bag_maps_source_state_and_uses_record_time_for_status(tmp_path):
     bag_path = tmp_path / "bags/episode622"
     make_bag(bag_path)
     state_path = bag_path / "collection_state.json"
@@ -276,10 +276,55 @@ def test_compact_cleaned_bag_maps_source_state_and_only_unmodified_payload_heade
     assert item["eligible"] is True
     assert (item["source_start_ns"], item["source_end_ns"]) == (9_700_000_000, 11_300_000_000)
     assert item["milestones"][0]["timestamp_ns"] == 10_500_000_000
-    assert item["source_time_adapter"]["mapped_payload_types"] == sorted(custom_types)
+    assert item["source_time_adapter"]["mapped_payload_types"] == []
+    assert item["source_time_adapter"]["record_timestamp_payload_types"] == sorted(custom_types)
 
     with Bag(bag_path, WORKSPACE / "schemas") as bag:
         custom_time, _ = next(bag.records("/teleop/arm_command_status"))
         standard_time, _ = next(bag.records("/left/franka/joint_states"))
-    assert custom_time == 9_500_000_000
+    assert custom_time == 10_005_000_000  # Already compacted record time; never remap it.
     assert standard_time == 10_000_000_000
+
+
+def test_gap_free_subtasks_supply_window_when_cleaned_state_is_absent(tmp_path):
+    bag_path = tmp_path / "bags/episode700"
+    make_bag(bag_path)
+    (bag_path / "collection_state.json").unlink()
+    (bag_path / "trim_report.json").write_text(json.dumps({
+        "source": "/original/episode700", "source_start_ns": "10000000000",
+        "compact": True, "timestamps": "compact_shared_time_mapping",
+        "unmodified_payload_types": {}, "mapping": [],
+    }))
+    (bag_path / "subtasks.yaml").write_text(yaml.safe_dump({
+        "version": 1, "time_basis": "bag_record_timestamp",
+        "timestamps": "compact_shared_time_mapping", "interval_semantics": "[start,end)",
+        "recommended_lerobot_column": "language_persistent", "coverage": "gap_free",
+        "subtasks": [
+            {"index": 1, "subtask": "Pick", "output_start": 0.0, "output_end": 0.8},
+            {"index": 2, "subtask": "Place", "output_start": 0.8, "output_end": 1.6},
+        ],
+    }, allow_unicode=True))
+
+    item = discover(tmp_path / "bags")[0]
+    assert item["eligible"] is True
+    assert item["eligibility_source"] == "gap_free_subtasks"
+    assert (item["source_start_ns"], item["source_end_ns"]) == (10_000_000_000, 11_600_000_000)
+    assert [part["task"] for part in item["subtasks"]] == ["Pick", "Place"]
+    assert item["source_recording_id"] == "/original/episode700"
+
+
+def test_multiple_source_roots_are_combined_and_overlap_is_rejected(tmp_path):
+    first, second = tmp_path / "first", tmp_path / "second"
+    first.mkdir()
+    second.mkdir()
+
+    class Adapter:
+        @staticmethod
+        def discover(root):
+            return [{"path": str(root / "episode1")}] if root == first else [{"path": str(root / "episode2")}]
+
+    assert [Path(item["path"]).name for item in pipeline.discover_sources(Adapter, [first, second])] == [
+        "episode1", "episode2",
+    ]
+    with pytest.raises(ValueError, match="must not overlap"):
+        pipeline.source_roots([tmp_path, first])

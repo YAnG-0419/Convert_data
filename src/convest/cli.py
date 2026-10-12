@@ -10,6 +10,8 @@ def main():
     for name in ("inspect", "convert"):
         command = sub.add_parser(name)
         command.add_argument("--config", type=Path, default=WORKSPACE / "configs/gello_pi05.yaml")
+        command.add_argument("--source-root", type=Path, action="append",
+                             help="Input root; repeat to combine multiple non-overlapping roots")
         if name == "inspect":
             command.add_argument("--report", type=Path, default=WORKSPACE / "reports/inventory.json")
         else:
@@ -24,16 +26,17 @@ def main():
             command.add_argument("--skip-ineligible", action="store_true", help="Explicitly omit listed bags that failed collection validation")
             command.add_argument("--output", type=Path)
             command.add_argument("--repo-id", help="Immutable dataset id: namespace/dataset")
-            command.add_argument("--source-root", type=Path)
-            command.add_argument("--segments", choices=("all", "full", "milestones", "first-milestone-or-full"),
-                                 help=("Export prefixes plus full, full only, prefixes only, or the first "
-                                       "milestone prefix with full as the unmarked fallback"))
+            command.add_argument("--segments", choices=("all", "full", "milestones", "first-milestone-or-full", "subtasks", "subtasks-only", "both"),
+                                 help=("Export prefixes plus full, full only, prefixes only, the first "
+                                       "milestone prefix with full fallback, full+subtasks mixed (legacy), "
+                                       "subtasks only, or two independent full/ and subtasks/ datasets"))
             command.add_argument("--workers", type=int, default=1,
-                                 help="Parallel bags (1-8); each worker uses two H264 encoder threads")
+                                 help="Parallel bags (1-12); each worker uses two H264 encoder threads")
     command = sub.add_parser("check-list", help="Read-only list and collection-state preflight")
     command.add_argument("episode_list", type=Path)
     command.add_argument("--config", type=Path, default=WORKSPACE / "configs/gello_pi05.yaml")
-    command.add_argument("--source-root", type=Path)
+    command.add_argument("--source-root", type=Path, action="append",
+                         help="Input root; repeat to combine multiple non-overlapping roots")
     command = sub.add_parser("verify")
     command.add_argument("root", type=Path)
     command.add_argument("--full-video", action="store_true")
@@ -49,13 +52,17 @@ def main():
         return
     config = load_config(args.config)
     if getattr(args, "source_root", None):
-        config["source_root"] = str(args.source_root.expanduser().resolve())
+        roots = [str(path.expanduser().resolve()) for path in args.source_root]
+        config["source_root"] = roots[0] if len(roots) == 1 else roots
     if args.command == "check-list":
         from convest.selection import select_episodes
         from convest.registry import get_source
         import json
         try:
-            _, selection = select_episodes(get_source(config["source_format"]).discover(config["source_root"]), args.episode_list, skip_ineligible=True)
+            from convest.pipeline import discover_sources
+            source = get_source(config["source_format"])
+            _, selection = select_episodes(discover_sources(source, config["source_root"]),
+                                           args.episode_list, skip_ineligible=True)
         except (ValueError, OSError) as exc:
             parser.exit(2, f"Error: {exc}\n")
         print(json.dumps(selection, ensure_ascii=False, indent=2))
@@ -78,8 +85,8 @@ def main():
             config["segments"] = args.segments
         if args.limit is not None and args.limit < 1:
             parser.error("--limit must be positive")
-        if not 1 <= args.workers <= 8:
-            parser.error("--workers must be in [1, 8]")
+        if not 1 <= args.workers <= 12:
+            parser.error("--workers must be in [1, 12]")
         if args.skip_ineligible and not args.episode_list:
             parser.error("--skip-ineligible requires --episode-list")
         try:

@@ -86,7 +86,11 @@ Pi05 配置默认使用 `segments: all`。没有完成标记的 bag 仍输出一
 清洗后压缩时间轴的数据可使用 `--segments first-milestone-or-full`：有标记时只输出从
 有效起点到第一个标记的前缀，没有标记时输出完整 episode。若清洗目录保留
 `source_collection_state.json` 和 `trim_report.json`，读取器会在内存中校正有效窗口、标记
-以及未被清洗器改写的自定义状态消息时间戳；源 `.db3` 不会被修改。不要把
+以及对应的时间轴；源 `.db3` 不会被修改。对于清洗报告 `unmodified_payload_types` 中列出的
+`ArmCommandStatus` / `HandTelemetryStatus`，使用已经清洗压缩的 bag 记录时间，避免只用最新
+trim mapping 修正旧 header 后仍残留早期清洗的时间偏移。关节状态、动作和图像仍按原有
+header 时间规则对齐；未清洗或未标记为 unmodified 的状态消息也保持原规则。
+转换记录的 `alignment.status_timestamp_policy` 会记录实际策略。不要把
 `source_collection_state.json` 直接改名为 `collection_state.json`，否则会混用压缩前后的时间轴。
 
 例如转换清洗后的 `datasets/B`：
@@ -99,6 +103,88 @@ scripts/convest convert \
   --resume --workers 8
 scripts/convest verify outputs/fr3_wuji/tomato_B_cleaned
 ```
+
+清洗目录带有 `subtasks.yaml` 时，可重复传入 `--source-root` 合并多个不重叠目录，并使用
+`--segments subtasks`。每条四阶段记录同时写出英文完整任务 episode 和四类英文阶段任务
+episode；若区间内部因相机、动作或状态超时形成无效间隔，会拆成多个同任务的连续 episode，
+不会跨断点拼接。不是四阶段的记录会被排除。缺少采集状态时，仅接受同时具有有效
+`trim_report.json` 和 gap-free `subtasks.yaml` 的记录。中文到英文的严格映射由配置中的
+`subtask_tasks` 提供，未知标签不会被静默当作 prompt。
+
+```bash
+scripts/convest convert \
+  --source-root /path/to/A-subtask \
+  --source-root /path/to/B-subtask \
+  --segments subtasks \
+  --output outputs/fr3_wuji/1001 \
+  --repo-id fr3_wuji/1001 \
+  --resume --workers 8
+scripts/convest verify outputs/fr3_wuji/1001
+```
+
+### 整段和四阶段分别导出
+
+| 参数 | 输出内容 |
+| --- | --- |
+| `--segments full` | `--output` 本身是一份整段数据集，只使用完整任务 `task`，不使用阶段 prompt。 |
+| `--segments subtasks-only` | `--output` 本身是一份阶段数据集，只包含四类阶段 prompt，不混入整段。 |
+| `--segments both` | 在 `--output/full` 和 `--output/subtasks` 生成两份独立数据集；repo ID 自动在指定基础名称后追加 `_full` / `_subtasks`。 |
+| `--segments subtasks` | 兼容旧行为：整段和四阶段混在同一数据集中，存在重叠样本。 |
+
+例如修复时间戳后，重新导出 `1001` 的整段和阶段两份数据集：
+
+```bash
+scripts/convest convert \
+  --source-root /home/descfly/company-remote2/real/harvest-tomato/clean/A-subtask \
+  --source-root /home/descfly/company-remote2/real/harvest-tomato/clean/B-subtask \
+  --segments both \
+  --output outputs/fr3_wuji/1001_v2 \
+  --repo-id fr3_wuji/1001_v2 \
+  --resume --workers 8
+scripts/convest verify outputs/fr3_wuji/1001_v2/full
+scripts/convest verify outputs/fr3_wuji/1001_v2/subtasks
+```
+
+只需一份时，把 `both` 换成 `full` 或 `subtasks-only`，同时为其指定单独的输出路径和
+repo ID（例如 `outputs/fr3_wuji/1001_full_v2`、`fr3_wuji/1001_full_v2`）。
+`both` 会顺序转换两份数据集，每份内部按 `--workers` 并行（支持 1–12，默认 1；
+`--workers 12` 表示最多同时转换 12 条源演示，不是整段和阶段各启动 12 个进程）。
+更高并发会增加内存、CPU 和磁盘/网络读取压力，不保证更快。两份各有独立的 metadata、
+任务编号、转换记录和续跑状态，需要分别计算训练归一化统计。重复运行同一条 `both`
+命令并加 `--resume` 即可继续未完成的数据集；位置迁移需分别对两个子数据集执行。
+已有旧混合数据集不能作为 `both` 的输出父目录。
+
+有阶段标注时，整段和阶段共同采用标注的 `[start,end)` 范围。整段输出不要求每个阶段都
+能独立成段，也不要求阶段翻译；因此两份数据集成功导出的源记录数量可能不同，需分别
+检查 `conversion/summary.json`、`conversion/rejections.json` 和 `conversion/errors.json`。
+四阶段指语义标签数，不是缺口造成的额外切段。当前默认相机缺口策略如下：
+
+```yaml
+max_staleness_ms: 150
+camera_short_gap_max_frames: 2
+camera_short_gap_max_age_ms: 250
+camera_gap_reject_min_frames: 3
+```
+
+- **每处内部缺口最多连续 2 个输出采样点**（30 Hz 下为两帧，约 66.7 ms），允许继续使用
+  最近的过去图像，但该图像实际年龄不能超过 250 ms。不是允许相机原始数据任意丢两帧，
+  也不是把图像时间戳改新。状态、动作及遥操状态仍遵守原有严格规则，不复制整条样本。
+- **任何一处内部相机缺口连续 3 个采样点及以上，整条原始演示排除**。不会只补前两个点，
+  也不会保留它切开的其他完整段/阶段段；此规则在编码前执行，对 `full`、`subtasks-only`、
+  `both` 及旧混合模式都生效。不删除或改写原始 bag。
+- 按多路相机无效点的并集计算连续缺口；分别发生的多个短缺口不累计为一个长缺口。
+  例如三处分别缺 1、1、2 帧，可以分别容错。首尾不完整采样仍按原有规则裁剪，不视为
+  内部断点，也不填补。状态/动作无效或图像超过年龄上限时不会强行填补，仍可能切段。
+- 启用上述任一新规则时，旧的清洗边界图像重打时间戳处理停用，防止绕过真实图像年龄
+  和缺口长度限制。`alignment.camera_short_gap_tolerance` 记录接受的缺口、帧数、相机、
+  图像原始时间及实际年龄。将容错和整条排除两个帧数参数都设为 `0` 才恢复旧策略。
+- `conversion/rejections.json` 单独记录按规则排除的源演示、缺口位置及长度；
+  `conversion/summary.json` 中的 `excluded_by_quality` 给出本次检查的排除数量。
+  这是主动质量筛选，不计为程序异常；真正的转换错误仍记录在 `errors.json`。
+
+Pi05 转换版本已提升至 `0.4.1`。**旧版本输出不能通过 `--resume` 自动修复**，必须使用
+新的输出目录重新转换；旧 `1001` 和原始 bag 不会被覆盖。训练时选择 `full` 或 `subtasks`
+其中一份，不要不加区分地合并两份，否则会重复使用同一演示的内容。
 
 如果已经转换的数据集和源 bag 一起移动了位置，可显式执行位置迁移后续跑：
 
@@ -241,7 +327,7 @@ Pi05 的 `Fr3WujiInputs` 会从 108 维状态提取位置，并将状态/动作�
 
 1. 仅处理 `collection_state.json` 中 `state=finalized`、`finalized=true`、`failures` 为空的 bag。缺失状态、丢弃、中断和采集验证失败会列入跳过报告。
 2. 使用采集报告的 `source_effective_start_time_ns` 到 `source_effective_end_time_ns`，这已包含原采集程序的公共时间区间和边缘裁剪；**不再次裁剪，也不擅自扩展到整个 bag 的起止时间**。部分 bag 的有效窗口会明显短于录制时长，详情见 inventory 与来源记录。
-3. 以消息 `header.stamp` 建立整数纳秒时间轴；收到时间不替代源时间。对到达乱序做稳定排序，相同源时间使用最后收到的消息。零时间戳、错误序列化、缺失/部分关节、缺少速度或非有限值直接报错，不填零。
+3. 默认以消息 `header.stamp` 建立整数纳秒时间轴；仅清洗报告中标记为未改写的两类遥操状态消息使用压缩后的 bag 记录时间（见上文）。对到达乱序做稳定排序，相同源时间使用最后收到的消息。零时间戳、错误序列化、缺失/部分关节、缺少速度或非有限值直接报错，不填零。
 4. 对状态、动作、接管状态和图像使用过去最近一条消息，默认最大年龄 150 ms，不取未来帧，不做线性插值。
 5. 明确停用的分组保持停用瞬间的最后目标；从停用状态开始则用首个实测位置初始化。接管状态本身必须新鲜。重新接管要求相应新命令，允许状态与命令最多 20 ms 的发布偏差。
 6. 无效行会被排除，剩余连续区间拆为独立 episode；不足 2 帧的短区间丢弃。每段从零重新计时，保留 `source_timestamp_ns`。因此输出 episode 数可能大于有效 bag 数，动作序列不会跨越断档。
@@ -364,7 +450,7 @@ env -u PYTHONPATH PYTHONNOUSERSITE=1 .runtime/bin/python -m pytest -q --basetemp
 |---|---|---|
 | ROS2 消息读取 | Python `sqlite3` 只读连接 + `rosbags` 的 CDR 反序列化 | 支持未压缩的 ROS2 sqlite3 bag；标准消息使用 ROS2 Humble 类型库，自定义状态消息使用 `schemas/` 中的本地定义，不需要启动 ROS 节点。 |
 | 关节映射与数值转换 | 按 `JointState.name` 查找契约中的关节，而非直接使用消息数组顺序；转成 NumPy `float32` | 生成契约顺序的 108 维状态和 54 维绝对动作，保留原始弧度数值。重复关节、部分关节组、缺失速度或非有限数值会报错，不补零。 |
-| 多路时间对齐 | 按 `header.stamp` 建立整数纳秒时间轴；稳定排序、相同源时间保留最后收到的样本；使用 `searchsorted(..., side="right") - 1` 查找过去最近样本 | 默认统一到 30 Hz。这是因果采样保持（零阶保持，ZOH），不会读取未来帧，也不做线性插值。使用采集报告已验证的起止区间，不重复进行边缘裁剪。 |
+| 多路时间对齐 | 默认按 `header.stamp`，清洗后未改写的遥操状态消息按 bag 记录时间；稳定排序、相同源时间保留最后收到的样本；使用 `searchsorted(..., side="right") - 1` 查找过去最近样本 | 默认统一到 30 Hz。这是因果采样保持（零阶保持，ZOH），不会读取未来帧，也不做线性插值。使用采集报告已验证的起止区间，不重复进行边缘裁剪。 |
 | 接管状态与动作保持 | 读取四个分组的接管状态；接管时检查命令是否新鲜，停用时保持停用瞬间的最后目标 | 起始停用且没有历史目标时，使用实测位置初始化；重新接管时要求匹配新命令，允许状态与命令有最多 20 ms 的发布偏差。接管状态本身也必须有效、新鲜。 |
 | 数据断档处理 | 默认 150 ms 新鲜度检查 + 连续有效区间分段 | 无效采样行会切断 episode，避免动作窗口跨越断档。每段时间重新从零开始，保留绝对 `source_timestamp_ns`；不足 2 帧的短片段丢弃。 |
 | 图像与视频转换 | 根据原图 `encoding` 和行步长恢复 RGB，通过 PyAV 调用 `libx264`，编码为 MP4/H264、`yuv420p` | 保留原分辨率，默认 CRF 23、`veryfast`。每路视频与数据行使用相同帧率和帧数，第 i 行对应第 i 帧；20 Hz 的 cam0 通过保持上一张图像对齐到 30 Hz。H264 是有损编码，不保证像素逐位相同。 |
